@@ -1,6 +1,8 @@
 package GUIPkg;
 
-import String;
+import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 public class ChooseMapsDisplay extends JPanel implements ActionListener {
 
@@ -19,7 +21,7 @@ public class ChooseMapsDisplay extends JPanel implements ActionListener {
   return null;
   }
 
-  public void actionPerformed( ActionEvent) {
+  public void actionPerformed(ActionEvent e) {
   }
 
   public void createAndDisplayGUI() {

@@ -1,10 +1,14 @@
 package GUIPkg;
 
+import java.awt.event.ActionEvent;
 import java.util.Vector;
+
+import javax.swing.JButton;
+import javax.swing.JTable;
 
 public class MainMenuDisplay extends JPanel implements ActionListener {
 
-  public JButton continue;
+  public JButton button1;
 
   public JButton logout;
 
@@ -13,10 +17,10 @@ public class MainMenuDisplay extends JPanel implements ActionListener {
   public void MainMenuDisplay() {
   }
 
-  public void printData( JTable) {
+  public void printData(JTable t) {
   }
 
-  public void actionPerformed( ActionEvent) {
+  public void actionPerformed(ActionEvent e) {
   }
 
   public void createAndDisplayGUI() {

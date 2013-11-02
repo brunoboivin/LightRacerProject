@@ -1,6 +1,12 @@
 package GUIPkg;
 
-import String;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 
 public class RegistrationDisplay extends JPanel implements ActionListener {
 
@@ -17,7 +23,7 @@ public class RegistrationDisplay extends JPanel implements ActionListener {
   public void RegistrationDisplay() {
   }
 
-  public void actionPerformed( ActionEvent) {
+  public void actionPerformed(ActionEvent e) {
   }
 
   public JComponent createButtonPanel() {

@@ -1,5 +1,10 @@
 package GUIPkg;
 
+import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
+import javax.swing.JTable;
+
 public class ResultsDisplay extends JPanel implements ActionListener {
 
   public JButton playAgain;
@@ -9,10 +14,10 @@ public class ResultsDisplay extends JPanel implements ActionListener {
   public void ResultsDisplay() {
   }
 
-  public void printData( JTable) {
+  public void printData(JTable t) {
   }
 
-  public void actionPerformed( ActionEvent) {
+  public void actionPerformed(ActionEvent e) {
   }
 
   public void createAndDisplayGUI() {

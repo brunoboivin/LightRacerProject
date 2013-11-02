@@ -1,7 +1,11 @@
 package GUIPkg;
 
+import java.awt.event.ActionEvent;
 import java.util.Vector;
-import String;
+
+import javax.swing.JComponent;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class LoginDisplay extends JPanel implements ActionListener {
 
@@ -11,7 +15,7 @@ public class LoginDisplay extends JPanel implements ActionListener {
 
   public String LOGIN;
 
-  public ControlFrame controlFrame;
+  //public ControlFrame controlFrame;
 
   public JPasswordField passwordPlayer1;
 
@@ -26,7 +30,7 @@ public class LoginDisplay extends JPanel implements ActionListener {
   return null;
   }
 
-  public void actionPerformed( ActionEvent) {
+  public void actionPerformed(ActionEvent e) {
   }
 
   public void resetWindowFocus() {
