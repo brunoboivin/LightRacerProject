@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @version 1.0
  * @since 2013-11-08
  */
-public class PlayerRecord implements Record, Serializable {
+class PlayerRecord implements Record, Serializable {
 	//Class properties
 	private static final long serialVersionUID = -1212207084583292889L;
 	

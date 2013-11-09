@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @version 1.0
  * @since 2013-11-08
  */
-public class PairRecord implements Record, Serializable {
+class PairRecord implements Record, Serializable {
 	//Class properties
 	private static final long serialVersionUID = -7395425916444454417L;
 	
@@ -63,7 +63,7 @@ public class PairRecord implements Record, Serializable {
 	 * 
 	 * @param winner username of player who won
 	 */
-	public void updateRecord(String winner){ //FIND A BETTER NAME FOR THIS METHOD
+	public void updateRecord(String winner){
 		if( getPlayerA().equals(winner) ){
 			gamesWonPlayerA++;
 		}

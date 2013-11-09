@@ -6,6 +6,6 @@ package StatisticsPkg;
  * @version 1.0
  * @since 2013-11-08
  */
-public interface Record {
+interface Record {
 
 }

@@ -6,7 +6,7 @@ package StatisticsPkg;
  * @version 1.0
  * @since 2013-11-08
  */
-public enum StatisticsFiles {
+enum StatisticsFiles {
 	PLAYER_RECORDS("player_records.csv"),
 	PAIR_RECORDS("pair_records.csv");
 	
