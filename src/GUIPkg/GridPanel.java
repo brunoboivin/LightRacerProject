@@ -9,11 +9,6 @@ import javax.swing.JPanel;
 
 import GridPkg.*;
 
-
-
-
-
-
 public class GridPanel extends JPanel {
 
 	/**
@@ -228,7 +223,5 @@ public class GridPanel extends JPanel {
 		
 		}
 	}
-		
-	
-
 }
+

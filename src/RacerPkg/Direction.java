@@ -21,4 +21,5 @@ public enum Direction {
 	 * Moving West (Left).
 	 */
 	West
+
 }

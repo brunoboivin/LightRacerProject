@@ -129,5 +129,4 @@ public class Clock {
 	private static final long getCurrentTime() {
 		return (System.nanoTime() / 1000000L);
 	}
-
 }
