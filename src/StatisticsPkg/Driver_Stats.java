@@ -1,5 +1,8 @@
 package StatisticsPkg;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 import CSVPkg.*;
 
 /** Class that runs and tests the other classes contained in the StatisticsPkg.
@@ -18,6 +21,12 @@ class Driver_Stats {
 		long time0 = System.currentTimeMillis();
 		//******TIME-BEG
 
+		Hashtable<String, PlayerRecord> map = new Hashtable<String, PlayerRecord>();
+		
+		map.put("Bruno", new PlayerRecord("Bruno"));
+		
+		PlayerRecord r = map.elements().nextElement();
+		System.out.println(r.getUsername() + " " + r.getGamesPlayed() + " " + r.getGamesWon());
 		
 		
 		//******TIME-END
