@@ -1,4 +1,3 @@
-
 package GUIPkg;
 
 import java.awt.BorderLayout;
@@ -472,5 +471,5 @@ public class TronGame extends JFrame
 		TronGame tron = new TronGame();
 		tron.startGame();
 	}
-}
 
+}
