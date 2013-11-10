@@ -346,7 +346,8 @@ public class TronGame extends JFrame
 		this.player1 = new LinkedList<>();
 		this.directionsP1 = new LinkedList<>();
 		/*
-		 * clock speed enables faster or slower updates to the game
+		 * clock speed enables faster or slower updates to the game. 
+		 * the higher the time the faster the racer.
 		 */
 		this.logicTimer = new Clock(10.0f);
 		this.isNewGame = true;
