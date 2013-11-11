@@ -305,6 +305,7 @@ public class TronGame extends JFrame
 		/*
 		 * Here we get the cell that was located at the new head position
 		 */
+		
 		GridCell old = board.getCell(head.x, head.y);
 	
 		
@@ -344,7 +345,11 @@ public class TronGame extends JFrame
 		//this.random = new Random();
 		this.player1 = new LinkedList<>();
 		this.directionsP1 = new LinkedList<>();
-		this.logicTimer = new Clock(10.0f);
+		/*
+		 * clock speed enables faster or slower updates to the game. 
+		 * the higher the time the faster the racer.
+		 */
+		this.logicTimer = new Clock(30.0f);
 		this.isNewGame = true;
 		
 		//Set the timer to paused initially.
