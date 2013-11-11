@@ -20,14 +20,50 @@ class Driver_Stats {
 
 		long time0 = System.currentTimeMillis();
 		//******TIME-BEG
+		
 
-		Hashtable<String, PlayerRecord> map = new Hashtable<String, PlayerRecord>();
 		
-		map.put("Bruno", new PlayerRecord("Bruno"));
+		//REINITIALIZES BOTH CSV FILES
 		
-		PlayerRecord r = map.elements().nextElement();
-		System.out.println(r.getUsername() + " " + r.getGamesPlayed() + " " + r.getGamesWon());
+		Hashtable<String, PlayerRecord> playerRecords = new Hashtable<String, PlayerRecord>();
+		ArrayList<PairRecord> pairRecords = new ArrayList<PairRecord>();
+
+		CSVHandler.write(playerRecords, StatisticsFiles.PLAYER_RECORDS.getPath());
+		CSVHandler.write(pairRecords, StatisticsFiles.PAIR_RECORDS.getPath());
 		
+		
+		 
+
+		/*
+		//PRINT EVERYTHING (PRINTS CONTENT OF BOTH CSV FILES)
+		
+		Hashtable<String, PlayerRecord> playerRecords = Statistics.getPlayerRecords();
+		ArrayList<PairRecord> pairRecords = Statistics.getPairRecords();
+		
+		System.out.println("PLAYERS RECORDS:");
+		
+		for (String key : playerRecords.keySet()){
+			if (!key.equals("")){
+				System.out.println(playerRecords.get(key).getUsername());
+				System.out.println("  played: "+playerRecords.get(key).getGamesPlayed());
+				System.out.println("  won: "+playerRecords.get(key).getGamesWon());
+				System.out.println();
+			}
+			
+		}
+		
+		System.out.println("******");
+		
+		System.out.println("PAIR RECORDS:");
+		
+		for (PairRecord r : pairRecords){
+			if ( !r.getPlayerA().equals("") && !r.getPlayerB().equals("") ){
+				System.out.println(r.getPlayerA()+" "+r.getGamesWonPlayerA());
+				System.out.println(r.getPlayerB()+" "+r.getGamesWonPlayerB());
+				System.out.println();
+			}
+		}
+		*/
 		
 		//******TIME-END
 		System.out.println();
