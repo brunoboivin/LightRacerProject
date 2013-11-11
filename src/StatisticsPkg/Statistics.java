@@ -12,6 +12,12 @@ import java.util.Hashtable;
  */
 public class Statistics {
 	
+	/**
+	 * Returns statistics of a specified player.
+	 * 
+	 * @param player username of player
+	 * @return corresponding player record
+	 */
 	public static PlayerRecord getPlayerStat(String player) {
 		Hashtable<String, PlayerRecord> playerRecords = getPlayerRecords();
 		
@@ -21,8 +27,13 @@ public class Statistics {
 		return new PlayerRecord(player); //if player plays for the 1st time, then return a new record
 	}
 
-	
-	
+	/**
+	 * Returns statistics of a specified pair of players.
+	 * 
+	 * @param playerA username of first player
+	 * @param playerB username of second player
+	 * @return corresponding pair record
+	 */
 	public static PairRecord getPairRecord(String playerA, String playerB) {
 		ArrayList<PairRecord> pairRecords = getPairRecords();
 
@@ -39,12 +50,30 @@ public class Statistics {
 		return new PairRecord(playerA, playerB); //means A plays against B for the 1st time
 	}
 	
-	
-	public static ArrayList<PlayerRecord> getHighestScores(int x) {
-		return findXHighestScores(getPlayerRecords(), x); //could hardcode x=10 since this is part of the requirements TO BE VERIFIED
+	/**
+	 * Returns statistics of top 10 players.
+	 * 
+	 * @return list of player records
+	 */
+	public static ArrayList<PlayerRecord> getHighestScores() {
+		return getHighestScores(10); //by default, return stats for top 10 players
 	}
 	
+	/**
+	 * Returns statistics of top X players.
+	 * 
+	 * @return list of player records
+	 */
+	public static ArrayList<PlayerRecord> getHighestScores(int x) {
+		return findXHighestScores(getPlayerRecords(), x);
+	}
 	
+	/**
+	 * Updates statistics of a specified pair of players. It updates their respective player records and the corresponding pair record.
+	 * 
+	 * @param winner username of player who won
+	 * @param loser username of player who lost
+	 */
 	public static void update(String winner, String loser) {
 		updatePlayerStats(winner, loser);
 		updatePairStats(winner, loser);
@@ -52,8 +81,13 @@ public class Statistics {
 	
 	
 	//Update Stats -- Helper Methods
-	
-	public static void updatePlayerStats(String winner, String loser) {
+	/**
+	 * Updates the individual statistics of a specified pair of players.
+	 * 
+	 * @param winner username of player who won
+	 * @param loser username of player who lost
+	 */
+	private static void updatePlayerStats(String winner, String loser) {
 		//get map from csv file
 		Hashtable<String, PlayerRecord> playerRecords = getPlayerRecords();
 		
@@ -78,7 +112,13 @@ public class Statistics {
 		updatePlayerRecords(playerRecords);
 	}
 	
-	public static void updatePairStats(String winner, String loser) {
+	/**
+	 * Updates the pair statistics of a specified pair of players.
+	 * 
+	 * @param winner username of player who won
+	 * @param loser username of player who lost
+	 */
+	private static void updatePairStats(String winner, String loser) {
 		//get list of pair records from csv file
 		ArrayList<PairRecord> pairRecords = getPairRecords();
 		PairRecord target = null;
@@ -113,26 +153,44 @@ public class Statistics {
 	
 	
 	//CSV Helper Methods
-	
-	public static Hashtable<String, PlayerRecord> getPlayerRecords(){ //***MAKE IT PRIVATE
+	/**
+	 * @return Hashtable that maps usernames to individual player records; the hashtable is read from a csv file
+	 */
+	private static Hashtable<String, PlayerRecord> getPlayerRecords(){
 		return (Hashtable<String, PlayerRecord>) CSVHandler.read(StatisticsFiles.PLAYER_RECORDS.getPath());
 	}
 	
-	public static ArrayList<PairRecord> getPairRecords(){ //***MAKE IT PRIVATE
+	/**
+	 * @return ArrayList of pair records stored in a csv file
+	 */
+	private static ArrayList<PairRecord> getPairRecords(){
 		return (ArrayList<PairRecord>) CSVHandler.read(StatisticsFiles.PAIR_RECORDS.getPath());
 	}
 	
+	/** Overwrites csv file with an updated hashtable that maps usernames to individual player records.
+	 * 
+	 * @param playerRecords Hashtable that maps usernames to individual player records
+	 */
 	private static void updatePlayerRecords(Hashtable<String, PlayerRecord> playerRecords){
 		CSVHandler.write(playerRecords, StatisticsFiles.PLAYER_RECORDS.getPath());
 	}
 	
+	/** Overwrites csv file with an updated list of pair records.
+	 * 
+	 * @param pairRecords ArrayList of pair records
+	 */
 	private static void updatePairRecords(ArrayList<PairRecord> pairRecords){
 		CSVHandler.write(pairRecords, StatisticsFiles.PAIR_RECORDS.getPath());
 	}
 	
 	
 	//Highest Scores -- Helper Methods
-	
+	/**
+	 * Finds and returns the player record that has the highest number of games won.
+	 * 
+	 * @param playerRecords Hashtable that maps usernames to individual player records
+	 * @return player record of best player
+	 */
 	private static PlayerRecord findHighestScore(Hashtable<String, PlayerRecord> playerRecords){
 		if(playerRecords.keySet().size() == 0)
 			return null;
@@ -149,6 +207,13 @@ public class Statistics {
 		return max;
 	}
 	
+	/**
+	 * Finds and returns a specified number of best player records.
+	 * 
+	 * @param playerRecords Hashtable that maps usernames to individual player records
+	 * @param x number of player records to be returned
+	 * @return list of best player records
+	 */
 	private static ArrayList<PlayerRecord> findXHighestScores (Hashtable<String, PlayerRecord> playerRecords, int x){
 		ArrayList<PlayerRecord> list = new ArrayList<PlayerRecord>();
 		
