@@ -152,7 +152,7 @@ public class Statistics {
 	}
 	
 	
-	//CSV Helper Methods
+	//CSV -- Helper Methods
 	/**
 	 * @return Hashtable that maps usernames to individual player records; the hashtable is read from a csv file
 	 */

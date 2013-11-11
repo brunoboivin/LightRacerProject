@@ -24,13 +24,13 @@ class Driver_Stats {
 
 		
 		//REINITIALIZES BOTH CSV FILES
-		
+		/*
 		Hashtable<String, PlayerRecord> playerRecords = new Hashtable<String, PlayerRecord>();
 		ArrayList<PairRecord> pairRecords = new ArrayList<PairRecord>();
 
 		CSVHandler.write(playerRecords, StatisticsFiles.PLAYER_RECORDS.getPath());
 		CSVHandler.write(pairRecords, StatisticsFiles.PAIR_RECORDS.getPath());
-		
+		*/
 		
 		 
 

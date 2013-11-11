@@ -57,7 +57,7 @@ class PlayerRecord implements Record, Serializable {
 	}
 	
 	/**
-	 * Decrements gamesWon attribute by 1.
+	 * Increments gamesPlayed attribute by 1.
 	 */
 	public void lostGame(){
 		this.gamesPlayed++;
