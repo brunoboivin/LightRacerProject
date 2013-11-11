@@ -349,7 +349,7 @@ public class TronGame extends JFrame
 		 * clock speed enables faster or slower updates to the game. 
 		 * the higher the time the faster the racer.
 		 */
-		this.logicTimer = new Clock(10.0f);
+		this.logicTimer = new Clock(30.0f);
 		this.isNewGame = true;
 		
 		//Set the timer to paused initially.
