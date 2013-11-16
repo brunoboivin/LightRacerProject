@@ -6,33 +6,23 @@ public class User
 	private String password;
 	
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) 
+	public User(String username,String password)
 	{
-		// TODO Auto-generated method stub
-
+		this.username=username;
+		this.password=password;
 	}
 
 
-	public String getUsername() {
+	public String getUsername() 
+	{
 		return username;
 	}
 
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
-	public String getPassword() {
+	public String getPassword() 
+	{
 		return password;
 	}
 
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 }
