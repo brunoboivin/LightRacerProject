@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import CSVPkg.*;
-
+// comment from Anita
 /** Class that runs and tests the other classes contained in the StatisticsPkg.
  * 
  * @author Bruno Boivin <bruno.boivin@mail.mcgill.ca>
