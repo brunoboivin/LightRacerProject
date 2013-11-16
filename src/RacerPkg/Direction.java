@@ -3,23 +3,23 @@ package RacerPkg;
 public enum Direction {
 	
 	/**
-	 * Moving North (Up).
+	 * Moving Up.
 	 */
-	North,
+	Up,
 	
 	/**
-	 * Moving East (Right).
+	 * Moving Right.
 	 */
-	East,
+	Right,
 	
 	/**
-	 * Moving South (Down).
+	 * Moving Down.
 	 */
-	South,
+	Down,
 	
 	/**
-	 * Moving West (Left).
+	 * Moving Left.
 	 */
-	West
+	Left
 
 }

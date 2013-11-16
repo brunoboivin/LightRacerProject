@@ -63,7 +63,7 @@ public class GridPanel extends JPanel {
 		{
 			for(int j=0;j<cells[i].length;j++)
 				{
-				cells[i][j] = null;
+				cells[i][j] = GridCell.Empty;
 				}
 		}
 		/*for(int k=10;k<25;k++)
@@ -193,12 +193,13 @@ public class GridPanel extends JPanel {
 	{
 		switch(type) 
 		{
+		case Empty:
+			break;
 		
 		case Obstacle:
 			g.setColor(Color.WHITE);
 			g.fillOval(x + 2, y + 2, TILE_SIZE - 4, TILE_SIZE - 4);
-			break;
-			
+			break;	
 		/*
 		 * The Racer1 body is depicted as a blue square that takes up the
 		 * entire tile.

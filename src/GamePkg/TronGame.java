@@ -4,10 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.LinkedList;
 import javax.swing.JFrame;
 
 import RacerPkg.*;
+import GameControllerPkg.User;
 import GridPkg.*;
 
 
@@ -22,11 +22,7 @@ public class TronGame extends JFrame
 	 */
 	private static final long FRAME_TIME = 1000L / 50L;
 		
-	/**
-	 * The maximum number of directions that we can have polled in the
-	 * direction list.
-	 */
-	private static final int MAX_DIRECTIONS = 3;
+	
 	
 	/**
 	 * The GridPanel instance.
@@ -52,19 +48,16 @@ public class TronGame extends JFrame
 	public GameStatus status;
 	
 	/**
-	 * The list that contains the points for the player1.
+	 * The RacerA instance
 	 */
-	private LinkedList<Point> player1;
+	private Racer racerA;
 	
 	/**
-	 * The list that contains the points for the player2.
+	 * The RacerB instance
 	 */
-	private LinkedList<Point> player2;
-	/**
-	 * The lists that contains the queued directions.
-	 */
-	private LinkedList<Direction> directionsP1;
-	private LinkedList<Direction> directionsP2;
+	private Racer racerB;
+
+	
 	
 	private TronGame() 
 	{
@@ -72,13 +65,14 @@ public class TronGame extends JFrame
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
-				
+		/*
+		 * Initialize the game's status
+		 */
+		this.status= new GameStatus(this);		
 		/*
 		 * Initialize the game's panels and add them to the window.
 		 */
 		this.board = new GridPanel(this);
-		this.status= new GameStatus(this);
-		
 		//this.side = new SidePanel(this);
 		
 		add(board, BorderLayout.CENTER);
@@ -97,90 +91,61 @@ public class TronGame extends JFrame
 				switch(e.getKeyCode()) 
 				{
 
-				/*
-				 * If the game is not paused, and the game is not over...
-				 * 
-				 * Ensure that the direction list is not full, and that the most
-				 * recent direction is adjacent to North before adding the
-				 * direction to the list.
-				 */
-				//case KeyEvent.VK_W:
-				case KeyEvent.VK_UP:
-					if(!status.isPaused() && !status.isGameOver()) 
-					{
-						if(directionsP1.size() < MAX_DIRECTIONS) 
-						{
-							Direction last = directionsP1.peekLast();
-							if(last != Direction.South && last != Direction.North) 
-							{
-								directionsP1.addLast(Direction.North);
-							}
-						}
-					}
-					break;
 					/*
 					 * If the game is not paused, and the game is not over...
 					 * 
-					 * Ensure that the direction list is not full, and that the most
-					 * recent direction is adjacent to South before adding the
-					 * direction to the list.
-					 */	
-					//case KeyEvent.VK_S:
+					 */
+					case KeyEvent.VK_W:
+						if(!status.isPaused() && !status.isGameOver()) 
+						{
+							racerB.updateDirection(Direction.Up);
+						}
+						break;
+					case KeyEvent.VK_UP:
+						if(!status.isPaused() && !status.isGameOver()) 
+						{
+							racerA.updateDirection(Direction.Up);
+						}
+						break;	
+					
+					case KeyEvent.VK_S:
+						if(!status.isPaused() && !status.isGameOver()) 
+						{
+							racerB.updateDirection(Direction.Down);
+						}
+						break;
 					case KeyEvent.VK_DOWN:
 						if(!status.isPaused() && !status.isGameOver()) 
 						{
-							if(directionsP1.size() < MAX_DIRECTIONS)
-							{
-								Direction last = directionsP1.peekLast();
-								if(last != Direction.North && last != Direction.South) 
-								{
-									directionsP1.addLast(Direction.South);
-								}
-							}
+							racerA.updateDirection(Direction.Down);
 						}
 						break;
-					
-					/*
-					 * If the game is not paused, and the game is not over...
-					 * 
-					 * Ensure that the direction list is not full, and that the most
-					 * recent direction is adjacent to West before adding the
-					 * direction to the list.
-					 */						
-					//case KeyEvent.VK_A:
+										
+					case KeyEvent.VK_A:
+						if(!status.isPaused() && !status.isGameOver())
+						{
+							racerB.updateDirection(Direction.Left);
+						}
+						break;
+						
 					case KeyEvent.VK_LEFT:
 						if(!status.isPaused() && !status.isGameOver())
 						{
-							if(directionsP1.size() < MAX_DIRECTIONS) 
-							{
-								Direction last = directionsP1.peekLast();
-								if(last != Direction.East && last != Direction.West) 
-								{
-									directionsP1.addLast(Direction.West);
-								}
-							}
+							racerA.updateDirection(Direction.Left);
 						}
 						break;
 				
-					/*
-					 * If the game is not paused, and the game is not over...
-					 * 
-					 * Ensure that the direction list is not full, and that the most
-					 * recent direction is adjacent to East before adding the
-					 * direction to the list.
-					 */		
-					//case KeyEvent.VK_D:
+					case KeyEvent.VK_D:
+						if(!status.isPaused() && !status.isGameOver()) 
+						{
+							racerB.updateDirection(Direction.Right);
+						}
+						break;
+						
 					case KeyEvent.VK_RIGHT:
 						if(!status.isPaused() && !status.isGameOver()) 
 						{
-							if(directionsP1.size() < MAX_DIRECTIONS) 
-							{
-								Direction last = directionsP1.peekLast();
-								if(last != Direction.West && last != Direction.East) 
-								{
-									directionsP1.addLast(Direction.East);
-								}
-							}
+							racerA.updateDirection(Direction.Right);
 						}
 						break;
 					
@@ -232,14 +197,21 @@ public class TronGame extends JFrame
 		 * the racer hit a wall, RacerBody will be returned, as both conditions
 		 * are handled identically.
 		 */
-		GridCell collision = updatePlayer();
+		GridCell collisionA = racerA.updateRacer(board);
+		GridCell collisionB = racerB.updateRacer(board);
 		
 		/*
 		 * Here we handle the different possible collisions.
 		 * 
 		 */
 		
-		if(collision == GridCell.RacerABody || collision == GridCell.Obstacle )
+		if(collisionA != GridCell.Empty )
+		{
+			status.setGameOver(true);
+			logicTimer.setPaused(true);
+		} 
+		
+		if(collisionB != GridCell.Empty )
 		{
 			status.setGameOver(true);
 			logicTimer.setPaused(true);
@@ -247,96 +219,16 @@ public class TronGame extends JFrame
 	}
 	
 	
-
-	/**
-	 * Updates the Racer's position.
-	 * @return GridCell cell that the head moved into.
-	 */
-	private GridCell updatePlayer() 
-	{
-
-		/*
-		 * Here we peek at the next direction rather than polling it. 
-		 */
-		Direction currentDirection = directionsP1.peekFirst();
-				
-		/*
-		 * Here we calculate the new point that the racerA's head will be at
-		 * after the update.
-		 */		
-		Point head = new Point(player1.peekFirst());
-		switch(currentDirection) 
-		{
-		case North:
-			head.y--;
-			break;
-			
-		case South:
-			head.y++;
-			break;
-			
-		case West:
-			head.x--;
-			break;
-			
-		case East:
-			head.x++;
-			break;
-		}
-		
-		/*
-		 * If the racer has moved out of bounds ('hit' a wall), we can just
-		 * return that it's collided with itself, as both cases are handled
-		 * identically.
-		 */
-		if(head.x < 0 || head.x >= GridPanel.COL_COUNT || head.y < 0 || head.y >= GridPanel.ROW_COUNT) 
-		{
-			return GridCell.RacerABody; //Pretend we collided with our body.
-		}
-		
-		/*
-		 * Here we get the cell that was located at the new head position
-		 */
-		
-		GridCell old = board.getCell(head.x, head.y);
-	
-		
-		
-		/*
-		 * Update the racers's position on the board if it didn't have a collision:
-		 * 
-		 * 1. Set the old head position to a body cell.
-		 * 2. Add the new head to the cell.
-		 * 3. Set the new head position to a head cell.
-		 * 
-		 * If more than one direction is in the queue, poll it to read new
-		 * input.
-		 */
-		if(old != GridCell.RacerABody && old != GridCell.Obstacle) 
-		{
-			board.setCell(player1.peekFirst(), GridCell.RacerABody);
-			player1.push(head);
-			board.setCell(head, GridCell.RacerAHead);
-			if(directionsP1.size() > 1) {
-				directionsP1.poll();
-			}
-		}
-				
-		return old;
-	}
-	
-	
 	/**
 	 * Starts the game running.
 	 */
-	private void startGame() 
+	private void startGame(User userA,User userB) 
 	{
 		/*
 		 * Initialize everything we're going to be using.
 		 */
-		//this.random = new Random();
-		this.player1 = new LinkedList<>();
-		this.directionsP1 = new LinkedList<>();
+		racerA=new Racer(userA,ID.A);
+		racerB=new Racer(userB,ID.B);
 		/*
 		 * clock speed enables faster or slower updates to the game. 
 		 * the higher the time the faster the racer.
@@ -385,7 +277,9 @@ public class TronGame extends JFrame
 			}
 		}
 	}
-	
+	/**
+	 * Resets the game.
+	 */
 	private void resetGame() 
 	{
 		/*
@@ -400,28 +294,20 @@ public class TronGame extends JFrame
 		this.status.setGameOver(false);
 		
 		/*
-		 * Create the head at the center of the board.
+		 * Create the heads at the two opposite corners.
 		 */
-		Point head = new Point(54, 54);
-
+		Point headA = new Point(54, 54);
+		Point headB = new Point(0, 54);
 		/*
-		 * Clear the racer list and add the head.
-		 */
-		player1.clear();
-		player1.add(head);
-		
-		/*
-		 * Clear the board and add the head.
+		 * Clear the board and add the heads.
 		 */
 		board.clearBoard();
-		board.setCell(head, GridCell.RacerAHead);
+		board.setCell(headA, GridCell.RacerAHead);
+		board.setCell(headB, GridCell.RacerBHead);
 		
-		/*
-		 * Clear the directions and add north as the
-		 * default direction.
-		 */
-		directionsP1.clear();
-		directionsP1.add(Direction.North);
+		racerA.setUpRacer(headA, Direction.Up);
+		racerB.setUpRacer(headB, Direction.Up);
+		
 		
 		/*
 		 * Reset the logic timer.
@@ -435,18 +321,18 @@ public class TronGame extends JFrame
 	}
 	*/
 	
-	public Direction getDirection() {
-		return directionsP1.peek();
-	}
-	
+
 	/**
 	 * Entry point of the program.
 	 * @param args Unused.
 	 */
 	public static void main(String[] args) 
 	{
+		User userA=new User("A","a");
+		User userB=new User("B","b");
+		
 		TronGame tron = new TronGame();
-		tron.startGame();
+		tron.startGame(userA,userB);
 	}
 
 }
