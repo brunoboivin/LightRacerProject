@@ -11,7 +11,8 @@ public enum GridCell
 	
 	RacerBHead,
 	
-	RacerBBody
+	RacerBBody,
+	
+	Empty
 	
 }
-

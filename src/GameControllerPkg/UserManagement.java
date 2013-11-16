@@ -8,7 +8,7 @@ public class UserManagement
 
   //  public myUIController;
 
-  public Racer login( String username ,  String password ,  Color color) 
+  public Racer login( String username ,  String password ) 
   {
 	  
   return null;
