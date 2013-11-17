@@ -59,7 +59,7 @@ public class TronGame extends JFrame
 
 	
 	
-	private TronGame() 
+	public TronGame() 
 	{
 		super("Tron Prototype1");
 		setLayout(new BorderLayout());
