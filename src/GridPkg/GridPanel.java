@@ -22,7 +22,7 @@ public class GridPanel extends JPanel {
 	 */
 	/*
 	 * 
-	 * these would be instantiated by the grid class
+	 * these would have to be instantiated by the grid class
 	 * 
 	 */
 	public static final int ROW_COUNT = 50;
