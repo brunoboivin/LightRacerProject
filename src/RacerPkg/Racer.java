@@ -4,8 +4,8 @@ import java.awt.Point;
 import java.util.LinkedList;
 
 import GameControllerPkg.User;
-import GamePkg.GridPanel;
 import GridPkg.GridCell;
+import GridPkg.GridPanel;
 
 public class Racer 
 {

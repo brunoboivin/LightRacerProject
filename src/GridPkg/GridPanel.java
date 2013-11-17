@@ -1,4 +1,4 @@
-package GamePkg;
+package GridPkg;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import javax.swing.JPanel;
 
+import GamePkg.TronGame;
 import GridPkg.*;
 
 
@@ -24,8 +25,8 @@ public class GridPanel extends JPanel {
 	 * these would be instantiated by the grid class
 	 * 
 	 */
-	public static final int ROW_COUNT = 55;
-	public static final int COL_COUNT = 55;
+	public static final int ROW_COUNT = 50;
+	public static final int COL_COUNT = 75;
 	/**
 	 * The size of each tile in pixels.
 	 */
@@ -48,7 +49,7 @@ public class GridPanel extends JPanel {
 	{
 		this.game = game;
 		
-		this.cells = new GridCell[ROW_COUNT][COL_COUNT];
+		this.cells = new GridCell[COL_COUNT][ROW_COUNT];
 		
 		setPreferredSize(new Dimension(COL_COUNT * TILE_SIZE, ROW_COUNT * TILE_SIZE));
 		setBackground(Color.BLACK);

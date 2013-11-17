@@ -9,12 +9,14 @@ public class GameStatus {
 	 * Whether or not we're running a new game.
 	 */
 	private TronGame tronGame;
+	private int Round;
 	private boolean isNewGame;
 	
 	/**
 	 * Whether or not the game is over.
 	 */
 	private boolean isGameOver;
+	private boolean isRoundOVer;
 	
 	/**	
 	 * Whether or not the game is paused.
