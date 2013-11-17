@@ -11,10 +11,6 @@ import GamePkg.TronGame;
 import GridPkg.*;
 
 
-
-
-
-
 public class GridPanel extends JPanel 
 {
 

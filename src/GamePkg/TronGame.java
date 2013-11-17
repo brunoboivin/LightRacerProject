@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 
 import RacerPkg.*;
-import GameControllerPkg.User;
+import UserPkg.User;
 import GridPkg.*;
 
 
@@ -329,7 +329,7 @@ public class TronGame extends JFrame
 	public static void main(String[] args) 
 	{
 		User userA=new User("A","a");
-		User userB=new User("B","b");
+		User userB=new UserPkg.User("B","b");
 		
 		TronGame tron = new TronGame();
 		tron.startGame(userA,userB);

@@ -3,7 +3,8 @@ package RacerPkg;
 import java.awt.Point;
 import java.util.LinkedList;
 
-import GameControllerPkg.User;
+import UserPkg.User;
+
 import GridPkg.GridCell;
 import GridPkg.GridPanel;
 
