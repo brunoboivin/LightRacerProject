@@ -15,7 +15,8 @@ import GridPkg.*;
 
 
 
-public class GridPanel extends JPanel {
+public class GridPanel extends JPanel 
+{
 
 	/**
 	 * @param args
@@ -236,3 +237,6 @@ public class GridPanel extends JPanel {
 	
 
 }
+
+
+

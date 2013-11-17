@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @version 1.0
  * @since 2013-11-08
  */
-class PairRecord implements Record, Serializable {
+public class PairRecord implements Record, Serializable {
 	//Class properties
 	private static final long serialVersionUID = -7395425916444454417L;
 	

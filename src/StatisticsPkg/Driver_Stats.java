@@ -31,12 +31,11 @@ class Driver_Stats {
 		CSVHandler.write(playerRecords, StatisticsFiles.PLAYER_RECORDS.getPath());
 		CSVHandler.write(pairRecords, StatisticsFiles.PAIR_RECORDS.getPath());
 		*/
-		
 		 
 
-		/*
-		//PRINT EVERYTHING (PRINTS CONTENT OF BOTH CSV FILES)
 		
+		//PRINT EVERYTHING (PRINTS CONTENT OF BOTH CSV FILES)
+		/*
 		Hashtable<String, PlayerRecord> playerRecords = Statistics.getPlayerRecords();
 		ArrayList<PairRecord> pairRecords = Statistics.getPairRecords();
 		
