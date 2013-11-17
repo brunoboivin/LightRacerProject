@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 
 import RacerPkg.*;
-import GameControllerPkg.User;
+import UserPkg.User;
 import GridPkg.*;
 
 
@@ -59,7 +59,7 @@ public class TronGame extends JFrame
 
 	
 	
-	private TronGame() 
+	public TronGame() 
 	{
 		super("Tron Prototype1");
 		setLayout(new BorderLayout());
@@ -222,7 +222,7 @@ public class TronGame extends JFrame
 	/**
 	 * Starts the game running.
 	 */
-	private void startGame(User userA,User userB) 
+	public void startGame(User userA,User userB) 
 	{
 		/*
 		 * Initialize everything we're going to be using.
@@ -296,8 +296,8 @@ public class TronGame extends JFrame
 		/*
 		 * Create the heads at the two opposite corners.
 		 */
-		Point headA = new Point(0, 49);
-		Point headB = new Point(74, 0);
+		Point headA = new Point(74, 0);
+		Point headB = new Point(0, 49);
 		/*
 		 * Clear the board and add the heads.
 		 */
@@ -305,8 +305,8 @@ public class TronGame extends JFrame
 		board.setCell(headA, GridCell.RacerAHead);
 		board.setCell(headB, GridCell.RacerBHead);
 		
-		racerA.setUpRacer(headA, Direction.Up);
-		racerB.setUpRacer(headB, Direction.Down);
+		racerA.setUpRacer(headA, Direction.Down);
+		racerB.setUpRacer(headB, Direction.Up);
 		
 		
 		/*
@@ -329,7 +329,7 @@ public class TronGame extends JFrame
 	public static void main(String[] args) 
 	{
 		User userA=new User("A","a");
-		User userB=new User("B","b");
+		User userB=new UserPkg.User("B","b");
 		
 		TronGame tron = new TronGame();
 		tron.startGame(userA,userB);
