@@ -28,7 +28,7 @@ public class Racer
 	 * 
 	 */
 	private User user;
-	
+	public 	int wonRounds;
 	private GridCell headCell;
 	private GridCell bodyCell;
 	
@@ -38,6 +38,7 @@ public class Racer
 	public Racer(User user,ID id)
 	{
 		this.setUser(user);
+		this.wonRounds=0;
 		this.racerPoints=new LinkedList<Point>();
 		this.racerDir=new LinkedList<Direction>();	
 		switch(id)

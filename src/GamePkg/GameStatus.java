@@ -1,5 +1,7 @@
 package GamePkg;
 
+import StatisticsPkg.Statistics;
+
 public class GameStatus {
 
 	/**
@@ -9,14 +11,14 @@ public class GameStatus {
 	 * Whether or not we're running a new game.
 	 */
 	private TronGame tronGame;
-	private int Round;
+	private int roundNumber;
 	private boolean isNewGame;
 	
 	/**
 	 * Whether or not the game is over.
 	 */
 	private boolean isGameOver;
-	private boolean isRoundOVer;
+	private boolean isRoundOver;
 	
 	/**	
 	 * Whether or not the game is paused.
@@ -27,6 +29,7 @@ public class GameStatus {
 	public GameStatus(TronGame game)
 	{
 		this.tronGame=game;
+		this.setGameOver(false);
 	}
 	/**
 	 * Gets the flag that indicates whether or not we're playing a new game.
@@ -35,6 +38,26 @@ public class GameStatus {
 	public boolean isNewGame() 
 	{
 		return this.isNewGame;
+	}
+	
+	
+	public void setRoundOver(boolean roundOver) 
+	{
+		this.isRoundOver=roundOver;
+		if(roundOver==true)
+		{
+			++roundNumber;
+		}
+	}
+	
+	
+	public boolean isRoundOver() 
+	{
+		return this.isRoundOver;
+	}
+	
+	public int getRoundNumber() {
+		return roundNumber;
 	}
 	
 	public void setNewGame(boolean newGame) 
@@ -48,10 +71,24 @@ public class GameStatus {
 	 */
 	public boolean isGameOver() 
 	{
+		if(roundNumber>=2)
+		{
+			if(this.tronGame.totalRoundWins()>=2)
+			{
+				this.setRoundOver(false);
+				this.setGameOver(true);
+				/**
+				 * when the game is over the Statistics getUpdated
+				 */
+				Statistics.update(tronGame.winnerIs(),tronGame.loserIs());
+			}
+				
+				
+		}
 		return this.isGameOver;
 	}
 	
-	public void setGameOver(boolean gameOver) 
+	private void setGameOver(boolean gameOver) 
 	{
 		this.isGameOver = gameOver;
 	}

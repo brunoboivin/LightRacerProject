@@ -147,7 +147,7 @@ public class GridPanel extends JPanel
 		/*
 		 * Show a message on the screen based on the current game state.
 		 */
-		if( (game.status.isGameOver()) || (game.status.isNewGame()) || (game.status.isPaused()) ) 
+		if( (game.status.isGameOver()) || (game.status.isNewGame()) || (game.status.isPaused()) || (game.status.isRoundOver())) 
 		{
 			g.setColor(Color.WHITE);
 			
@@ -163,15 +163,26 @@ public class GridPanel extends JPanel
 			 */
 			String largeMessage = null;
 			String smallMessage = null;
-			String winnerMessage=null;
-			if(game.status.isNewGame()) {
+			String gameMessage=null;
+			if(game.status.isNewGame()) 
+			{
 				largeMessage = "Tron Game!";
 				smallMessage = "Press Enter to Start";
-			} else if(game.status.isGameOver()) {
-				winnerMessage=game.winnerIs()+" Won";
+			} 
+			else if (game.status.isRoundOver())
+			{
+				gameMessage=game.roundWinner()+" Won this round";
+				largeMessage = "Round"+game.status.getRoundNumber()+" is over";
+				smallMessage = "Press Enter to start the next round";
+				
+			}
+			else if(game.status.isGameOver()) 
+			{
+				gameMessage=game.winnerIs()+" Won :)"+game.loserIs()+" Lost :(";
 				largeMessage = "Game Over!";
-				smallMessage = "Press Enter to Restart";
-			} else if(game.status.isPaused()) {
+				smallMessage = "Press Space to go to the statistics";
+			} else if(game.status.isPaused()) 
+			{
 				largeMessage = "Paused";
 				smallMessage = "Press P to Resume";
 			}
@@ -180,9 +191,9 @@ public class GridPanel extends JPanel
 			 * Set the message font and draw the messages in the center of the board.
 			 */
 			g.setFont(FONT);
-			if (winnerMessage != null)
+			if (gameMessage != null)
 			{	
-				g.drawString(winnerMessage, centerX - g.getFontMetrics().stringWidth(winnerMessage) / 2, centerY-50 );
+				g.drawString(gameMessage, centerX - g.getFontMetrics().stringWidth(gameMessage) / 2, centerY-50 );
 			}
 			g.drawString(largeMessage, centerX - g.getFontMetrics().stringWidth(largeMessage) / 2, centerY);
 			g.drawString(smallMessage, centerX - g.getFontMetrics().stringWidth(smallMessage) / 2, centerY + 50);
