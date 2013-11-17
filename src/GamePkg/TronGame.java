@@ -114,20 +114,28 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		 */
 		GridCell collisionA = racerA.updateRacer(board);
 		GridCell collisionB = racerB.updateRacer(board);
-		
+		//System.out.println("colA"+collisionA);
+		//System.out.println("colB"+collisionB);
 		/*
 		 * Here we handle the different possible collisions.
 		 * 
 		 */
 		
-		if(collisionA != GridCell.Empty )
+		if(collisionB == GridCell.RacerAHead || collisionA == GridCell.RacerAHead || 
+				(collisionA != GridCell.Empty && collisionB != GridCell.Empty ))
+		{
+			winner="No One";
+			status.setGameOver(true);
+			logicTimer.setPaused(true);
+		}
+		if(collisionA != GridCell.Empty && collisionA != GridCell.RacerBHead)
 		{
 			winner=racerB.getUser().getUsername();
 			status.setGameOver(true);
 			logicTimer.setPaused(true);
 		} 
 		
-		if(collisionB != GridCell.Empty )
+		if(collisionB != GridCell.Empty && collisionB != GridCell.RacerAHead )
 		{
 			winner=racerA.getUser().getUsername();
 			status.setGameOver(true);
