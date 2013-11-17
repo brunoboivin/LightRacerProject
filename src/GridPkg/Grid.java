@@ -20,18 +20,6 @@ public class Grid {
 		this.gridCells = new GridCell[this.colCount][this.rowCount];
 	
 	}  
-  
-	public static void clearBoard ( GridCell[][] gridCells ) {
-		
-		GridCell[][] currentGridCells = gridCells;
-		
-		for(int i = 0; i < currentGridCells.length; i++) {
-			
-			for(int j=0; j< currentGridCells[i].length; j++) {
-				currentGridCells[i][j] = GridCell.Empty;
-			}
-		}
-	}
 	
 	public GridCell[][] getGridCells (){
 		return this.gridCells;
