@@ -296,8 +296,8 @@ public class TronGame extends JFrame
 		/*
 		 * Create the heads at the two opposite corners.
 		 */
-		Point headA = new Point(0, 49);
-		Point headB = new Point(74, 0);
+		Point headA = new Point(74, 0);
+		Point headB = new Point(0, 49);
 		/*
 		 * Clear the board and add the heads.
 		 */
@@ -305,8 +305,8 @@ public class TronGame extends JFrame
 		board.setCell(headA, GridCell.RacerAHead);
 		board.setCell(headB, GridCell.RacerBHead);
 		
-		racerA.setUpRacer(headA, Direction.Up);
-		racerB.setUpRacer(headB, Direction.Down);
+		racerA.setUpRacer(headA, Direction.Down);
+		racerB.setUpRacer(headB, Direction.Up);
 		
 		
 		/*
