@@ -163,10 +163,12 @@ public class GridPanel extends JPanel
 			 */
 			String largeMessage = null;
 			String smallMessage = null;
+			String winnerMessage=null;
 			if(game.status.isNewGame()) {
 				largeMessage = "Tron Game!";
 				smallMessage = "Press Enter to Start";
 			} else if(game.status.isGameOver()) {
+				winnerMessage=game.winnerIs()+" Won";
 				largeMessage = "Game Over!";
 				smallMessage = "Press Enter to Restart";
 			} else if(game.status.isPaused()) {
@@ -178,7 +180,11 @@ public class GridPanel extends JPanel
 			 * Set the message font and draw the messages in the center of the board.
 			 */
 			g.setFont(FONT);
-			g.drawString(largeMessage, centerX - g.getFontMetrics().stringWidth(largeMessage) / 2, centerY - 50);
+			if (winnerMessage != null)
+			{	
+				g.drawString(winnerMessage, centerX - g.getFontMetrics().stringWidth(winnerMessage) / 2, centerY-50 );
+			}
+			g.drawString(largeMessage, centerX - g.getFontMetrics().stringWidth(largeMessage) / 2, centerY);
 			g.drawString(smallMessage, centerX - g.getFontMetrics().stringWidth(smallMessage) / 2, centerY + 50);
 		}
 	}

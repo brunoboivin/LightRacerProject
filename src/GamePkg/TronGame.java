@@ -59,7 +59,10 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	 */
 	private Racer racerB;
 
-	
+	/**
+	 * 
+	 */
+	public String winner;
 	
 	public TronGame() 
 	{
@@ -119,12 +122,14 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		
 		if(collisionA != GridCell.Empty )
 		{
+			winner=racerB.getUser().getUsername();
 			status.setGameOver(true);
 			logicTimer.setPaused(true);
 		} 
 		
 		if(collisionB != GridCell.Empty )
 		{
+			winner=racerA.getUser().getUsername();
 			status.setGameOver(true);
 			logicTimer.setPaused(true);
 		} 
@@ -134,13 +139,14 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	/**
 	 * Starts the game running.
 	 */
-	public void startGame(User userA,User userB) 
+	private void startGame(User userA,User userB) 
 	{
 		/*
 		 * Initialize everything we're going to be using.
 		 */
 		racerA=new Racer(userA,ID.A);
 		racerB=new Racer(userB,ID.B);
+		winner="";
 		
 	}
 	/**
@@ -186,7 +192,10 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		return this.status;
 	}
 	*/
-	
+	public String winnerIs()
+	{
+		return winner;
+	}
 
 	/**
 	 * Entry point of the program.
@@ -303,8 +312,8 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		this.logicTimer = new Clock(30.0f);
 		this.status.setNewGame(true);
 		this.status.setGameOver(false);
-		User userA=new User("A","a");
-		User userB=new UserPkg.User("B","b");
+		User userA=new User("Blue","a");
+		User userB=new User("Red","b");
 		startGame(userA,userB);
 		
 		//Set the timer to paused initially.
