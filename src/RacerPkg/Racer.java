@@ -37,7 +37,7 @@ public class Racer
 	 */
 	public Racer(User user,ID id)
 	{
-		this.user=user;
+		this.setUser(user);
 		this.racerPoints=new LinkedList<Point>();
 		this.racerDir=new LinkedList<Direction>();	
 		switch(id)
@@ -52,6 +52,13 @@ public class Racer
 				this.bodyCell=GridCell.RacerBBody;
 				break;
 		}
+	}
+	public User getUser()
+	{
+		return user;
+	}
+	private void setUser(User user) {
+		this.user = user;
 	}
 	/**
 	 * Racer gets set up.
