@@ -18,8 +18,8 @@ public class GridPanel extends JPanel
 	 * @param args
 	 */
 
-	private int ROW_COUNT = 50;
-	private int COL_COUNT = 75;
+	private int ROW_COUNT;
+	private int COL_COUNT;
 	/**
 	 * The size of each tile in pixels.
 	 */
@@ -29,7 +29,6 @@ public class GridPanel extends JPanel
 	 * The array of cells that make up this board.
 	 */
 	private GridCell[][] cells;
-	
 	
 	private TronGame game;
 	/**
@@ -43,9 +42,8 @@ public class GridPanel extends JPanel
 		this.game = game;
 		Grid grid = new Grid();
 		this.cells = grid.getGridCells();
-
-		
-		
+		this.COL_COUNT = grid.getGridCol();
+		this.ROW_COUNT = grid.getGridRow();
 		
 		setPreferredSize(new Dimension(COL_COUNT * TILE_SIZE, ROW_COUNT * TILE_SIZE));
 		setBackground(Color.BLACK);
