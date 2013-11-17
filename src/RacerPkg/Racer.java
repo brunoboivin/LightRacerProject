@@ -202,7 +202,7 @@ public class Racer
 		 * return that it's collided with itself, as both cases are handled
 		 * identically.
 		 */
-		if(head.x < 0 || head.x >= GridPanel.COL_COUNT || head.y < 0 || head.y >= GridPanel.ROW_COUNT) 
+		if(head.x < 0 || head.x >= board.getGridPanelCol() || head.y < 0 || head.y >= board.getGridPanelRow() ) 
 		{
 			return bodyCell; //Pretend we collided with our body.
 		}

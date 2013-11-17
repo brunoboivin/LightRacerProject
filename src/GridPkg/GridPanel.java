@@ -17,13 +17,9 @@ public class GridPanel extends JPanel
 	/**
 	 * @param args
 	 */
-	/*
-	 * 
-	 * these would have to be instantiated by the grid class
-	 * 
-	 */
-	public static final int ROW_COUNT = 50;
-	public static final int COL_COUNT = 75;
+
+	private int ROW_COUNT = 50;
+	private int COL_COUNT = 75;
 	/**
 	 * The size of each tile in pixels.
 	 */
@@ -229,7 +225,14 @@ public class GridPanel extends JPanel
 		
 		}
 	}
-		
+	
+	public int getGridPanelRow (){
+		return this.ROW_COUNT;
+	}
+	
+	public int getGridPanelCol (){
+		return this.COL_COUNT;
+	}
 	
 
 }
