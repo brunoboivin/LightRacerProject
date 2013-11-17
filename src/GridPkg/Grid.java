@@ -32,6 +32,18 @@ public class Grid {
 			}
 		}
 	}
+	
+	public GridCell[][] getgGridCells (){
+		return this.gridCells;
+	}
+	
+	public int getGridRow (){
+		return this.rowCount;
+	}
+	
+	public int getGridCol (){
+		return this.colCount;
+	}
  
 
 }
