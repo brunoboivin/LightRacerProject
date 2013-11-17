@@ -17,11 +17,11 @@ public class Grid {
 	  
 		this.rowCount = 50;
 		this.colCount = 75;
-		this.gridCells = new GridCell[rowCount][colCount];
+		this.gridCells = new GridCell[this.colCount][this.rowCount];
 	
 	}  
   
-	public void clearBoard ( GridCell[][] gridCells ) {
+	public static void clearBoard ( GridCell[][] gridCells ) {
 		
 		GridCell[][] currentGridCells = gridCells;
 		
@@ -33,7 +33,7 @@ public class Grid {
 		}
 	}
 	
-	public GridCell[][] getgGridCells (){
+	public GridCell[][] getGridCells (){
 		return this.gridCells;
 	}
 	

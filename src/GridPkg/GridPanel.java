@@ -41,8 +41,11 @@ public class GridPanel extends JPanel
 	public GridPanel(TronGame game) 
 	{
 		this.game = game;
+		Grid grid = new Grid();
+		this.cells = grid.getGridCells();
+
 		
-		this.cells = new GridCell[COL_COUNT][ROW_COUNT];
+		
 		
 		setPreferredSize(new Dimension(COL_COUNT * TILE_SIZE, ROW_COUNT * TILE_SIZE));
 		setBackground(Color.BLACK);
