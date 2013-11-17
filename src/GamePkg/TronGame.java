@@ -222,7 +222,7 @@ public class TronGame extends JFrame
 	/**
 	 * Starts the game running.
 	 */
-	private void startGame(User userA,User userB) 
+	public void startGame(User userA,User userB) 
 	{
 		/*
 		 * Initialize everything we're going to be using.
