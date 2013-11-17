@@ -4,36 +4,34 @@ import java.io.File;
 
 //import java.util.Vector;
 
-public class Grid 
-{
+public class Grid {
 
-  public int difficulty;
+	private int rowCount;
+	private int colCount;
+	private GridCell[][] gridCells;
+	
 
-  public int width;
-
-  public int length;
-
-
-    /**
-   * 
-   * @element-type GridCell
-   */
-  
-
-  public Grid ( int difficulty ,  int width,  int length ) 
-  {
-  this.difficulty=difficulty;
-  this.width=width;
-  this.length=length;
-  }
-
-  public Grid( File file) 
-  {
-	  this.difficulty=0;
-			  
+	public Grid () {
 	  
-  }
-  
-  
+		/* For now, the grid's properties are hard-coded. custom grids will be implemented later. */
+	  
+		this.rowCount = 50;
+		this.colCount = 75;
+		this.gridCells = new GridCell[this.colCount][this.rowCount];
+	
+	}  
+	
+	public GridCell[][] getGridCells (){
+		return this.gridCells;
+	}
+	
+	public int getGridRow (){
+		return this.rowCount;
+	}
+	
+	public int getGridCol (){
+		return this.colCount;
+	}
+ 
 
 }

@@ -17,13 +17,9 @@ public class GridPanel extends JPanel
 	/**
 	 * @param args
 	 */
-	/*
-	 * 
-	 * these would have to be instantiated by the grid class
-	 * 
-	 */
-	public static final int ROW_COUNT = 50;
-	public static final int COL_COUNT = 75;
+
+	private int ROW_COUNT;
+	private int COL_COUNT;
 	/**
 	 * The size of each tile in pixels.
 	 */
@@ -33,7 +29,6 @@ public class GridPanel extends JPanel
 	 * The array of cells that make up this board.
 	 */
 	private GridCell[][] cells;
-	
 	
 	private TronGame game;
 	/**
@@ -45,8 +40,10 @@ public class GridPanel extends JPanel
 	public GridPanel(TronGame game) 
 	{
 		this.game = game;
-		
-		this.cells = new GridCell[COL_COUNT][ROW_COUNT];
+		Grid grid = new Grid();
+		this.cells = grid.getGridCells();
+		this.COL_COUNT = grid.getGridCol();
+		this.ROW_COUNT = grid.getGridRow();
 		
 		setPreferredSize(new Dimension(COL_COUNT * TILE_SIZE, ROW_COUNT * TILE_SIZE));
 		setBackground(Color.BLACK);
@@ -150,7 +147,7 @@ public class GridPanel extends JPanel
 		/*
 		 * Show a message on the screen based on the current game state.
 		 */
-		if( (game.status.isGameOver()) || (game.status.isNewGame()) || (game.status.isPaused()) ) 
+		if( (game.status.isGameOver()) || (game.status.isNewGame()) || (game.status.isPaused()) || (game.status.isRoundOver())) 
 		{
 			g.setColor(Color.WHITE);
 			
@@ -166,13 +163,26 @@ public class GridPanel extends JPanel
 			 */
 			String largeMessage = null;
 			String smallMessage = null;
-			if(game.status.isNewGame()) {
+			String gameMessage=null;
+			if(game.status.isNewGame()) 
+			{
 				largeMessage = "Tron Game!";
 				smallMessage = "Press Enter to Start";
-			} else if(game.status.isGameOver()) {
+			} 
+			else if (game.status.isRoundOver())
+			{
+				gameMessage=game.roundWinner()+" Won this round";
+				largeMessage = "Round"+game.status.getRoundNumber()+" is over";
+				smallMessage = "Press Enter to start the next round";
+				
+			}
+			else if(game.status.isGameOver()) 
+			{
+				gameMessage=game.winnerIs()+" Won :)"+game.loserIs()+" Lost :(";
 				largeMessage = "Game Over!";
-				smallMessage = "Press Enter to Restart";
-			} else if(game.status.isPaused()) {
+				smallMessage = "Press Space to go to the statistics";
+			} else if(game.status.isPaused()) 
+			{
 				largeMessage = "Paused";
 				smallMessage = "Press P to Resume";
 			}
@@ -181,7 +191,11 @@ public class GridPanel extends JPanel
 			 * Set the message font and draw the messages in the center of the board.
 			 */
 			g.setFont(FONT);
-			g.drawString(largeMessage, centerX - g.getFontMetrics().stringWidth(largeMessage) / 2, centerY - 50);
+			if (gameMessage != null)
+			{	
+				g.drawString(gameMessage, centerX - g.getFontMetrics().stringWidth(gameMessage) / 2, centerY-50 );
+			}
+			g.drawString(largeMessage, centerX - g.getFontMetrics().stringWidth(largeMessage) / 2, centerY);
 			g.drawString(smallMessage, centerX - g.getFontMetrics().stringWidth(smallMessage) / 2, centerY + 50);
 		}
 	}
@@ -229,7 +243,14 @@ public class GridPanel extends JPanel
 		
 		}
 	}
-		
+	
+	public int getGridPanelRow (){
+		return this.ROW_COUNT;
+	}
+	
+	public int getGridPanelCol (){
+		return this.COL_COUNT;
+	}
 	
 
 }

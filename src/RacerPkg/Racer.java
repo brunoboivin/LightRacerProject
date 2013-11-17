@@ -28,7 +28,7 @@ public class Racer
 	 * 
 	 */
 	private User user;
-	
+	public 	int wonRounds;
 	private GridCell headCell;
 	private GridCell bodyCell;
 	
@@ -37,7 +37,8 @@ public class Racer
 	 */
 	public Racer(User user,ID id)
 	{
-		this.user=user;
+		this.setUser(user);
+		this.wonRounds=0;
 		this.racerPoints=new LinkedList<Point>();
 		this.racerDir=new LinkedList<Direction>();	
 		switch(id)
@@ -52,6 +53,13 @@ public class Racer
 				this.bodyCell=GridCell.RacerBBody;
 				break;
 		}
+	}
+	public User getUser()
+	{
+		return user;
+	}
+	private void setUser(User user) {
+		this.user = user;
 	}
 	/**
 	 * Racer gets set up.
@@ -202,7 +210,7 @@ public class Racer
 		 * return that it's collided with itself, as both cases are handled
 		 * identically.
 		 */
-		if(head.x < 0 || head.x >= GridPanel.COL_COUNT || head.y < 0 || head.y >= GridPanel.ROW_COUNT) 
+		if(head.x < 0 || head.x >= board.getGridPanelCol() || head.y < 0 || head.y >= board.getGridPanelRow() ) 
 		{
 			return bodyCell; //Pretend we collided with our body.
 		}
