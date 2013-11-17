@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JFrame;
 
 import RacerPkg.*;
@@ -13,7 +15,7 @@ import GridPkg.*;
 
 
 
-public class TronGame extends JFrame
+public class TronGame extends JFrame implements Runnable,KeyListener
 {
 	
 	
@@ -65,6 +67,7 @@ public class TronGame extends JFrame
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
+		setVisible(true);
 		/*
 		 * Initialize the game's status
 		 */
@@ -82,107 +85,16 @@ public class TronGame extends JFrame
 		/*
 		 * Adds a new key listener to the frame to process input. 
 		 */
-		addKeyListener(new KeyAdapter() 
-		{
-			
-			@Override
-			public void keyPressed(KeyEvent e) 
-			{
-				switch(e.getKeyCode()) 
-				{
-
-					/*
-					 * If the game is not paused, and the game is not over...
-					 * 
-					 */
-					case KeyEvent.VK_W:
-						if(!status.isPaused() && !status.isGameOver()) 
-						{
-							racerB.updateDirection(Direction.Up);
-						}
-						break;
-					case KeyEvent.VK_UP:
-						if(!status.isPaused() && !status.isGameOver()) 
-						{
-							racerA.updateDirection(Direction.Up);
-						}
-						break;	
-					
-					case KeyEvent.VK_S:
-						if(!status.isPaused() && !status.isGameOver()) 
-						{
-							racerB.updateDirection(Direction.Down);
-						}
-						break;
-					case KeyEvent.VK_DOWN:
-						if(!status.isPaused() && !status.isGameOver()) 
-						{
-							racerA.updateDirection(Direction.Down);
-						}
-						break;
-										
-					case KeyEvent.VK_A:
-						if(!status.isPaused() && !status.isGameOver())
-						{
-							racerB.updateDirection(Direction.Left);
-						}
-						break;
-						
-					case KeyEvent.VK_LEFT:
-						if(!status.isPaused() && !status.isGameOver())
-						{
-							racerA.updateDirection(Direction.Left);
-						}
-						break;
-				
-					case KeyEvent.VK_D:
-						if(!status.isPaused() && !status.isGameOver()) 
-						{
-							racerB.updateDirection(Direction.Right);
-						}
-						break;
-						
-					case KeyEvent.VK_RIGHT:
-						if(!status.isPaused() && !status.isGameOver()) 
-						{
-							racerA.updateDirection(Direction.Right);
-						}
-						break;
-					
-					/*
-					 * If the game is not over, toggle the paused flag and update
-					 * the logicTimer's pause flag accordingly.
-					 */
-					case KeyEvent.VK_P:
-						if(!status.isGameOver()) 
-						{
-							status.setPaused(!status.isPaused());
-							logicTimer.setPaused(status.isPaused());
-						}
-						break;
-					
-					/*
-					 * Reset the game if one is not currently in progress.
-					 */
-					case KeyEvent.VK_ENTER:
-						if(status.isNewGame() || status.isGameOver())
-						{
-							resetGame();
-						}
-						break;
-					}
-				}
-				
-			});
+		addKeyListener(this);
 	
-
+		new Thread(this).start();
 		/*
 		 * Resize the window to the appropriate size, center it on the
 		 * screen and display it.
 		 */
 		pack();
 		setLocationRelativeTo(null);
-		setVisible(true);
+		
 		
 		
 	}
@@ -229,53 +141,7 @@ public class TronGame extends JFrame
 		 */
 		racerA=new Racer(userA,ID.A);
 		racerB=new Racer(userB,ID.B);
-		/*
-		 * clock speed enables faster or slower updates to the game. 
-		 * the higher the time the faster the racer.
-		 */
-		this.logicTimer = new Clock(30.0f);
-		this.status.setNewGame(true);
-		this.status.setGameOver(false);
-		//Set the timer to paused initially.
-		logicTimer.setPaused(true);
-
-		/*
-		 * This is the game loop. It will update and render the game and will
-		 * continue to run until the game window is closed.
-		 */
-		while(true) 
-		{
-			//Get the current frame's start time.
-			long start = System.nanoTime();
-			
-			//Update the logic timer.
-			logicTimer.updateClock();
-			
-			/*
-			 * If a cycle has elapsed on the logic timer, then update the game.
-			 */
-			if(logicTimer.hasElapsedCycle()) {
-				updateGame();
-			}
-			
-			//Repaint the board and side panel with the new content.
-			board.repaint();
-			//side.repaint();
-			
-			/*
-			 * Calculate the delta time between since the start of the frame
-			 * and sleep for the excess time to cap the frame rate. While not
-			 * incredibly accurate, it is sufficient for our purposes.
-			 */
-			long delta = (System.nanoTime() - start) / 1000000L;
-			if(delta < FRAME_TIME) {
-				try {
-					Thread.sleep(FRAME_TIME - delta);
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		
 	}
 	/**
 	 * Resets the game.
@@ -328,11 +194,158 @@ public class TronGame extends JFrame
 	 */
 	public static void main(String[] args) 
 	{
+		new TronGame();
+		//tron.startGame(userA,userB);
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+		switch(e.getKeyCode()) 
+		{
+
+			/*
+			 * If the game is not paused, and the game is not over...
+			 * 
+			 */
+			case KeyEvent.VK_W:
+				if(!status.isPaused() && !status.isGameOver()) 
+				{
+					racerB.updateDirection(Direction.Up);
+				}
+				break;
+			case KeyEvent.VK_UP:
+				if(!status.isPaused() && !status.isGameOver()) 
+				{
+					racerA.updateDirection(Direction.Up);
+				}
+				break;	
+			
+			case KeyEvent.VK_S:
+				if(!status.isPaused() && !status.isGameOver()) 
+				{
+					racerB.updateDirection(Direction.Down);
+				}
+				break;
+			case KeyEvent.VK_DOWN:
+				if(!status.isPaused() && !status.isGameOver()) 
+				{
+					racerA.updateDirection(Direction.Down);
+				}
+				break;
+								
+			case KeyEvent.VK_A:
+				if(!status.isPaused() && !status.isGameOver())
+				{
+					racerB.updateDirection(Direction.Left);
+				}
+				break;
+				
+			case KeyEvent.VK_LEFT:
+				if(!status.isPaused() && !status.isGameOver())
+				{
+					racerA.updateDirection(Direction.Left);
+				}
+				break;
+		
+			case KeyEvent.VK_D:
+				if(!status.isPaused() && !status.isGameOver()) 
+				{
+					racerB.updateDirection(Direction.Right);
+				}
+				break;
+				
+			case KeyEvent.VK_RIGHT:
+				if(!status.isPaused() && !status.isGameOver()) 
+				{
+					racerA.updateDirection(Direction.Right);
+				}
+				break;
+			
+			/*
+			 * If the game is not over, toggle the paused flag and update
+			 * the logicTimer's pause flag accordingly.
+			 */
+			case KeyEvent.VK_P:
+				if(!status.isGameOver()) 
+				{
+					status.setPaused(!status.isPaused());
+					logicTimer.setPaused(status.isPaused());
+				}
+				break;
+			
+			/*
+			 * Reset the game if one is not currently in progress.
+			 */
+			case KeyEvent.VK_ENTER:
+				if(status.isNewGame() || status.isGameOver())
+				{
+					resetGame();
+				}
+				break;
+			}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void run()
+	{
+		this.logicTimer = new Clock(30.0f);
+		this.status.setNewGame(true);
+		this.status.setGameOver(false);
 		User userA=new User("A","a");
 		User userB=new UserPkg.User("B","b");
+		startGame(userA,userB);
 		
-		TronGame tron = new TronGame();
-		tron.startGame(userA,userB);
+		//Set the timer to paused initially.
+		logicTimer.setPaused(true);
+		/*
+         * This is the game loop. It will update and render the game and will
+         * continue to run until the game window is closed.
+         */
+        while(true) 
+        {
+                //Get the current frame's start time.
+                long start = System.nanoTime();
+                
+                //Update the logic timer.
+                logicTimer.updateClock();
+                
+                /*
+                 * If a cycle has elapsed on the logic timer, then update the game.
+                 */
+                if(logicTimer.hasElapsedCycle()) {
+                        updateGame();
+                }
+                
+                //Repaint the board and side panel with the new content.
+                board.repaint();
+                //side.repaint();
+                
+                /*
+                 * Calculate the delta time between since the start of the frame
+                 * and sleep for the excess time to cap the frame rate. While not
+                 * incredibly accurate, it is sufficient for our purposes.
+                 */
+                long delta = (System.nanoTime() - start) / 1000000L;
+                if(delta < FRAME_TIME) {
+                        try {
+                                Thread.sleep(FRAME_TIME - delta);
+                        } catch(Exception e) {
+                                e.printStackTrace();
+                        }
+                }
+        }
 	}
 
 }
