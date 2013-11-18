@@ -178,10 +178,11 @@ public class GridPanel extends JPanel
 			}
 			else if(game.status.isGameOver()) 
 			{
-				gameMessage=game.winnerIs()+" Won :)";
+				gameMessage=game.winnerIs()+" Won :) *****"+game.loserIs()+" Lost :(";
 				largeMessage = "Game Over!";
-				smallMessage =game.loserIs()+" Lost :(";
-			} else if(game.status.isPaused()) 
+				smallMessage ="Press SPACE to go back to the Main Menu";
+			} 
+			else if(game.status.isPaused()) 
 			{
 				largeMessage = "Paused";
 				smallMessage = "Press P to Resume";

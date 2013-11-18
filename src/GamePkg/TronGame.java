@@ -139,15 +139,22 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		 * Here we handle the different possible collisions.
 		 * 
 		 */
-		
-		if(collisionB == GridCell.RacerAHead || collisionA == GridCell.RacerAHead || 
-				(collisionA != GridCell.Empty && collisionB != GridCell.Empty ))
+		//System.out.println("colA :"+collisionA+" colB: "+collisionB);
+		//System.out.println("this is :"+(collisionA== GridCell.RacerABody && collisionB==GridCell.RacerBBody));
+		if(collisionA== GridCell.RacerABody && collisionB==GridCell.RacerBBody) 
 		{
 			roundWinner="No One";
 			status.setRoundOver(true);
 			logicTimer.setPaused(true);
 		}
-		if(collisionA != GridCell.Empty && collisionA != GridCell.RacerBHead)
+		
+		else if((collisionB == GridCell.RacerAHead) || (collisionA == GridCell.RacerBHead))
+		{
+			roundWinner="No One";
+			status.setRoundOver(true);
+			logicTimer.setPaused(true);
+		}
+		else if(collisionA != GridCell.Empty && collisionA != GridCell.RacerBHead)
 		{
 			++racerB.wonRounds;
 			roundWinner=racerB.getUser().getUsername();
@@ -155,7 +162,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 			logicTimer.setPaused(true);
 		} 
 		
-		if(collisionB != GridCell.Empty && collisionB != GridCell.RacerAHead )
+		else if(collisionB != GridCell.Empty && collisionB != GridCell.RacerAHead )
 		{
 			++racerA.wonRounds;
 			roundWinner=racerA.getUser().getUsername();
@@ -366,6 +373,9 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 						resetGame();					
 				}
 				break;
+			case KeyEvent.VK_SPACE:
+				if(status.isGameOver())
+					this.dispose();	
 			}
 	}
 

@@ -31,7 +31,7 @@ public class GameStatus {
 	 * Whether or not the game is paused.
 	 */
 	private boolean isPaused ;
-	
+	private boolean statUpdated;
 	/**
 	 * GameStatus constructor.
 	 * @param game
@@ -40,6 +40,7 @@ public class GameStatus {
 	{
 		this.tronGame=game;
 		this.setGameOver(false);
+		this.statUpdated=false;
 	}
 	/**
 	 * Gets the flag that indicates whether or not we're playing a new game.
@@ -105,7 +106,13 @@ public class GameStatus {
 				 */
 				this.setRoundOver(false);
 				this.setGameOver(true);
-				Statistics.update(tronGame.winnerIs(),tronGame.loserIs());
+				
+				
+				if(statUpdated!=true)
+				{	Statistics.update(tronGame.winnerIs(),tronGame.loserIs());
+					statUpdated=true;
+					System.out.println("saved");
+				}
 			}
 				
 				
