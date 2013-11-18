@@ -64,8 +64,21 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	 * The winner of the current round
 	 */
 	private String roundWinner;
+	/**
+	 * The winner of the game
+	 */
 	private String gameWinner;
+	/**
+	 * The loser of the game
+	 */
 	private String gameLoser;
+	/**
+	 * The constructor of the TronGame which initializes
+	 * the frame and its components.
+	 * @param userA
+	 * @param userB
+	 */
+	
 	public TronGame(User userA,User userB) 
 	{
 		super("Tron Prototype1");
@@ -91,9 +104,9 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		 * Adds a new key listener to the frame to process input. 
 		 */
 		addKeyListener(this);
-		
-	//	User userRA=new User("Blue","a");
-		//User userRB=new User("Red","b");
+		/*
+		 * Initialize the racers 
+		 */
 		initRacers(userA,userB);
 	
 		new Thread(this).start();
@@ -153,7 +166,9 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	
 	
 	/**
-	 * Starts the game running.
+	 * Initializes the Racer instances.
+	 * @param userA
+	 * @param userB
 	 */
 	private void initRacers(User userA,User userB) 
 	{
@@ -206,11 +221,11 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		logicTimer.resetClock();
 		
 	}
-	/*public GameStatus getStatus()
-	{
-		return this.status;
-	}
-	*/
+	/**
+	 * Returns the maximum number of wins between two Racers.
+	 * @return maxWin
+	 */
+	
 	public int totalRoundWins()
 	{
 		if(this.racerB.wonRounds> this.racerA.wonRounds)
@@ -226,18 +241,27 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 			return this.racerA.wonRounds;
 		}
 	}
+	/**
+	 * Returns the winner of the current round as a String.
+	 * @return roundWinner
+	 */
 	public String roundWinner()
 	{
 		return roundWinner;
 	}
+	
 	/**
-	 * when the game is over the Statistics getUpdated
+	 * Returns the final winner as a String.
+	 * @return Winner
 	 */
-
 	public String winnerIs()
 	{	
 		return gameWinner;
 	}
+	/**
+	 * Returns the final loser as a String.
+	 * @return Loser
+	 */
 	public String loserIs()
 	{	
 		return gameLoser;
@@ -254,7 +278,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		new TronGame(uA,uB);
 		//tron.startGame(userA,userB);
 	}
-
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -361,10 +385,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		this.logicTimer = new Clock(30.0f);
 		this.status.setNewGame(true);
 		this.status.setRoundOver(false);
-		//this.status.setGameOver(false);
-		//User userA=new User("Blue","a");
-		//User userB=new User("Red","b");
-	//	startGame(userA,userB);
+		
 		
 		//Set the timer to paused initially.
 		logicTimer.setPaused(true);

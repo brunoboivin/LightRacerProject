@@ -25,15 +25,23 @@ public class Racer
 	 */
 	private LinkedList<Point> racerPoints;
 	/**
-	 * 
+	 * The user instance.
 	 */
 	private User user;
+	/**
+	 * The number of rounds the Racer has won.
+	 */
 	public 	int wonRounds;
+	/**
+	 * GridCell instances.
+	 */
 	private GridCell headCell;
 	private GridCell bodyCell;
 	
 	/**
-	 * Creates a new Racer instance.
+	 * The Racer Constructor
+	 * @param user
+	 * @param id
 	 */
 	public Racer(User user,ID id)
 	{
@@ -62,7 +70,7 @@ public class Racer
 		this.user = user;
 	}
 	/**
-	 * Racer gets set up.
+	 * Racer gets set up to be placed on the grid.
 	 * @param head
 	 * @param start
 	 */
@@ -81,18 +89,7 @@ public class Racer
 		this.racerDir.add(start);
 		
 	}
-	/*
-	public LinkedList<Point> getRacerPath() 
-	{
-		return racerPoints;
-	}
 	
-	public LinkedList<Direction> getRacerDir() 
-	{
-		return racerDir;
-	}
-	
-	*/
 	
 	/**
 	 * Updates the Racer's direction list.
