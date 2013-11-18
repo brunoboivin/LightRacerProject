@@ -178,9 +178,9 @@ public class GridPanel extends JPanel
 			}
 			else if(game.status.isGameOver()) 
 			{
-				gameMessage=game.winnerIs()+" Won :)"+game.loserIs()+" Lost :(";
+				gameMessage=game.winnerIs()+" Won :)";
 				largeMessage = "Game Over!";
-				smallMessage = "Press Space to go to the statistics";
+				smallMessage =game.loserIs()+" Lost :(";
 			} else if(game.status.isPaused()) 
 			{
 				largeMessage = "Paused";
