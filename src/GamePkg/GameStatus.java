@@ -112,6 +112,7 @@ public class GameStatus {
 				{	Statistics.update(tronGame.winnerIs(),tronGame.loserIs());
 					statUpdated=true;
 					System.out.println("saved");
+					//this.tronGame.run();
 				}
 			}
 				
@@ -123,6 +124,9 @@ public class GameStatus {
 	private void setGameOver(boolean gameOver) 
 	{
 		this.isGameOver = gameOver;
+		//if(gameOver==false)
+			//this.statUpdated=false;
+		//System.out.println("stat is updated"+this.statUpdated);
 	}
 
 	/**
@@ -138,5 +142,15 @@ public class GameStatus {
 	{
 		this.isPaused = paused;
 	}
-
+	/*
+	public void restartStatus(TronGame tron,boolean confirm)
+	{
+		//this.setNewGame(true);
+		if(confirm==true)
+		{
+			tron.setGameOver(false);
+			this.statUpdated=false;
+		}
+	}
+	*/
 }

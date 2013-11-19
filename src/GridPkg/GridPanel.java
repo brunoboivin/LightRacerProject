@@ -180,7 +180,7 @@ public class GridPanel extends JPanel
 			{
 				gameMessage=game.winnerIs()+" Won :) *****"+game.loserIs()+" Lost :(";
 				largeMessage = "Game Over!";
-				smallMessage ="Press SPACE to go back to the Main Menu";
+				smallMessage ="Press SPACE play Again or ESC to go back to the Main Menu";
 			} 
 			else if(game.status.isPaused()) 
 			{

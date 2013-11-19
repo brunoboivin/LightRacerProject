@@ -185,6 +185,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		racerA=new Racer(userA,ID.A);
 		racerB=new Racer(userB,ID.B);
 		roundWinner="";
+		gameLoser="";
 		gameWinner="";
 		
 	}
@@ -272,6 +273,15 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	public String loserIs()
 	{	
 		return gameLoser;
+	}
+	/**
+	 * Reinitializes the racers as well as the game status for new rounds.
+	 */
+	private void replayGame()
+	{
+		this.status=new GameStatus(this);
+		this.initRacers(racerA.getUser(), racerB.getUser());
+		
 	}
 
 	/**
@@ -375,7 +385,18 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 				break;
 			case KeyEvent.VK_SPACE:
 				if(status.isGameOver())
-					this.dispose();	
+					{	
+						this.replayGame();
+						resetGame();
+						//this.dispose();
+					}
+				break;
+			case KeyEvent.VK_ESCAPE:
+				if(status.isGameOver())
+					{	
+						this.dispose();
+					}
+				break;
 			}
 	}
 
