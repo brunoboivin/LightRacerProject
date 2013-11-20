@@ -49,15 +49,17 @@ public class ChooseMapsDisplay extends JFrame  {
 	
 	private JButton proceedBtn; 
 	
+	private boolean isGridChosen;
 	private String gridChosen;
 	
+	
 	public ChooseMapsDisplay() {
+		
+		this.isGridChosen = false;
 		
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 520, 450);
-	
-		this.gridChosen = "none";
 		
 		loadPanels ();
 		loadTopElements ();
@@ -110,7 +112,7 @@ public class ChooseMapsDisplay extends JFrame  {
 	        {
 	            //Execute when button is pressed
 	            clickButton ();
-	            System.exit(0);
+	            dispose();
 	        }
 	    }); 
 		
@@ -126,10 +128,15 @@ public class ChooseMapsDisplay extends JFrame  {
 		else if ((this.map3).isSelected()) {
 			this.gridChosen = "map3";
 		}
+		this.isGridChosen = true;
 	}
 	
     public String getGridChosen (){
     	return this.gridChosen;
+    }
+    
+    public boolean getIsGridChosen (){
+    	return this.isGridChosen;
     }
 	
 	public static void main(String[] args) {

@@ -34,9 +34,21 @@ public class Grid {
 	
 	//Initializes a new grid in which each cell of the grid is empty or an obstacle
 	private void initializeGrid () {
+	
+//		ChooseMapsDisplay selectGrid = new ChooseMapsDisplay();
+//		selectGrid.setVisible(true);
+//		
+//		while (!selectGrid.getIsGridChosen()){
+////			System.out.println (selectGrid.getGridChosen());
+//		}
+//		
+//		System.out.println (selectGrid.getGridChosen());
+//		
+//		
+//		String mapPath = "maps/" + selectGrid.getGridChosen() + ".txt"; 
+//		
+//		loadGridFromFile(mapPath);
 		
-		ChooseMapsDisplay selectGrid = new ChooseMapsDisplay ();
-		System.out.println (selectGrid.getGridChosen());
 		
 		for (int i = 0; i < this.colCount; i++) {
 		    for (int j = 0; j < this.rowCount; j++) {
@@ -54,6 +66,23 @@ public class Grid {
 		
 		this.gridCells[5][5] = GridCell.Obstacle;
 		this.gridCells[6][6] = GridCell.Obstacle;
+	}
+	
+	
+	private void loadGridFromFile (String mapSelected) {
+		
+		String obstacleCoords = null;
+		
+		try {
+			obstacleCoords = GridFileLoader.readFile(mapSelected);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println ("hello" + obstacleCoords);
+		
+		
 	}
 	
 	//Resets an existing grid to its initial state; with each cell either being empty or an obstacle
