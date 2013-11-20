@@ -1,35 +1,33 @@
 package GridPkg;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileReader;
-import java.io.BufferedReader; 
-import java.io.InputStream;
+import java.io.BufferedReader;
 
 public class GridFileLoader {
 	
-	public static void main (String[] args) throws IOException{
-		GridFileLoader test = new GridFileLoader();
-		test.readFile();
-		
-	}
+//	public static void main (String[] args) throws IOException{
+//		GridFileLoader test = new GridFileLoader();
+//		test.readFile();
+//	}
 	
-	public static void readFile () throws IOException {
+	public static String readFile ( String filePath ) throws IOException {
 		
-		String mapFilePath = "maps/test.txt";
+//		e.g. "maps/map2.txt"
+		String gridFilePath = filePath; 
 		
-		BufferedReader fileReader = new BufferedReader(new FileReader(mapFilePath));
+		BufferedReader fileReader = new BufferedReader(new FileReader(gridFilePath));
 	    try {
 	    	
 	        StringBuilder stringBuilder = new StringBuilder();
 	        String line = fileReader.readLine();
 
 	        while (line != null) {
-	        	System.out.println(stringBuilder.append(line));
-//	        	stringBuilder.append('\n');
+	        	stringBuilder.append(line);
 	            line = fileReader.readLine();
 	        }
 	        String everything = stringBuilder.toString();
+      		return everything;
 	    } finally {
 	    	fileReader.close();
 	    }

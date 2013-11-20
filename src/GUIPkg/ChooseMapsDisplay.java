@@ -45,7 +45,7 @@ public class ChooseMapsDisplay extends JFrame  {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
+
 	}
 	
 	public ChooseMapsDisplay() {

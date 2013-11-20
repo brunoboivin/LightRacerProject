@@ -24,16 +24,16 @@ public class Grid {
 		this.colCount = 75;
 		this.gridCells = new GridCell[this.colCount][this.rowCount];
 		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ChooseMapsDisplay  frame = new ChooseMapsDisplay ();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}			
-		});
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					ChooseMapsDisplay  frame = new ChooseMapsDisplay ();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}			
+//		});
 		
 		initializeGridTest ();
 		previewGrid ();
