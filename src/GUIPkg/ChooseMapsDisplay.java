@@ -2,11 +2,14 @@ package GUIPkg;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,116 +17,132 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.lang3.StringUtils;
 
 import GamePkg.TronGame;
+import GridPkg.GridFileLoader;
 import UserPkg.UserManagement;
 import UserPkg.login_frame;
 import UserPkg.register_frame;
+import javax.swing.JSplitPane;
+import java.awt.BorderLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import javax.swing.BoxLayout;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import java.awt.FlowLayout;
 
 public class ChooseMapsDisplay extends JFrame  {
 
-	private JPanel contentPane;
-	private JPasswordField passwordField1;
-	private JPasswordField passwordField2;
-	private JTextField usernameField1;
-	private JTextField usernameField2;
-	private JLabel lblUsername_1;
-	private JLabel lblPassword_1;
-	private JLabel lblIfYouDont;
-	private JButton btnRegister;
-	private JLabel lblLogin;
-	private JButton btnNewButton;
-	private JButton btnStartGame;
-	int usersLoggedIn = 0;
-	int loginResult;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-
-	}
+	private JPanel topPanel;
+	private JPanel bottomPanel;
+	
+	private JRadioButton map1;
+	private JRadioButton map2;
+	private JRadioButton map3;
+	
+	private JButton proceedBtn; 
+	
+	private String gridChosen;
 	
 	public ChooseMapsDisplay() {
-
-		usersLoggedIn = 0;
+		
+		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 450);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-
+		setBounds(100, 100, 520, 450);
+	
+		this.gridChosen = "none";
 		
+		loadPanels ();
+		loadTopElements ();
+		loadBottomElements ();
+		
+//		GridFileLoader fileLoader = new GridFileLoader();
+//		String obtainedCoords = fileLoader.readFile("maps/map2.txt");
+//		System.out.println(obtainedCoords);
+	}
+	
+	private void loadPanels () {
 
-		btnStartGame = new JButton("Start Game!");
-		btnStartGame.setEnabled(false);
-		btnStartGame.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (btnStartGame.isEnabled()) {
-					TronGame tron = new TronGame(UserManagement.user2, UserManagement.user1);
+		this.topPanel = new JPanel();
+		this.topPanel.setBounds(0, 99, 513, 98);
+		getContentPane().add(this.topPanel);
+
+		this.bottomPanel = new JPanel();
+		this.bottomPanel.setBounds(0, 196, 513, 251);
+		getContentPane().add(this.bottomPanel);
+		
+	}
+	
+	private void loadTopElements (){
+		
+		this.map1 = new JRadioButton("Map 1");
+		this.topPanel.add(this.map1);
+		
+		this.map2 = new JRadioButton("Map 2");
+		this.topPanel.add(this.map2);
+		
+		this.map3 = new JRadioButton("Map 3");
+		this.topPanel.add(this.map3);
+		
+		
+		ButtonGroup buttonGroup = new ButtonGroup();
+		buttonGroup.add(this.map1);
+		buttonGroup.add(this.map2);
+		buttonGroup.add(this.map3);
+	}
+	
+	private void loadBottomElements (){
+		
+		this.proceedBtn = new JButton("START");
+		this.bottomPanel.add(this.proceedBtn);
+		
+		//Add action listener to button
+	    this.proceedBtn.addActionListener(new ActionListener() {
+	    	
+	        public void actionPerformed(ActionEvent e)
+	        {
+	            //Execute when button is pressed
+	            clickButton ();
+	            System.exit(0);
+	        }
+	    }); 
+		
+	}
+	
+	private void clickButton () {
+		if ((this.map1).isSelected()) {
+			this.gridChosen = "map1";
+		}
+		else if ((this.map2).isSelected()) {
+			this.gridChosen = "map2";
+		}
+		else if ((this.map3).isSelected()) {
+			this.gridChosen = "map3";
+		}
+	}
+	
+    public String getGridChosen (){
+    	return this.gridChosen;
+    }
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ChooseMapsDisplay frame = new ChooseMapsDisplay();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			}
+			}			
 		});
-		btnStartGame.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		btnStartGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnStartGame.setBounds(136, 290, 182, 72);
-		contentPane.add(btnStartGame);
-
-		
-		usernameField1 = new JTextField();
-		usernameField1.setBounds(99, 72, 84, 28);
-		contentPane.add(usernameField1);
-		usernameField1.setColumns(10);
-
-		usernameField2 = new JTextField();
-		usernameField2.setBounds(346, 72, 84, 28);
-		contentPane.add(usernameField2);
-		usernameField2.setColumns(10);
-
-		JLabel lblUsername = new JLabel("Username:");
-		lblUsername.setBounds(16, 78, 85, 16);
-		contentPane.add(lblUsername);
-
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(16, 118, 81, 16);
-		contentPane.add(lblPassword);
-
-		lblUsername_1 = new JLabel("Username:");
-		lblUsername_1.setBounds(272, 78, 84, 16);
-		contentPane.add(lblUsername_1);
-
-		lblPassword_1 = new JLabel("Password:");
-		lblPassword_1.setBounds(272, 118, 84, 16);
-		contentPane.add(lblPassword_1);
-
-		lblIfYouDont = new JLabel("Click \"Register!\" if you don't have an account");
-		lblIfYouDont.setBounds(94, 192, 375, 16);
-		contentPane.add(lblIfYouDont);
-
-		btnRegister = new JButton("Register!");
-		btnRegister.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				register_frame frame = new register_frame();
-				frame.setVisible(true);
-			}
-		});
-		btnRegister.setBounds(168, 217, 117, 29);
-		contentPane.add(btnRegister);
-
-		lblLogin = new JLabel("SELECT A MAP");
-		lblLogin.setFont(new Font("Lucida Grande", Font.BOLD, 24));
-		lblLogin.setBounds(199, 18, 101, 45);
-		contentPane.add(lblLogin);
 	}
 
 }

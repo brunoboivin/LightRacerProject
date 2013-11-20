@@ -1,7 +1,9 @@
 package GridPkg;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -24,23 +26,18 @@ public class Grid {
 		this.colCount = 75;
 		this.gridCells = new GridCell[this.colCount][this.rowCount];
 		
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					ChooseMapsDisplay  frame = new ChooseMapsDisplay ();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}			
-//		});
+
+		initializeGrid ();
 		
-		initializeGridTest ();
 		previewGrid ();
 	}  
 	
 	//Initializes a new grid in which each cell of the grid is empty or an obstacle
-	private void initializeGrid (){
+	private void initializeGrid () {
+		
+		ChooseMapsDisplay selectGrid = new ChooseMapsDisplay ();
+		System.out.println (selectGrid.getGridChosen());
+		
 		for (int i = 0; i < this.colCount; i++) {
 		    for (int j = 0; j < this.rowCount; j++) {
 		    	this.gridCells[i][j] = GridCell.Empty;
@@ -97,21 +94,22 @@ public class Grid {
 				//If YES, display preview of grid in a separate window (JFrame)
 				JFrame gridPreview = new JFrame();
 				gridPreview.setTitle ("Current Grid Preview");
-				gridPreview.setSize (300,300);
-				gridPreview.setResizable (true);
+				gridPreview.setSize (500,550);
+				gridPreview.setResizable (false);
 				gridPreview.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 				
 				JTextArea textArea = new JTextArea ("");
+				textArea.setFont(new Font("Lucida Grande", Font.BOLD, 5));
 				gridPreview.add(textArea);
 				
 				for (int i = 0; i < this.colCount; i++) {
 				    for (int j = 0; j < this.rowCount; j++) {
 				    	GridCell gridCell = this.gridCells [i][j];
 				    	if (gridCell == GridCell.Empty){
-				    		textArea.append("." + " ");
+				    		textArea.append("  " + ".." + "  ");
 				    	}
 				    	else if (gridCell == GridCell.Obstacle){
-				    		textArea.append("0" + " ");
+				    		textArea.append("  " + "0" + "  ");
 				    	}
 				    }
 					textArea.append("\n");
