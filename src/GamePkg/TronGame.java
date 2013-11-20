@@ -87,9 +87,9 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		//setResizable(false);
-		setVisible(true);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setResizable(false);
+		//setVisible(true);
+		//setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		/*
 		 * Initialize the game's status
@@ -122,7 +122,8 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		 */
 		pack();
 		setLocationRelativeTo(null);
-		
+		//setVisible(true);
+		//setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 		
 	}
@@ -455,7 +456,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
          */
         while(true) 
         {
-        	System.out.println(System.currentTimeMillis());
+        	//System.out.println(System.currentTimeMillis());
                 //Get the current frame's start time.
                 long start = System.nanoTime();
                 
