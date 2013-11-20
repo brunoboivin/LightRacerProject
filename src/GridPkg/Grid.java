@@ -1,8 +1,11 @@
 package GridPkg;
 
+import java.awt.EventQueue;
 import java.io.File;
 
 import javax.swing.*;
+
+import GUIPkg.ChooseMapsDisplay;
 
 //import java.util.Vector;
 
@@ -21,9 +24,51 @@ public class Grid {
 		this.colCount = 75;
 		this.gridCells = new GridCell[this.colCount][this.rowCount];
 		
-		initializeGrid ();
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ChooseMapsDisplay  frame = new ChooseMapsDisplay ();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}			
+		});
+		
+		initializeGridTest ();
 		previewGrid ();
 	}  
+	
+	//Initializes a new grid in which each cell of the grid is empty or an obstacle
+	private void initializeGrid (){
+		for (int i = 0; i < this.colCount; i++) {
+		    for (int j = 0; j < this.rowCount; j++) {
+		    	this.gridCells[i][j] = GridCell.Empty;
+		    }
+		}
+	}	
+	
+	private void initializeGridTest (){
+		for (int i = 0; i < this.colCount; i++) {
+		    for (int j = 0; j < this.rowCount; j++) {
+		    	this.gridCells[i][j] = GridCell.Empty;
+		    }
+		}
+		
+		this.gridCells[5][5] = GridCell.Obstacle;
+		this.gridCells[6][6] = GridCell.Obstacle;
+	}
+	
+	//Resets an existing grid to its initial state; with each cell either being empty or an obstacle
+	public static void resetGrid (GridCell[][] gridCells) {
+		for(int i = 0; i < gridCells.length; i++) {
+			for(int j=0; j< gridCells[i].length; j++) {
+				if(gridCells[i][j] != GridCell.Obstacle){
+					gridCells[i][j] = GridCell.Empty;
+				}
+			}
+		}
+	}
 	
 	public GridCell[][] getGridCells (){
 		return this.gridCells;
@@ -40,6 +85,7 @@ public class Grid {
 	public void setPreviewVisible ( boolean isPreviewEnabled ){
 		this.isPreviewEnabled = isPreviewEnabled;	
 	}
+	
 	
 	private void previewGrid (){
 		if  (isPreviewEnabled) {
@@ -76,11 +122,5 @@ public class Grid {
 		}
 	}
 	
-	private void initializeGrid (){
-		for (int i = 0; i < this.colCount; i++) {
-		    for (int j = 0; j < this.rowCount; j++) {
-		    	this.gridCells[i][j] = GridCell.Empty;
-		    }
-		}
-	}	
+
 }

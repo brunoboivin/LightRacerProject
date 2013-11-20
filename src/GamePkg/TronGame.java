@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import RacerPkg.*;
 import StatisticsPkg.Statistics;
 import UserPkg.User;
+import GameGuiPkg.GridPanel;
+import GameGuiPkg.SidePanel;
 import GridPkg.*;
 
 
@@ -36,7 +38,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	/**
 	 * The SidePanel instance.
 	 */
-	//private SidePanel side;
+	protected SidePanel side;
 	
 	
 	/**
@@ -51,19 +53,19 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	public GameStatus status;
 	
 	/**
-	 * The RacerA instance
+	 * The RacerA instance (Darth Vader)
 	 */
 	private Racer racerA;
 	
 	/**
-	 * The RacerB instance
+	 * The RacerB instance (Yoda)
 	 */
 	private Racer racerB;
 
 	/**
 	 * The winner of the current round
 	 */
-	private String roundWinner;
+	private Racer roundWinner;
 	/**
 	 * The winner of the game
 	 */
@@ -75,17 +77,20 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	/**
 	 * The constructor of the TronGame which initializes
 	 * the frame and its components.
-	 * @param userA
-	 * @param userB
+	 * @param asDarthVader
+	 * @param asYoda
 	 */
 	
-	public TronGame(User userA,User userB) 
+	public TronGame(User asDarthVader,User asYoda) 
 	{
 		super("Tron Prototype1");
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
+		
+		//setResizable(false);
 		setVisible(true);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+
 		/*
 		 * Initialize the game's status
 		 */
@@ -94,11 +99,11 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		 * Initialize the game's panels and add them to the window.
 		 */
 		this.board = new GridPanel(this);
-		//this.side = new SidePanel(this);
+		this.side = new SidePanel(this,this.board.getGridPanelRow());
 		
 		add(board, BorderLayout.CENTER);
 		
-		//add(side, BorderLayout.EAST);
+		add(side, BorderLayout.WEST);
 		
 		/*
 		 * Adds a new key listener to the frame to process input. 
@@ -107,17 +112,18 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		/*
 		 * Initialize the racers 
 		 */
-		initRacers(userA,userB);
+		initRacers(asDarthVader,asYoda);
 	
 		new Thread(this).start();
 		/*
-		 * Resize the window to the appropriate size, center it on the
+		 * Resize the window to the appropriate size, center it on th
+		 * e
 		 * screen and display it.
 		 */
 		pack();
 		setLocationRelativeTo(null);
 		
-		
+		setVisible(true);
 		
 	}
 
@@ -139,26 +145,35 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		 * Here we handle the different possible collisions.
 		 * 
 		 */
+		//System.out.println("colA :"+collisionA+" colB: "+collisionB);
+		//System.out.println("this is :"+(collisionA== GridCell.RacerABody && collisionB==GridCell.RacerBBody));
 		
-		if(collisionB == GridCell.RacerAHead || collisionA == GridCell.RacerAHead || 
-				(collisionA != GridCell.Empty && collisionB != GridCell.Empty ))
+		//If they collide with their own light or the wall at the same time
+		if(collisionA== GridCell.RedLight && collisionB==GridCell.GreenLight) 
 		{
-			roundWinner="No One";
+			roundWinner=null;
 			status.setRoundOver(true);
 			logicTimer.setPaused(true);
 		}
-		if(collisionA != GridCell.Empty && collisionA != GridCell.RacerBHead)
+		//If they collide head to head
+		else if((collisionA == GridCell.YodaIcon) || (collisionB == GridCell.DarthVaderIcon))
+		{
+			roundWinner=null;
+			status.setRoundOver(true);
+			logicTimer.setPaused(true);
+		}
+		else if(collisionA != GridCell.Empty && collisionA != GridCell.YodaIcon)
 		{
 			++racerB.wonRounds;
-			roundWinner=racerB.getUser().getUsername();
+			roundWinner=racerB;
 			status.setRoundOver(true);
 			logicTimer.setPaused(true);
 		} 
 		
-		if(collisionB != GridCell.Empty && collisionB != GridCell.RacerAHead )
+		else if(collisionB != GridCell.Empty && collisionB != GridCell.DarthVaderIcon )
 		{
 			++racerA.wonRounds;
-			roundWinner=racerA.getUser().getUsername();
+			roundWinner=racerA;
 			status.setRoundOver(true);
 			logicTimer.setPaused(true);
 		} 
@@ -175,9 +190,10 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		/*
 		 * Initialize everything we're going to be using.
 		 */
-		racerA=new Racer(userA,ID.A);
-		racerB=new Racer(userB,ID.B);
-		roundWinner="";
+		racerA=new Racer(userA,ID.DARTHVADER);
+		racerB=new Racer(userB,ID.YODA);
+		roundWinner=null;
+		gameLoser="";
 		gameWinner="";
 		
 	}
@@ -195,6 +211,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		/*
 		 * Reset both the new game and game over flags.
 		 */
+		
 		this.status.setNewGame(false);
 		this.status.setRoundOver(false);
 		//this.status.setGameOver(false);
@@ -202,17 +219,20 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		/*
 		 * Create the heads at the two opposite corners.
 		 */
-		Point headA = new Point(74, 0);
-		Point headB = new Point(0, 49);
+		Point headA = new Point(0, 49);
+		
+		Point headB = new Point(74, 0);
+		
 		/*
 		 * Clear the board and add the heads.
 		 */
 		board.clearBoard();
-		board.setCell(headA, GridCell.RacerAHead);
-		board.setCell(headB, GridCell.RacerBHead);
+		board.setCell(headA, GridCell.DarthVaderIcon);
+		board.setCell(headB, GridCell.YodaIcon);
 		
-		racerA.setUpRacer(headA, Direction.Down);
-		racerB.setUpRacer(headB, Direction.Up);
+		racerA.setUpRacer(headA, Direction.Up);
+		racerB.setUpRacer(headB, Direction.Down);
+		
 		
 		
 		/*
@@ -247,9 +267,16 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	 */
 	public String roundWinner()
 	{
-		return roundWinner;
+		if(roundWinner==null)
+			return "";
+		return roundWinner.getUser().username;
 	}
-	
+	public ID winnerId()
+	{
+		if(roundWinner==null)
+			return ID.NULL;
+		return roundWinner.racerId;
+	}
 	/**
 	 * Returns the final winner as a String.
 	 * @return Winner
@@ -266,6 +293,20 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	{	
 		return gameLoser;
 	}
+	/**
+	 * Reinitializes the racers as well as the game status for new rounds.
+	 */
+	private void replayGame()
+	{
+		this.status=new GameStatus(this);
+		this.initRacers(racerA.getUser(), racerB.getUser());
+		//this.side.dispose();
+		this.side.removeAll();
+		this.side.paintHeaders(1);
+		//this.side=new SidePanel(this, this.board.getGridPanelRow());
+		//this.add(side);
+		//side.repaint();		
+	}
 
 	/**
 	 * Entry point of the program.
@@ -273,8 +314,8 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	 */
 	public static void main(String[] args) 
 	{
-		User uA=new User("Blue","a");
-		User uB=new User("Red","b");
+		User uA=new User("darthVader","a");
+		User uB=new User("yoda","b");
 		new TronGame(uA,uB);
 		//tron.startGame(userA,userB);
 	}
@@ -293,54 +334,54 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 			case KeyEvent.VK_W:
 				if(!status.isPaused() && !status.isRoundOver()) 
 				{
-					racerB.updateDirection(Direction.Up);
+					racerA.updateDirection(Direction.Up);
 				}
 				break;
 			case KeyEvent.VK_UP:
 				if(!status.isPaused() && !status.isRoundOver()) 
 				{
-					racerA.updateDirection(Direction.Up);
+					racerB.updateDirection(Direction.Up);
 				}
 				break;	
 			
 			case KeyEvent.VK_S:
 				if(!status.isPaused() && !status.isRoundOver()) 
 				{
-					racerB.updateDirection(Direction.Down);
+					racerA.updateDirection(Direction.Down);
 				}
 				break;
 			case KeyEvent.VK_DOWN:
 				if(!status.isPaused() && !status.isRoundOver()) 
 				{
-					racerA.updateDirection(Direction.Down);
+					racerB.updateDirection(Direction.Down);
 				}
 				break;
 								
 			case KeyEvent.VK_A:
 				if(!status.isPaused() && !status.isRoundOver())
 				{
-					racerB.updateDirection(Direction.Left);
+					racerA.updateDirection(Direction.Left);
 				}
 				break;
 				
 			case KeyEvent.VK_LEFT:
 				if(!status.isPaused() && !status.isRoundOver())
 				{
-					racerA.updateDirection(Direction.Left);
+					racerB.updateDirection(Direction.Left);
 				}
 				break;
 		
 			case KeyEvent.VK_D:
 				if(!status.isPaused() && !status.isRoundOver()) 
 				{
-					racerB.updateDirection(Direction.Right);
+					racerA.updateDirection(Direction.Right);
 				}
 				break;
 				
 			case KeyEvent.VK_RIGHT:
 				if(!status.isPaused() && !status.isRoundOver()) 
 				{
-					racerA.updateDirection(Direction.Right);
+					racerB.updateDirection(Direction.Right);
 				}
 				break;
 			
@@ -363,8 +404,27 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 				if(status.isNewGame() || status.isRoundOver())
 				{
 					if(!status.isGameOver())
-						resetGame();					
+						{
+							
+							//side.clean();
+							//side.repaint();
+							resetGame();					
+						}
 				}
+				break;
+			case KeyEvent.VK_SPACE:
+				if(status.isGameOver())
+					{	
+						this.replayGame();
+						resetGame();
+						//this.dispose();
+					}
+				break;
+			case KeyEvent.VK_ESCAPE:
+				if(status.isGameOver())
+					{	
+						this.dispose();
+					}
 				break;
 			}
 	}
@@ -395,6 +455,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
          */
         while(true) 
         {
+        	System.out.println(System.currentTimeMillis());
                 //Get the current frame's start time.
                 long start = System.nanoTime();
                 
@@ -410,8 +471,8 @@ public class TronGame extends JFrame implements Runnable,KeyListener
                 
                 //Repaint the board and side panel with the new content.
                 board.repaint();
-                //side.repaint();
-                
+                side.repaint();
+               
                 /*
                  * Calculate the delta time between since the start of the frame
                  * and sleep for the excess time to cap the frame rate. While not

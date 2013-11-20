@@ -31,7 +31,8 @@ public class GameStatus {
 	 * Whether or not the game is paused.
 	 */
 	private boolean isPaused ;
-	
+	private boolean statUpdated;
+	private boolean threeRounds;
 	/**
 	 * GameStatus constructor.
 	 * @param game
@@ -40,6 +41,8 @@ public class GameStatus {
 	{
 		this.tronGame=game;
 		this.setGameOver(false);
+		this.statUpdated=false;
+		this.threeRounds=false;
 	}
 	/**
 	 * Gets the flag that indicates whether or not we're playing a new game.
@@ -68,6 +71,23 @@ public class GameStatus {
 		{
 			++roundNumber;
 		}
+		
+		if(roundOver==true)
+		{
+			if(roundNumber>3 && threeRounds==false)
+			{
+				this.tronGame.side.removeAll();
+				this.tronGame.side.paintHeaders(roundNumber);
+				this.threeRounds=true;
+				//roundNumber=1;
+			}
+			if(roundNumber>3 && (roundNumber%3)==0)
+			{
+			//	this.tronGame.side.removeAll();
+				threeRounds=false;
+			}
+		}
+		
 	}
 	/**
 	 * Gets the flag that indicates whether or not the current round is over.
@@ -105,7 +125,14 @@ public class GameStatus {
 				 */
 				this.setRoundOver(false);
 				this.setGameOver(true);
-				Statistics.update(tronGame.winnerIs(),tronGame.loserIs());
+				
+				
+				if(statUpdated!=true)
+				{	Statistics.update(tronGame.winnerIs(),tronGame.loserIs());
+					statUpdated=true;
+					System.out.println("saved");
+					//this.tronGame.run();
+				}
 			}
 				
 				
@@ -116,6 +143,9 @@ public class GameStatus {
 	private void setGameOver(boolean gameOver) 
 	{
 		this.isGameOver = gameOver;
+		//if(gameOver==false)
+			//this.statUpdated=false;
+		//System.out.println("stat is updated"+this.statUpdated);
 	}
 
 	/**
@@ -131,5 +161,15 @@ public class GameStatus {
 	{
 		this.isPaused = paused;
 	}
-
+	/*
+	public void restartStatus(TronGame tron,boolean confirm)
+	{
+		//this.setNewGame(true);
+		if(confirm==true)
+		{
+			tron.setGameOver(false);
+			this.statUpdated=false;
+		}
+	}
+	*/
 }

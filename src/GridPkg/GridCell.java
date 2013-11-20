@@ -5,13 +5,13 @@ public enum GridCell
 
 	Obstacle,
 	
-	RacerAHead,
+	YodaIcon,
 	
-	RacerABody,
+	GreenLight,
 	
-	RacerBHead,
+	DarthVaderIcon,
 	
-	RacerBBody,
+	RedLight,
 	
 	Empty
 	

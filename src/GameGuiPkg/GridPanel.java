@@ -1,10 +1,18 @@
-package GridPkg;
+package GameGuiPkg;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import GamePkg.TronGame;
@@ -23,12 +31,14 @@ public class GridPanel extends JPanel
 	/**
 	 * The size of each tile in pixels.
 	 */
-	public static final int TILE_SIZE = 10;
-	private static final Font FONT = new Font("Tahoma", Font.BOLD, 25);
+	public static final int TILE_SIZE = 13;
+	private static final Font FONT = new Font("STARWARS", Font.BOLD, 25);
 	/**
 	 * The array of cells that make up this board.
 	 */
 	private GridCell[][] cells;
+	
+	private static final Color TEXT_COLOR=new Color(25, 25, 112);
 	
 	private TronGame game;
 	/**
@@ -46,30 +56,15 @@ public class GridPanel extends JPanel
 		this.ROW_COUNT = grid.getGridRow();
 		
 		setPreferredSize(new Dimension(COL_COUNT * TILE_SIZE, ROW_COUNT * TILE_SIZE));
-		setBackground(Color.BLACK);
+		setBackground(Color.WHITE);
 	}
 	
 	/**
 	 * Clears all of the cells on the board and sets their values to null. this has to be done by the Grid Class
 	 */
-	public void clearBoard() 
-	{
-		for(int i = 0; i < cells.length; i++) 
-		{
-			for(int j=0;j<cells[i].length;j++)
-				{
-				cells[i][j] = GridCell.Empty;
-				}
-		}
-		/*for(int k=10;k<25;k++)
-		{
-			for (int w=k;w<k+5;w++)
-				cells[k][w]=GridCell.Obstacle;
-			
-		}*/
+	public void clearBoard() {
+		Grid.resetGrid(this.cells);
 	}
-	
-	
 	
 	/**
 	 * Sets the tile at the desired coordinate.
@@ -133,7 +128,7 @@ public class GridPanel extends JPanel
 		 * The panel is one pixel too small to draw the bottom and right
 		 * outlines, so we outline the board with a rectangle separately.
 		 */
-		g.setColor(Color.DARK_GRAY);
+		/*g.setColor(Color.LIGHT_GRAY);
 		g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 		for(int x = 0; x < COL_COUNT; x++) 
 		{
@@ -143,13 +138,13 @@ public class GridPanel extends JPanel
 				g.drawLine(0, y * TILE_SIZE, getWidth(), y * TILE_SIZE);
 			
 			}
-		}
+		}*/
 		/*
 		 * Show a message on the screen based on the current game state.
 		 */
 		if( (game.status.isGameOver()) || (game.status.isNewGame()) || (game.status.isPaused()) || (game.status.isRoundOver())) 
 		{
-			g.setColor(Color.WHITE);
+			g.setColor(TEXT_COLOR);
 			
 			/*
 			 * Get the center coordinates of the board.
@@ -171,17 +166,21 @@ public class GridPanel extends JPanel
 			} 
 			else if (game.status.isRoundOver())
 			{
-				gameMessage=game.roundWinner()+" Won this round";
+				if (game.roundWinner()=="")
+					gameMessage= "Tie";
+				else
+					gameMessage=game.roundWinner()+" Won this round";
 				largeMessage = "Round"+game.status.getRoundNumber()+" is over";
 				smallMessage = "Press Enter to start the next round";
 				
 			}
 			else if(game.status.isGameOver()) 
 			{
-				gameMessage=game.winnerIs()+" Won :)";
+				gameMessage=game.winnerIs()+" Won :) *****"+game.loserIs()+" Lost :(";
 				largeMessage = "Game Over!";
-				smallMessage =game.loserIs()+" Lost :(";
-			} else if(game.status.isPaused()) 
+				smallMessage ="Press SPACE to play Again or ESC to go back to the Main Menu";
+			} 
+			else if(game.status.isPaused()) 
 			{
 				largeMessage = "Paused";
 				smallMessage = "Press P to Resume";
@@ -209,32 +208,34 @@ public class GridPanel extends JPanel
 			break;
 		
 		case Obstacle:
-			g.setColor(Color.WHITE);
+			g.setColor(Color.BLACK);
 			g.fillOval(x + 2, y + 2, TILE_SIZE - 4, TILE_SIZE - 4);
 			break;	
 		/*
 		 * The Racer1 body is depicted as a blue square that takes up the
 		 * entire tile.
 		 */
-		case RacerAHead:
-			g.setColor(Color.CYAN);
-			g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+		case YodaIcon:
+			ImageIcon yoda = new ImageIcon(SidePanel.class.getResource("/GameGuiPkg/yodaRacer.gif"));
+			Image yodaImg=yoda.getImage();
+			g.drawImage(yodaImg, x-10, y-10, TILE_SIZE+15, TILE_SIZE+15, null);
 			break;
 		
-		case RacerBHead:
-			g.setColor(Color.PINK);
-			g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+		case DarthVaderIcon :
+			ImageIcon darthVader = new ImageIcon(SidePanel.class.getResource("/GameGuiPkg/darthVaderRacer.gif"));
+			Image darthVaderImg=darthVader.getImage();
+			g.drawImage(darthVaderImg, x-10, y-10, TILE_SIZE+15, TILE_SIZE+15, null);
 			break;
 
-		case RacerABody:
-			//Fill the tile in with blue.
-			g.setColor(Color.BLUE);
+		case GreenLight:
+			//Fill the tile in with green.
+			g.setColor(new Color(144, 238, 144));
 			g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
 			break;
 		
-		case RacerBBody:
-			//Fill the tile in with blue.
-			g.setColor(Color.RED);
+		case RedLight:
+			//Fill the tile in with red.
+			g.setColor(new Color(255, 99, 71));
 			g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
 			break;
 		
@@ -244,7 +245,7 @@ public class GridPanel extends JPanel
 		}
 	}
 	
-	public int getGridPanelRow (){
+	public int getGridPanelRow(){
 		return this.ROW_COUNT;
 	}
 	

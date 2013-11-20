@@ -5,8 +5,8 @@ import java.util.LinkedList;
 
 import UserPkg.User;
 
+import GameGuiPkg.GridPanel;
 import GridPkg.GridCell;
-import GridPkg.GridPanel;
 
 public class Racer 
 {
@@ -37,7 +37,7 @@ public class Racer
 	 */
 	private GridCell headCell;
 	private GridCell bodyCell;
-	
+	public ID racerId;
 	/**
 	 * The Racer Constructor
 	 * @param user
@@ -49,16 +49,17 @@ public class Racer
 		this.wonRounds=0;
 		this.racerPoints=new LinkedList<Point>();
 		this.racerDir=new LinkedList<Direction>();	
+		this.racerId=id;
 		switch(id)
 		{
-			case A:
-				this.headCell=GridCell.RacerAHead;
-				this.bodyCell=GridCell.RacerABody;
+			case YODA:
+				this.headCell=GridCell.YodaIcon;
+				this.bodyCell=GridCell.GreenLight;
 				break;
 				
-			case B:
-				this.headCell=GridCell.RacerBHead;
-				this.bodyCell=GridCell.RacerBBody;
+			case DARTHVADER:
+				this.headCell=GridCell.DarthVaderIcon;
+				this.bodyCell=GridCell.RedLight;
 				break;
 		}
 	}
