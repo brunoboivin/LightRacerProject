@@ -32,6 +32,7 @@ public class GameStatus {
 	 */
 	private boolean isPaused ;
 	private boolean statUpdated;
+	private boolean threeRounds;
 	/**
 	 * GameStatus constructor.
 	 * @param game
@@ -41,6 +42,7 @@ public class GameStatus {
 		this.tronGame=game;
 		this.setGameOver(false);
 		this.statUpdated=false;
+		this.threeRounds=false;
 	}
 	/**
 	 * Gets the flag that indicates whether or not we're playing a new game.
@@ -69,6 +71,23 @@ public class GameStatus {
 		{
 			++roundNumber;
 		}
+		
+		if(roundOver==true)
+		{
+			if(roundNumber>3 && threeRounds==false)
+			{
+				this.tronGame.side.removeAll();
+				this.tronGame.side.paintHeaders(roundNumber);
+				this.threeRounds=true;
+				//roundNumber=1;
+			}
+			if(roundNumber>3 && (roundNumber%3)==0)
+			{
+			//	this.tronGame.side.removeAll();
+				threeRounds=false;
+			}
+		}
+		
 	}
 	/**
 	 * Gets the flag that indicates whether or not the current round is over.

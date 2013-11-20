@@ -2,6 +2,7 @@ package RacerPkg;
 
 public enum ID
 {
-	A,
-	B
+	YODA,
+	DARTHVADER,
+	NULL
 }
