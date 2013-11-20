@@ -86,8 +86,11 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		super("Tron Prototype1");
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
+		
+		//setResizable(false);
 		setVisible(true);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+
 		/*
 		 * Initialize the game's status
 		 */
@@ -120,7 +123,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		pack();
 		setLocationRelativeTo(null);
 		
-		
+		setVisible(true);
 		
 	}
 
@@ -452,6 +455,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
          */
         while(true) 
         {
+        	System.out.println(System.currentTimeMillis());
                 //Get the current frame's start time.
                 long start = System.nanoTime();
                 
@@ -468,7 +472,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
                 //Repaint the board and side panel with the new content.
                 board.repaint();
                 side.repaint();
-                
+               
                 /*
                  * Calculate the delta time between since the start of the frame
                  * and sleep for the excess time to cap the frame rate. While not
