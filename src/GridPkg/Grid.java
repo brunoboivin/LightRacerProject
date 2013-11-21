@@ -20,7 +20,7 @@ public class Grid {
 		this.rowCount = ROW_COUNT_DEFAULT;
 		this.colCount = COL_COUNT_DEFAULT;
 		this.gridCells = new GridCell[this.colCount][this.rowCount];
-	
+
 		initializeGrid ();
 	}  
 	
@@ -34,16 +34,14 @@ public class Grid {
 		    }
 		}
 	
+		System.out.println ("here");
+		
 		//Prompt user to select a map
 		ChooseMapsDisplay selectGrid = new ChooseMapsDisplay();
-		selectGrid.setVisible(true);
-		while (!selectGrid.getIsGridChosen()){
-			//DONT REMOVE FOR NOW: SHOCKINGLY, THIS LINE NEEDS TO BE THERE...
-			System.out.println ();
-		}
 		
 		//Add obstacles corresponding to the selected map
-		addObstacles(selectGrid.getGridChosen());
+//		addObstacles(selectGrid.getGridChosen());
+		addObstacles("map2");
 	}	
 	
 	//ONLY FOR TESTING PURPOSES: adds obstacles at select coordinates

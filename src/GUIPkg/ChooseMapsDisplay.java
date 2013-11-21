@@ -65,9 +65,7 @@ public class ChooseMapsDisplay extends JFrame  {
 		loadTopElements ();
 		loadBottomElements ();
 		
-//		GridFileLoader fileLoader = new GridFileLoader();
-//		String obtainedCoords = fileLoader.readFile("maps/map2.txt");
-//		System.out.println(obtainedCoords);
+		setVisible(true);
 	}
 	
 	private void loadPanels () {
@@ -107,7 +105,7 @@ public class ChooseMapsDisplay extends JFrame  {
 		
 		//Add action listener to button
 	    this.proceedBtn.addActionListener(new ActionListener() {
-	    	
+	    	@Override
 	        public void actionPerformed(ActionEvent e)
 	        {
 	            //Execute when button is pressed
@@ -139,17 +137,17 @@ public class ChooseMapsDisplay extends JFrame  {
     	return this.isGridChosen;
     }
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ChooseMapsDisplay frame = new ChooseMapsDisplay();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}			
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					ChooseMapsDisplay frame = new ChooseMapsDisplay();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}			
+//		});
+//	}
 
 }
