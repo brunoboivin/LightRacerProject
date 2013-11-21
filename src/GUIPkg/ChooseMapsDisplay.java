@@ -65,7 +65,12 @@ public class ChooseMapsDisplay extends JFrame  {
 		loadTopElements ();
 		loadBottomElements ();
 		
+//		GridFileLoader fileLoader = new GridFileLoader();
+//		String obtainedCoords = fileLoader.readFile("maps/map2.txt");
+//		System.out.println(obtainedCoords);
+		
 		setVisible(true);
+
 	}
 	
 	private void loadPanels () {
