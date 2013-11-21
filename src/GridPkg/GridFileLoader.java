@@ -11,10 +11,11 @@ public class GridFileLoader {
 //		test.readFile();
 //	}
 	
-	public static String readFile ( String filePath ) throws IOException {
+	//Takes a map file path. Returns the data in the form of an array of int coordinates.
+	public static int [] readFile ( String mapName ) throws IOException {
 		
-//		e.g. "maps/map2.txt"
-		String gridFilePath = filePath; 
+		//e.g. "maps/map2.txt"		
+		String gridFilePath = "maps/" + mapName + ".txt"; 
 		
 		BufferedReader fileReader = new BufferedReader(new FileReader(gridFilePath));
 	    try {
@@ -26,12 +27,31 @@ public class GridFileLoader {
 	        	stringBuilder.append(line);
 	            line = fileReader.readLine();
 	        }
-	        String everything = stringBuilder.toString();
-      		return everything;
+	        String dataFromFile = stringBuilder.toString();
+	        return GridFileLoader.convertDataToCoords (dataFromFile);
 	    } finally {
 	    	fileReader.close();
 	    }
 	
 	}
+	
+	//Converts raw data from a file into an array of int coordinates
+	private static int [] convertDataToCoords ( String dataFromFile ) {
+	
+		String[] coordsFromFile;
+		int obstacleCoords[];
+
+		//Raw data from file is broken up into separate coordinates and moved into array
+		dataFromFile = dataFromFile.replace("(", "");
+		coordsFromFile = dataFromFile.split("(,)|(\\))");
+		
+		//Converts each String coordinate into an int coordinate
+		obstacleCoords = new int[coordsFromFile.length];
+		for (int i = 0; i < coordsFromFile.length; ++i) {
+			obstacleCoords[i] = Integer.parseInt(coordsFromFile[i].trim());
+		}
+		
+		return obstacleCoords;
+	}	
 
 }
