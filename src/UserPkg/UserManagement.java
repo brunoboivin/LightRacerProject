@@ -31,8 +31,7 @@ public class UserManagement
 			hasUpperCase = true;
 			hasLowerCase = true;
 		}
-		
-		return hasUpperCase && hasLowerCase && hasDigit && hasNonAlphanumeric && hasProperLength;
+		return (hasUpperCase && hasLowerCase && hasDigit && hasNonAlphanumeric && hasProperLength);
 	}
 	
 	public static int login(int userNumber, String username, String password) {
@@ -42,13 +41,6 @@ public class UserManagement
 		for (User user : users) {
 			if ((user.getUsername()).equals(username)) {
 				if ((user.getPassword()).equals(password)) {
-					// Uncomment below when login is ready to be connected to the game
-					/*
-					UIController.setUser(newUser);
-					if (((UIController.userA).equals(username)) || ((UIController.userB).equals(username))) {
-						return true;
-					}
-					*/ 
 					if (userNumber == 1) {
 						if ((user2 != null) && ((user2.getUsername())).equals(username)) {
 							return 3;
@@ -89,8 +81,7 @@ public class UserManagement
 				return 1; // username taken
 			}
 		}
-		
-		if (checkPasswordRequirements(password)) {
+		if (!checkPasswordRequirements(password)) {
 			return 2; // password requirements do not match
 		}
 		

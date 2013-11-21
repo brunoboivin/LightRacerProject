@@ -1,6 +1,7 @@
 package UserPkg;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -39,6 +40,7 @@ public class login_frame extends JFrame {
 	boolean btn1AsLogout = false;
 	boolean btn2AsLogout = false;
 	int loginResult;
+	Color diabledField, enabledField;
 
 	/**
 	 * Launch the application.
@@ -61,7 +63,8 @@ public class login_frame extends JFrame {
 	 */
 	@SuppressWarnings("deprecation")
 	public login_frame() {
-
+		
+		diabledField = Color.LIGHT_GRAY;
 		usersLoggedIn = 0;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 400);
@@ -72,6 +75,7 @@ public class login_frame extends JFrame {
 
 		passwordField1 = new JPasswordField();
 		passwordField1.setBounds(109, 112, 84, 28);
+		enabledField = passwordField1.getBackground();
 		contentPane.add(passwordField1);
 
 		passwordField2 = new JPasswordField();
@@ -118,6 +122,10 @@ public class login_frame extends JFrame {
 								break;
 						case 0: btnLoginPlayer1.setText("Logout " + usernameField1.getText());
 								btn1AsLogout = true;
+								usernameField1.setEnabled(false);
+								passwordField1.setEnabled(false);
+								usernameField1.setBackground(diabledField);
+								passwordField1.setBackground(diabledField);
 								usersLoggedIn++;
 								usernameField1.setText("");
 								passwordField1.setText("");
@@ -131,8 +139,12 @@ public class login_frame extends JFrame {
 				} else {
 					UserManagement.logout(UserManagement.user1);
 					btnLoginPlayer1.setText("Login player 1");
+					usernameField1.setBackground(enabledField);
+					passwordField1.setBackground(enabledField);
 					usersLoggedIn--;
 					btn1AsLogout = false;
+					usernameField1.setEnabled(true);
+					passwordField1.setEnabled(true);
 				}
 			}
 		});
@@ -162,6 +174,10 @@ public class login_frame extends JFrame {
 						case 0: btnLoginPlayer2.setText("Logout " + usernameField2.getText());
 								//btnLoginPlayer2.sets
 								btn2AsLogout = true;
+								usernameField2.setEnabled(false);
+								passwordField2.setEnabled(false);
+								usernameField2.setForeground(diabledField);
+								passwordField2.setForeground(diabledField);
 								usernameField2.setText("");
 								passwordField2.setText("");
 								usersLoggedIn++;
@@ -174,9 +190,13 @@ public class login_frame extends JFrame {
 					}
 				} else {
 					UserManagement.logout(UserManagement.user2);
+					usernameField2.setBackground(enabledField);
+					passwordField2.setBackground(enabledField);
 					usersLoggedIn--;
 					btn2AsLogout = false;
 					btnLoginPlayer2.setText("Login player 2");
+					usernameField2.setEnabled(true);
+					passwordField2.setEnabled(true);
 				}
 			} 
 		});

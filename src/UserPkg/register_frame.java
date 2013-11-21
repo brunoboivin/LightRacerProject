@@ -86,10 +86,11 @@ public class register_frame extends JFrame {
 							registerResult = UserManagement.registerUser(usernameField.getText(), (passwordField.getText()));
 							switch (registerResult) {
 							case 3: JOptionPane.showMessageDialog(null, "Success!");
+							        dispose();
 									break;
-							case 2: JOptionPane.showMessageDialog(null, "Password must be at least 8 characters,"
-											+ "have at least one upper case and one lower case letter, "
-											+ "a digit and a special character (i.e. ~!@#$%^&*()_+=-.,<>?{}[];",
+							case 2: JOptionPane.showMessageDialog(null, "Password must be at least 8 characters, "
+											+ "have at least \none upper case and one lower case letter, "
+											+ "a digit and \na special character (i.e. ~!@#$%^&*()_+=-.,<>?{}[];)",
 											"Error", JOptionPane.ERROR_MESSAGE);
 									break;
 							case 1: JOptionPane.showMessageDialog(null, "Username already in use!", "Error",
