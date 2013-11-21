@@ -1,8 +1,11 @@
 package GridPkg;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -24,6 +27,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.lang3.StringUtils;
 
+import GameGuiPkg.SidePanel;
 import GamePkg.TronGame;
 import GridPkg.GridFileLoader;
 import UserPkg.UserManagement;
@@ -50,6 +54,8 @@ public class GridSelectorGUI extends JOptionPane {
 	private JRadioButton map1;
 	private JRadioButton map2;
 	private JRadioButton map3;
+	
+	public static final int TILE_SIZE = 5;
 
 	public GridSelectorGUI () {
 		

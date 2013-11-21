@@ -210,8 +210,8 @@ public class GridPanel extends JPanel
 			break;
 		
 		case Obstacle:
-			g.setColor(Color.BLACK);
-			g.fillOval(x + 2, y + 2, TILE_SIZE - 4, TILE_SIZE - 4);
+			g.setColor(Color.GRAY);
+			g.fillRect(x + 2, y + 2, TILE_SIZE - 1, TILE_SIZE - 1);
 			break;	
 		/*
 		 * The Racer1 body is depicted as a blue square that takes up the
