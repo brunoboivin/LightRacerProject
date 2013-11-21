@@ -12,6 +12,29 @@ public class UserManagement
 	public static User user1;
 	public static User user2;
 	
+	public static boolean checkPasswordRequirements(String password) {
+	
+		String numbers = "0123456789";
+		String specialChars = "~!@#$%^&*()_+=-.,<>?{}[];";
+		boolean hasUpperCase = false, hasLowerCase = false, hasDigit = false, hasNonAlphanumeric = false, hasProperLength = false;
+		if (password.length() >= 8) {
+			hasProperLength = true;
+		}
+		if (StringUtils.containsAny(password, numbers)) {
+			hasDigit = true;
+		}
+		if (StringUtils.containsAny(password, specialChars)) {
+			hasNonAlphanumeric = true;
+		}
+		
+		if ((!(StringUtils.upperCase(password)).equals(password)) && (!(StringUtils.lowerCase(password)).equals(password))) {
+			hasUpperCase = true;
+			hasLowerCase = true;
+		}
+		
+		return hasUpperCase && hasLowerCase && hasDigit && hasNonAlphanumeric && hasProperLength;
+	}
+	
 	public static int login(int userNumber, String username, String password) {
 
 		ArrayList<User> users = new ArrayList<User>();
@@ -48,12 +71,12 @@ public class UserManagement
 		return 2; // username not found
 	}
 
-	public void logout (User user) {
-//		if ((UIController.userA).equals(user)) {
-//			UIController.userA = null;
-//		} else {
-//			UIController.userB = null;
-//		}
+	public static void logout (User user) {
+		if ((user1).equals(user)) {
+			user1 = null;
+		} else {
+			user2 = null;
+		}
 	}
 
 	public static int registerUser(String username, String password) {
@@ -67,6 +90,10 @@ public class UserManagement
 			}
 		}
 		
+		if (checkPasswordRequirements(password)) {
+			return 2; // password requirements do not match
+		}
+		
 		User newUser = new User(username, password);
 		users.add(newUser);
 
@@ -78,7 +105,7 @@ public class UserManagement
 		users = (ArrayList<User>) CSVHandler.read("csv/user_data.csv");
 		for (User user : users) {
 			if ((user.getUsername()).equals(username)) {
-				return 2;
+				return 3; 
 			}
 		}
 		return 0;

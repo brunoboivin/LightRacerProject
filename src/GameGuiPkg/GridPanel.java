@@ -1,3 +1,5 @@
+
+
 package GameGuiPkg;
 
 import java.awt.Color;
@@ -62,24 +64,9 @@ public class GridPanel extends JPanel
 	/**
 	 * Clears all of the cells on the board and sets their values to null. this has to be done by the Grid Class
 	 */
-	public void clearBoard() 
-	{
-		for(int i = 0; i < cells.length; i++) 
-		{
-			for(int j=0;j<cells[i].length;j++)
-				{
-				cells[i][j] = GridCell.Empty;
-				}
-		}
-		/*for(int k=10;k<25;k++)
-		{
-			for (int w=k;w<k+5;w++)
-				cells[k][w]=GridCell.Obstacle;
-			
-		}*/
+	public void clearBoard() {
+		Grid.resetGrid(this.cells);
 	}
-	
-	
 	
 	/**
 	 * Sets the tile at the desired coordinate.
@@ -223,7 +210,7 @@ public class GridPanel extends JPanel
 			break;
 		
 		case Obstacle:
-			g.setColor(Color.WHITE);
+			g.setColor(Color.BLACK);
 			g.fillOval(x + 2, y + 2, TILE_SIZE - 4, TILE_SIZE - 4);
 			break;	
 		/*
