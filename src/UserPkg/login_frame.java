@@ -1,6 +1,7 @@
 package UserPkg;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -34,10 +35,12 @@ public class login_frame extends JFrame {
 	private JLabel lblIfYouDont;
 	private JButton btnRegister;
 	private JLabel lblLogin;
-	private JButton btnNewButton;
-	private JButton btnStartGame;
+	private JButton btnMainMenu;
 	int usersLoggedIn = 0;
+	boolean btn1AsLogout = false;
+	boolean btn2AsLogout = false;
 	int loginResult;
+	Color diabledField, enabledField;
 
 	/**
 	 * Launch the application.
@@ -60,46 +63,48 @@ public class login_frame extends JFrame {
 	 */
 	@SuppressWarnings("deprecation")
 	public login_frame() {
-
+		
+		diabledField = Color.LIGHT_GRAY;
 		usersLoggedIn = 0;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 450);
+		setBounds(100, 100, 450, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		passwordField1 = new JPasswordField();
-		passwordField1.setBounds(99, 112, 84, 28);
+		passwordField1.setBounds(109, 112, 84, 28);
+		enabledField = passwordField1.getBackground();
 		contentPane.add(passwordField1);
 
 		passwordField2 = new JPasswordField();
-		passwordField2.setBounds(346, 112, 84, 28);
+		passwordField2.setBounds(333, 112, 84, 28);
 		contentPane.add(passwordField2);
 
-		btnStartGame = new JButton("Start Game!");
-		btnStartGame.setEnabled(false);
-		btnStartGame.addMouseListener(new MouseAdapter() {
+		btnMainMenu = new JButton("Go to main menu!");
+		btnMainMenu.setEnabled(false);
+		btnMainMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (btnStartGame.isEnabled()) {
-					TronGame tron = new TronGame(UserManagement.user2, UserManagement.user1);
+				if (btnMainMenu.isEnabled()) {
+					//TronGame tron = new TronGame(UserManagement.user2, UserManagement.user1);
 				}
 			}
 		});
-		btnStartGame.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		btnStartGame.addActionListener(new ActionListener() {
+		btnMainMenu.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnStartGame.setBounds(136, 290, 182, 72);
-		contentPane.add(btnStartGame);
+		btnMainMenu.setBounds(117, 295, 220, 45);
+		contentPane.add(btnMainMenu);
 
 		final JButton btnLoginPlayer1 = new JButton("Login player 1");
 		btnLoginPlayer1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (btnLoginPlayer1.isEnabled()) {
+				if (btn1AsLogout == false) {
 					if (StringUtils.isBlank(passwordField1.getText()) || (StringUtils.isBlank(usernameField1.getText()))) {
 						JOptionPane.showMessageDialog(null, "Please enter the username and/or the password.", "Warning",
 								JOptionPane.WARNING_MESSAGE);
@@ -115,27 +120,42 @@ public class login_frame extends JFrame {
 						case 1: JOptionPane.showMessageDialog(null, "Provided username and password combination is invalid!", "Error",
 									JOptionPane.ERROR_MESSAGE);
 								break;
-						case 0: btnLoginPlayer1.setText("Done!");
-								btnLoginPlayer1.setEnabled(false);
+						case 0: btnLoginPlayer1.setText("Logout " + usernameField1.getText());
+								btn1AsLogout = true;
+								usernameField1.setEnabled(false);
+								passwordField1.setEnabled(false);
+								usernameField1.setBackground(diabledField);
+								passwordField1.setBackground(diabledField);
 								usersLoggedIn++;
+								usernameField1.setText("");
+								passwordField1.setText("");
 								break;
 						}
 						loginResult = 5;
 						if (usersLoggedIn == 2) {
-							btnStartGame.setEnabled(true);
+							btnMainMenu.setEnabled(true);
 						}
 					}
+				} else {
+					UserManagement.logout(UserManagement.user1);
+					btnLoginPlayer1.setText("Login player 1");
+					usernameField1.setBackground(enabledField);
+					passwordField1.setBackground(enabledField);
+					usersLoggedIn--;
+					btn1AsLogout = false;
+					usernameField1.setEnabled(true);
+					passwordField1.setEnabled(true);
 				}
 			}
 		});
-		btnLoginPlayer1.setBounds(66, 151, 117, 29);
+		btnLoginPlayer1.setBounds(6, 152, 187, 29);
 		contentPane.add(btnLoginPlayer1);
 
 		final JButton btnLoginPlayer2 = new JButton("Login player 2");
 		btnLoginPlayer2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (btnLoginPlayer2.isEnabled()) {
+				if (btn2AsLogout == false) {
 					if (StringUtils.isBlank(passwordField2.getText()) || (StringUtils.isBlank(usernameField2.getText()))) {
 						JOptionPane.showMessageDialog(null, "Please enter the username and/or the password.", "Warning",
 								JOptionPane.WARNING_MESSAGE);
@@ -151,50 +171,66 @@ public class login_frame extends JFrame {
 						case 1: JOptionPane.showMessageDialog(null, "Provided username and password combination is invalid.", "Error",
 									JOptionPane.ERROR_MESSAGE);
 								break;
-						case 0: btnLoginPlayer2.setText("Done!");
-								btnLoginPlayer2.setEnabled(false);
+						case 0: btnLoginPlayer2.setText("Logout " + usernameField2.getText());
+								//btnLoginPlayer2.sets
+								btn2AsLogout = true;
+								usernameField2.setEnabled(false);
+								passwordField2.setEnabled(false);
+								usernameField2.setForeground(diabledField);
+								passwordField2.setForeground(diabledField);
+								usernameField2.setText("");
+								passwordField2.setText("");
 								usersLoggedIn++;
 								break;
 						}
 						loginResult = 5;
 						if (usersLoggedIn == 2) {
-							btnStartGame.setEnabled(true);
+							btnMainMenu.setEnabled(true);
 						}
 					}
+				} else {
+					UserManagement.logout(UserManagement.user2);
+					usernameField2.setBackground(enabledField);
+					passwordField2.setBackground(enabledField);
+					usersLoggedIn--;
+					btn2AsLogout = false;
+					btnLoginPlayer2.setText("Login player 2");
+					usernameField2.setEnabled(true);
+					passwordField2.setEnabled(true);
 				}
 			} 
 		});
-		btnLoginPlayer2.setBounds(272, 151, 117, 29);
+		btnLoginPlayer2.setBounds(241, 152, 187, 29);
 		contentPane.add(btnLoginPlayer2);
 
 		usernameField1 = new JTextField();
-		usernameField1.setBounds(99, 72, 84, 28);
+		usernameField1.setBounds(109, 72, 84, 28);
 		contentPane.add(usernameField1);
 		usernameField1.setColumns(10);
 
 		usernameField2 = new JTextField();
-		usernameField2.setBounds(346, 72, 84, 28);
+		usernameField2.setBounds(333, 72, 84, 28);
 		contentPane.add(usernameField2);
 		usernameField2.setColumns(10);
 
 		JLabel lblUsername = new JLabel("Username:");
-		lblUsername.setBounds(16, 78, 85, 16);
+		lblUsername.setBounds(22, 84, 85, 16);
 		contentPane.add(lblUsername);
 
 		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(16, 118, 81, 16);
+		lblPassword.setBounds(22, 118, 81, 16);
 		contentPane.add(lblPassword);
 
 		lblUsername_1 = new JLabel("Username:");
-		lblUsername_1.setBounds(272, 78, 84, 16);
+		lblUsername_1.setBounds(257, 78, 84, 16);
 		contentPane.add(lblUsername_1);
 
 		lblPassword_1 = new JLabel("Password:");
-		lblPassword_1.setBounds(272, 118, 84, 16);
+		lblPassword_1.setBounds(257, 118, 84, 16);
 		contentPane.add(lblPassword_1);
 
 		lblIfYouDont = new JLabel("Click \"Register!\" if you don't have an account");
-		lblIfYouDont.setBounds(94, 192, 375, 16);
+		lblIfYouDont.setBounds(94, 206, 296, 16);
 		contentPane.add(lblIfYouDont);
 
 		btnRegister = new JButton("Register!");
@@ -205,12 +241,12 @@ public class login_frame extends JFrame {
 				frame.setVisible(true);
 			}
 		});
-		btnRegister.setBounds(168, 217, 117, 29);
+		btnRegister.setBounds(168, 234, 117, 29);
 		contentPane.add(btnRegister);
 
 		lblLogin = new JLabel("Login");
 		lblLogin.setFont(new Font("Lucida Grande", Font.BOLD, 24));
-		lblLogin.setBounds(199, 18, 101, 45);
+		lblLogin.setBounds(184, 16, 101, 45);
 		contentPane.add(lblLogin);
 	}
 }
