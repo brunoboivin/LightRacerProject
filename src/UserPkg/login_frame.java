@@ -2,7 +2,10 @@ package UserPkg;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.EventQueue;
+import java.awt.FocusTraversalPolicy;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,6 +25,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.Vector;
 
 public class login_frame extends JFrame {
 
@@ -63,7 +69,7 @@ public class login_frame extends JFrame {
 	 */
 	@SuppressWarnings("deprecation")
 	public login_frame() {
-		
+
 		diabledField = Color.LIGHT_GRAY;
 		usersLoggedIn = 0;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,6 +80,17 @@ public class login_frame extends JFrame {
 		contentPane.setLayout(null);
 
 		passwordField1 = new JPasswordField();
+		passwordField1.setFocusTraversalKeysEnabled(false);
+		passwordField1.addKeyListener(new KeyAdapter() {
+		@Override
+		public void keyPressed(KeyEvent key) {
+			System.out.println(key.getKeyCode());
+			if (key.getKeyCode() == KeyEvent.VK_TAB) {
+				//passwordField1.setEnabled(true);
+				usernameField1.transferFocus();
+			}
+		}
+	});
 		passwordField1.setBounds(109, 112, 84, 28);
 		enabledField = passwordField1.getBackground();
 		contentPane.add(passwordField1);
@@ -112,24 +129,24 @@ public class login_frame extends JFrame {
 						loginResult = UserManagement.login(1, usernameField1.getText(), (passwordField1.getText()));
 						switch (loginResult) {
 						case 3: JOptionPane.showMessageDialog(null, "User already logged in!", "Error",
-									JOptionPane.ERROR_MESSAGE);
-								break;
+								JOptionPane.ERROR_MESSAGE);
+						break;
 						case 2: JOptionPane.showMessageDialog(null, "Username not found.", "Warning",
-									JOptionPane.WARNING_MESSAGE);
-								break;
+								JOptionPane.WARNING_MESSAGE);
+						break;
 						case 1: JOptionPane.showMessageDialog(null, "Provided username and password combination is invalid!", "Error",
-									JOptionPane.ERROR_MESSAGE);
-								break;
+								JOptionPane.ERROR_MESSAGE);
+						break;
 						case 0: btnLoginPlayer1.setText("Logout " + usernameField1.getText());
-								btn1AsLogout = true;
-								usernameField1.setEnabled(false);
-								passwordField1.setEnabled(false);
-								usernameField1.setBackground(diabledField);
-								passwordField1.setBackground(diabledField);
-								usersLoggedIn++;
-								usernameField1.setText("");
-								passwordField1.setText("");
-								break;
+						btn1AsLogout = true;
+						usernameField1.setEnabled(false);
+						passwordField1.setEnabled(false);
+						usernameField1.setBackground(diabledField);
+						passwordField1.setBackground(diabledField);
+						usersLoggedIn++;
+						usernameField1.setText("");
+						passwordField1.setText("");
+						break;
 						}
 						loginResult = 5;
 						if (usersLoggedIn == 2) {
@@ -163,25 +180,25 @@ public class login_frame extends JFrame {
 						loginResult = UserManagement.login(2, usernameField2.getText(), (passwordField2.getText()));
 						switch (loginResult) {
 						case 3: JOptionPane.showMessageDialog(null, "User already logged in!", "Error",
-									JOptionPane.ERROR_MESSAGE);
-								break;
+								JOptionPane.ERROR_MESSAGE);
+						break;
 						case 2: JOptionPane.showMessageDialog(null, "Username not found.", "Warning",
-									JOptionPane.WARNING_MESSAGE);
-								break;
+								JOptionPane.WARNING_MESSAGE);
+						break;
 						case 1: JOptionPane.showMessageDialog(null, "Provided username and password combination is invalid.", "Error",
-									JOptionPane.ERROR_MESSAGE);
-								break;
+								JOptionPane.ERROR_MESSAGE);
+						break;
 						case 0: btnLoginPlayer2.setText("Logout " + usernameField2.getText());
-								//btnLoginPlayer2.sets
-								btn2AsLogout = true;
-								usernameField2.setEnabled(false);
-								passwordField2.setEnabled(false);
-								usernameField2.setForeground(diabledField);
-								passwordField2.setForeground(diabledField);
-								usernameField2.setText("");
-								passwordField2.setText("");
-								usersLoggedIn++;
-								break;
+						//btnLoginPlayer2.sets
+						btn2AsLogout = true;
+						usernameField2.setEnabled(false);
+						passwordField2.setEnabled(false);
+						usernameField2.setForeground(diabledField);
+						passwordField2.setForeground(diabledField);
+						usernameField2.setText("");
+						passwordField2.setText("");
+						usersLoggedIn++;
+						break;
 						}
 						loginResult = 5;
 						if (usersLoggedIn == 2) {
@@ -202,13 +219,34 @@ public class login_frame extends JFrame {
 		});
 		btnLoginPlayer2.setBounds(241, 152, 187, 29);
 		contentPane.add(btnLoginPlayer2);
-
+		
 		usernameField1 = new JTextField();
+		usernameField1.setFocusTraversalKeysEnabled(false);
+		usernameField1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent key) {
+				System.out.println(key.getKeyCode());
+				if (key.getKeyCode() == KeyEvent.VK_TAB) {
+					//passwordField1.setEnabled(true);
+					usernameField2.transferFocus();
+				}
+			}
+		});
 		usernameField1.setBounds(109, 72, 84, 28);
 		contentPane.add(usernameField1);
 		usernameField1.setColumns(10);
 
 		usernameField2 = new JTextField();
+		usernameField2.setFocusTraversalKeysEnabled(false);
+		usernameField2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent key) {
+				System.out.println(key.getKeyCode());
+				if (key.getKeyCode() == KeyEvent.VK_TAB) {
+					passwordField1.transferFocus();
+				}
+			}
+		});
 		usernameField2.setBounds(333, 72, 84, 28);
 		contentPane.add(usernameField2);
 		usernameField2.setColumns(10);
