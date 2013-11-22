@@ -53,9 +53,11 @@ public class GridPanel extends JPanel
 	{
 		this.game = game;
 		Grid grid = new Grid();
+		grid.promptMapSelection();
 		this.cells = grid.getGridCells();
 		this.COL_COUNT = grid.getGridCol();
 		this.ROW_COUNT = grid.getGridRow();
+		
 		
 		setPreferredSize(new Dimension(COL_COUNT * TILE_SIZE, ROW_COUNT * TILE_SIZE));
 		setBackground(Color.WHITE);

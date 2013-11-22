@@ -33,13 +33,19 @@ public class Grid {
 		    	this.gridCells[i][j] = GridCell.Empty;
 		    }
 		}
-		
+	}	
+	
+	
+	public void promptMapSelection () {
+			
 		//Prompt user to select a map
 		GridSelectorGUI selectGrid = new GridSelectorGUI();
 		
 		//Add obstacles corresponding to the selected map
-		addObstacles(selectGrid.getGridSelected());
+		addObstacles(selectGrid.getSelectedMapPath());
+
 	}	
+	
 	
 	//ONLY FOR TESTING PURPOSES: adds obstacles at select coordinates
 	private void initializeGridTest (){
@@ -67,9 +73,9 @@ public class Grid {
 	}
 	
 	//adds obstacles to the grid
-	private void addObstacles (String mapSelected) {
+	public void addObstacles (String selectedMapPath) {
 		
-		int [] obstacleCoords = loadObstacles(mapSelected);
+		int [] obstacleCoords = loadObstacles(selectedMapPath);
 		int [] obstacleCoordsPair = new int [4];
 		int xCoord1,xCoord2,yCoord1,yCoord2;
 		int xStart, xEnd, yStart, yEnd;

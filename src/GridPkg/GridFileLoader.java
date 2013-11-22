@@ -12,10 +12,10 @@ public class GridFileLoader {
 //	}
 	
 	//Takes a map file path. Returns the data in the form of an array of int coordinates.
-	public static int [] readFile ( String mapName ) throws IOException {
+	public static int [] readFile ( String mapPath ) throws IOException {
 		
 		//e.g. "maps/map2.txt"		
-		String gridFilePath = "maps/" + mapName + ".txt"; 
+		String gridFilePath = mapPath; 
 		
 		BufferedReader fileReader = new BufferedReader(new FileReader(gridFilePath));
 	    try {
