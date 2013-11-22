@@ -2,10 +2,7 @@ package UserPkg;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.EventQueue;
-import java.awt.FocusTraversalPolicy;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,7 +24,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Vector;
 
 public class login_frame extends JFrame {
 
@@ -84,9 +80,7 @@ public class login_frame extends JFrame {
 		passwordField1.addKeyListener(new KeyAdapter() {
 		@Override
 		public void keyPressed(KeyEvent key) {
-			System.out.println(key.getKeyCode());
 			if (key.getKeyCode() == KeyEvent.VK_TAB) {
-				//passwordField1.setEnabled(true);
 				usernameField1.transferFocus();
 			}
 		}
@@ -225,7 +219,6 @@ public class login_frame extends JFrame {
 		usernameField1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent key) {
-				System.out.println(key.getKeyCode());
 				if (key.getKeyCode() == KeyEvent.VK_TAB) {
 					//passwordField1.setEnabled(true);
 					usernameField2.transferFocus();
@@ -241,7 +234,6 @@ public class login_frame extends JFrame {
 		usernameField2.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent key) {
-				System.out.println(key.getKeyCode());
 				if (key.getKeyCode() == KeyEvent.VK_TAB) {
 					passwordField1.transferFocus();
 				}
