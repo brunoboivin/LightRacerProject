@@ -9,24 +9,26 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import UserPkg.User;
+import UserPkg.UserManagement;
 import GridPkg.GridSelectorGUI;
 
 public class MainFrame extends JFrame{
 
+	static MainMenuPanel mainMenuPanel;
 	static CardLayout cardLayout;
-	static JPanel card = new JPanel();
+	static JPanel deck = new JPanel();
 	private JPanel contentPane;
 //	public LoginPanel loginFrame;
 
 	/**
 	 * Launch the application.
 	 */
-	/*
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainFrame frame = new MainFrame(new LoginFrame(), new User("Neve", "123.Neve"), new User("Bruno", "123.Bruno")); //would need to pass 2 users as parameters
+					MainFrame frame = new MainFrame(); //would need to pass 2 users as parameters
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,33 +36,31 @@ public class MainFrame extends JFrame{
 			}
 		});
 	}
-	*/
 	
 	/**
 	 * Create the frame.
 	 */
-	public MainFrame(User userA, User userB) {
+	public MainFrame() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = (JPanel) getContentPane();
-		card.setLayout(cardLayout = new CardLayout());
+		deck.setLayout(cardLayout = new CardLayout());
 		
 		LoginPanel loginPanel = new LoginPanel();
-		MainMenuPanel mainMenuPanel = new MainMenuPanel(userA, userB);
 		TopTenPanel topTenPanel = new TopTenPanel();
 		
-		card.add("loginPanel", loginPanel);
-		card.add("mainMenuPanel", mainMenuPanel);
-		card.add("topTenPanel", topTenPanel);
+		deck.add("loginPanel", loginPanel);
+//		deck.add("mainMenuPanel", mainMenuPanel);
+		deck.add("topTenPanel", topTenPanel);
 		
 		//default card 
-		cardLayout.show(card, "loginPanel");
+		cardLayout.show(deck, "loginPanel");
 		
 		//set contentPane to add static card panel
-		contentPane.add(card);
+		contentPane.add(deck);
 		
 		//set frame parameters
-		setSize(500,350);
+		setSize(450,400);
 		
 		//center frame
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -70,7 +70,7 @@ public class MainFrame extends JFrame{
 	}
 	
 	public void swapView(String key){
-		cardLayout.show(card, key);
+		cardLayout.show(deck, key);
 	}
 
 }
