@@ -167,7 +167,7 @@ public class SidePanel extends JPanel {
 			case 1:
 				if(painted1==false)
 					{
-						System.out.println("current round is "+round);
+						//System.out.println("current round is "+round);
 						winnerCell(this.game.winnerId(),this.layeredPane,1);
 						painted1=true;
 					}
@@ -176,7 +176,7 @@ public class SidePanel extends JPanel {
 			case 2:
 				if(painted2==false)
 					{
-						System.out.println("current round is "+round);
+						//System.out.println("current round is "+round);
 						winnerCell(this.game.winnerId(),this.layeredPane,2);
 						painted2=true;
 					}
@@ -184,7 +184,7 @@ public class SidePanel extends JPanel {
 			case 3:
 				if(painted3==false)
 					{
-						System.out.println("current round is "+round);
+						//System.out.println("current round is "+round);
 						winnerCell(this.game.winnerId(),this.layeredPane,3);
 						painted3=true;
 					}
