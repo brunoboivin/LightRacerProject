@@ -92,7 +92,7 @@ public class Grid {
 			yCoord1 = obstacleCoordsPair[1];
 			yCoord2 = obstacleCoordsPair[3];
 			
-			if (xCoord1 < xCoord2){
+			if (xCoord1 <= xCoord2){
 				xStart = xCoord1;
 				xEnd = xCoord2;
 			}
@@ -101,7 +101,7 @@ public class Grid {
 				xEnd = xCoord1;
 			}
 			
-			if (yCoord1 < yCoord2){
+			if (yCoord1 <= yCoord2){
 				yStart = yCoord1;
 				yEnd = yCoord2;
 			}
@@ -110,7 +110,7 @@ public class Grid {
 				yEnd = yCoord1;
 			}
 			
-			for (int x = xStart - 1; x < xEnd; x++) {
+			for (int x = xStart; x < xEnd; x++) {
 			    for (int y = yStart; y < yEnd; y++) {
 			    	this.gridCells[x][y] = GridCell.Obstacle;
 			    }
