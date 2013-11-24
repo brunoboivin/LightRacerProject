@@ -16,7 +16,7 @@ public class MainFrame extends JFrame{
 	static CardLayout cardLayout;
 	static JPanel card = new JPanel();
 	private JPanel contentPane;
-	public LoginFrame loginFrame;
+//	public LoginPanel loginFrame;
 
 	/**
 	 * Launch the application.
@@ -39,24 +39,22 @@ public class MainFrame extends JFrame{
 	/**
 	 * Create the frame.
 	 */
-	public MainFrame(LoginFrame loginFrame, User userA, User userB) {
-
-		this.loginFrame = loginFrame;
+	public MainFrame(User userA, User userB) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = (JPanel) getContentPane();
 		card.setLayout(cardLayout = new CardLayout());
 		
-		
-
+		LoginPanel loginPanel = new LoginPanel();
 		MainMenuPanel mainMenuPanel = new MainMenuPanel(userA, userB);
 		TopTenPanel topTenPanel = new TopTenPanel();
 		
+		card.add("loginPanel", loginPanel);
 		card.add("mainMenuPanel", mainMenuPanel);
 		card.add("topTenPanel", topTenPanel);
 		
 		//default card 
-		cardLayout.show(card, "mainMenuPanel");
+		cardLayout.show(card, "loginPanel");
 		
 		//set contentPane to add static card panel
 		contentPane.add(card);

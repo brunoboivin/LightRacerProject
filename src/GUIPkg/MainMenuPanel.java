@@ -117,8 +117,7 @@ public class MainMenuPanel extends JPanel {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				((MainFrame) getTopLevelAncestor()).loginFrame.setVisible(true);
-				((MainFrame) getTopLevelAncestor()).setVisible(false);
+				((MainFrame) getTopLevelAncestor()).swapView("loginPanel");
 			}
 		});
 		btnBack.setBounds(10, 11, 77, 23);

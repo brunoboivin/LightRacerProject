@@ -22,7 +22,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class LoginFrame extends JFrame {
+public class LoginPanel extends JFrame {
 
 	private JPanel contentPane;
 	private JPasswordField passwordField1;
@@ -48,7 +48,7 @@ public class LoginFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginFrame frame = new LoginFrame();
+					LoginPanel frame = new LoginPanel();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,9 +61,9 @@ public class LoginFrame extends JFrame {
 	 * Create the frame.
 	 */
 	@SuppressWarnings("deprecation")
-	public LoginFrame() {
+	public LoginPanel() {
 
-		final LoginFrame param = this; //parameter passed to other frames
+		final LoginPanel param = this; //parameter passed to other frames
 		
 		diabledField = Color.LIGHT_GRAY;
 		usersLoggedIn = 0;
@@ -99,9 +99,9 @@ public class LoginFrame extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (btnMainMenu.isEnabled()) {
 					//TronGame tron = new TronGame(UserManagement.user2, UserManagement.user1);
-					MainFrame mainFrame = new MainFrame(param, UserManagement.user1, UserManagement.user2);
-					mainFrame.setVisible(true);
-					setVisible(false);
+					//MainFrame mainFrame = new MainFrame(param, UserManagement.user1, UserManagement.user2);
+					//mainFrame.setVisible(true);
+					//setVisible(false);
 				}
 			}
 		});
