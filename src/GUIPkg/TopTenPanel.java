@@ -52,7 +52,7 @@ public class TopTenPanel extends JPanel {
         }
         
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(10, 50, 388, 184);
+        scrollPane.setBounds(30, 61, 388, 184);
         container.add(scrollPane);	
 		
         
@@ -60,12 +60,12 @@ public class TopTenPanel extends JPanel {
 		JLabel lblTopPlayers = new JLabel("Top 10 Players");
 		lblTopPlayers.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTopPlayers.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblTopPlayers.setBounds(146, 11, 151, 42);
+		lblTopPlayers.setBounds(154, 7, 151, 42);
 		container.add(lblTopPlayers);
 		
 		//back button
 		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(10, 246, 89, 23);
+		btnBack.setBounds(30, 257, 89, 23);
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

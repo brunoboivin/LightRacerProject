@@ -420,6 +420,12 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 						resetGame();
 						//this.dispose();
 					}
+				else if(status.isRoundOver())
+				{
+					this.board.changeGrid(this);
+					this.board.repaint();
+					//resetGame();
+				}
 				break;
 			case KeyEvent.VK_ESCAPE:
 				if(status.isGameOver())

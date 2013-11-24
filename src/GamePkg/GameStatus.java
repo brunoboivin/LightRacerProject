@@ -130,7 +130,7 @@ public class GameStatus {
 				if(statUpdated!=true)
 				{	Statistics.update(tronGame.winnerIs(),tronGame.loserIs());
 					statUpdated=true;
-					System.out.println("saved");
+					//System.out.println("saved");
 					//this.tronGame.run();
 				}
 			}
