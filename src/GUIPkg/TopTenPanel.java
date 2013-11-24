@@ -69,7 +69,7 @@ public class TopTenPanel extends JPanel {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				((MainFrame) getTopLevelAncestor()).swapView("loginPanel");
+				((MainFrame) getTopLevelAncestor()).swapView("mainMenuPanel");
 			}
 		});
 		container.add(btnBack);

@@ -3,6 +3,7 @@ package StatisticsPkg;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import UserPkg.User;
 import CSVPkg.*;
 
 /** Class that runs and tests the other classes contained in the StatisticsPkg.
@@ -32,7 +33,12 @@ class Driver_Stats {
 		CSVHandler.write(pairRecords, StatisticsFiles.PAIR_RECORDS.getPath());
 		*/
 		 
+		//PRINT USERNAMES/PASSWORDS
+		ArrayList<User> users = (ArrayList<User>) CSVHandler.read("csv/user_data.csv");
 
+		for (User user : users){
+			System.out.println(user.username+": "+user.password);
+		}
 		
 		//PRINT EVERYTHING (PRINTS CONTENT OF BOTH CSV FILES)
 		/*
