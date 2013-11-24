@@ -1,91 +1,80 @@
 package GUIPkg;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import StatisticsPkg.PlayerRecord;
 import StatisticsPkg.Statistics;
 
-import java.awt.FlowLayout;
-import java.awt.CardLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.BoxLayout;
-
-
 public class TopTenPanel extends JPanel {
 
-	static JButton back = new JButton("Back");
-	
 	/**
 	 * Create the panel.
 	 */
 	public TopTenPanel() {
-		setLayout(new BorderLayout(0, 0));
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
-		JLabel topLabel = new JLabel("Top 10 Players");
-		topLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		topLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		topLabel.setBorder(new EmptyBorder(10,0,10,0));
-		add(topLabel, BorderLayout.NORTH);
-		
-		JPanel tablePanel = new JPanel();
-		tablePanel.setLayout(new GridLayout(1, 1));
-		
+		JPanel container = new JPanel();
+		container.setLayout(null);
+
 		//generate table
-		ArrayList<PlayerRecord> records = Statistics.getHighestScores();
-	    
-	    Object columnNames[] = {  "Rank", "Username", "Games Won", "Games Played" };
-	    Object rowData[][] = new Object [records.size()][columnNames.length];
-	    
-	    for (int j = 0; j < records.size(); j++){
-	    	PlayerRecord record = records.get(j);
-	    	rowData[j][0] = j+1;
-	    	rowData[j][1] = record.getUsername();
-	    	rowData[j][2] = record.getGamesWon();
-	    	rowData[j][3] = record.getGamesPlayed();
-	    }
-	    
-	    JTable table = new JTable(rowData, columnNames);
-	    table.getTableHeader().setFont(table.getTableHeader().getFont().deriveFont(Font.BOLD)); //makes table headers bold
-	    
-	    //center table data
-	    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-	    centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-	    
-	    for (int i=0; i < columnNames.length; i++){
-	    	table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-	    }
+        ArrayList<PlayerRecord> records = Statistics.getHighestScores();
+        
+        Object columnNames[] = {  "Rank", "Username", "Games Won", "Games Played" };
+        Object rowData[][] = new Object [records.size()][columnNames.length];
+        
+        for (int j = 0; j < records.size(); j++){
+                PlayerRecord record = records.get(j);
+                rowData[j][0] = j+1;
+                rowData[j][1] = record.getUsername();
+                rowData[j][2] = record.getGamesWon();
+                rowData[j][3] = record.getGamesPlayed();
+        }
+        
+        JTable table = new JTable(rowData, columnNames);
+        
+        //center table data
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        
+        for (int i=0; i < columnNames.length; i++){
+                table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(10, 50, 388, 184);
+        container.add(scrollPane);	
 		
-	    JScrollPane scrollPane = new JScrollPane(table);
-	    tablePanel.add(scrollPane);
-	    
-		add(tablePanel, BorderLayout.CENTER);
+        
+		//top label
+		JLabel lblTopPlayers = new JLabel("Top 10 Players");
+		lblTopPlayers.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTopPlayers.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblTopPlayers.setBounds(146, 11, 151, 42);
+		container.add(lblTopPlayers);
 		
-		
-		//button panel
-	    JPanel buttonPanel = new JPanel();
-	    buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-	    back.addMouseListener(new MouseAdapter() {
+		//back button
+		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(10, 246, 89, 23);
+		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//((MainFrame) getTopLevelAncestor()).swapView("loginPanel");
+				((MainFrame) getTopLevelAncestor()).swapView("loginPanel");
 			}
 		});
-	    buttonPanel.add(back);
-	    add(buttonPanel, BorderLayout.SOUTH);
+		container.add(btnBack);
+		
+		//add container to TopTen JPanel
+		add(container);
 	}
-
 }
