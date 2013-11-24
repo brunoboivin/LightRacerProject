@@ -1,5 +1,6 @@
 package GridPkg;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FileDialog;
@@ -59,180 +60,223 @@ import java.awt.FlowLayout;
 
 public class GridSelectorGUI extends JOptionPane {
 	
+	//Path to map file
 	private String selectedMapPath;
-	private Grid previewGrid;
 	
-	private JPanel panel;
-	private JPanel panelGridPreview;
+	//GUI swing elements
 	private JDialog dialog;
 	private JOptionPane optionPane;
 	
-	private FileDialog selectFile;
+	private JPanel mainPanel;
+	private JPanel previewContainerPanel;
 	
-	private JButton customMap;
+	private JPanel previewMap1;
+	private JPanel previewMap2;
+	private JPanel previewMap3;
+	private JPanel previewCustom;
 	
 	private JRadioButton map1;
 	private JRadioButton map2;
 	private JRadioButton map3;
+	private ButtonGroup buttonGroup;
 	
-	private JPanel[][] panelHolder;
+	private JButton customMap;
+		
+	private FileDialog selectFile;
+	//Set map names used throughout class
+	final private String MAP_NAME_1 = "map1";
+	final private String MAP_NAME_2 = "map2";
+	final private String MAP_NAME_3 = "map3";
+	final private String MAP_NAME_4 = "custom";
 
+	//Constructor
 	public GridSelectorGUI () {
-		this.previewGrid = new Grid();
-		initializeElements ();
+		
+		this.selectedMapPath = "maps/map1.txt";
+		initializeGUIElements ();
+		
+	}
+	
+	private void initializeGUIElements () {
+		
+		//Level 1 (Top Level): Load Dialog
+		this.dialog = null;
+
+		//Level 2: Load OptionPane (within Dialog)
+		this.optionPane = new JOptionPane();
+	    this.optionPane.setMessage("SELECT A MAP");
+//	    this.optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+	    this.optionPane.setOptionType(JOptionPane.DEFAULT_OPTION);
+//	    this.optionPane.setBackground(Color.BLACK);  
+
+	    //Level 3: Load Panels (within OptionPane)
+	    this.mainPanel = new JPanel();
+	    this.mainPanel.setOpaque(false);
+	    this.optionPane.add(mainPanel);
+	    
+	    this.previewContainerPanel = new JPanel(new CardLayout());
+	    this.previewContainerPanel.setBorder(BorderFactory.createLineBorder(Color.gray));
+	    this.previewContainerPanel.setBackground(Color.gray);
+	    this.optionPane.add(this.previewContainerPanel);
+	    
+	    //Level 4: Load Elements (within Panels)
+	    initializeSelection ();
 		initializePreview ();
+		
+		//Show everything after they have all been loaded
 		this.dialog = optionPane.createDialog(null, "MAPS"); 
 	    this.dialog.setVisible(true);
 	}
 	
-	private void initializeElements () {
+	private void initializeSelection (){
+		this.map1 = new JRadioButton(this.MAP_NAME_1);
+		this.mainPanel.add(this.map1);
 		
-		selectedMapPath = "maps/map1.txt";
+		this.map2 = new JRadioButton(this.MAP_NAME_2);
+		this.mainPanel.add(this.map2);
 		
-		//Level 1: Dialog
-		this.dialog = null;
-
-		//Level 2: OptionPane
-		this.optionPane = new JOptionPane();
-	    this.optionPane.setMessage("SELECT A MAP");
-	    this.optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-	    this.optionPane.setOptionType(JOptionPane.DEFAULT_OPTION);
-
-	    //Level 3: Panels
-	    this.panel = new JPanel();
-
-	    this.optionPane.add(panel);
-	    
-	    //Level 4: Elements within Panels
-	    loadSelection ();
-	    this.customMap = new JButton("Select File");
-	    this.selectFile = new FileDialog(this.dialog, "Select a map file");
-	    this.panel.add(this.customMap);
-
-		setSelectionActions ();
-	}
+		this.map3 = new JRadioButton(this.MAP_NAME_3);
+		this.mainPanel.add(this.map3);
 	
-	private void initializePreview (){
-		
-	    this.panelGridPreview = new JPanel();
-	    this.panelGridPreview.setLayout(new GridLayout(50,75,1,1));
-	    
-	    this.panelHolder = new JPanel[50][75];    
-	    
-	    for(int i = 0; i < panelHolder.length; i++) {
-	       for(int j = 0; j < panelHolder[i].length; j++) {
-	          panelHolder[i][j] = new JPanel();
-	          panelHolder[i][j].setBackground(Color.lightGray);
-	  	      panelGridPreview.add(panelHolder[i][j]);
-	       }
-	    }
-	    
-	    this.panelGridPreview.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	    this.optionPane.add(panelGridPreview);
-	    
-	    
-
-	}
-	
-	private void updatePreview (){
-		
-//		this.previewGrid.addObstacles(mapPath);
-////		GridCell[][] updatedCells = this.previewGrid.getGridCells();
-////		int updatedColCount = previewGrid.getGridCol();
-////		int updatedRowCount = previewGrid.getGridRow();
-//		
-//	    this.panelHolder = new JPanel[50][75];    
-//
-//	    for(int i = 0; i < panelHolder.length; i++) {
-//	       for(int j = 0; j < panelHolder[i].length; j++) {
-//	          panelHolder[i][j] = new JPanel();
-//	          if(i%2 ==0 && j%2==0){
-//	        	  panelHolder[i][j].setBackground(Color.red);
-//	          }
-//	          panelGridPreview.add(panelHolder[i][j]);
-//	       }
-//	    }
-//	    
-//	    this.optionPane.add(panelGridPreview);
-//	    myPanel.revalidate();
-//	    myPanel.repaint();
-//	 
-	}
-	
-
-	private void loadSelection (){
-		this.map1 = new JRadioButton("Map 1");
-		this.panel.add(this.map1);
-		
-		this.map2 = new JRadioButton("Map 2");
-		this.panel.add(this.map2);
-		
-		this.map3 = new JRadioButton("Map 3");
-		this.panel.add(this.map3);
-		
-		ButtonGroup buttonGroup = new ButtonGroup();
+		this.buttonGroup = new ButtonGroup();
 		buttonGroup.add(this.map1);
 		buttonGroup.add(this.map2);
 		buttonGroup.add(this.map3);
 		this.map1.setSelected(true);
-
+		
+		this.customMap = new JButton("Select File");
+		this.selectFile = new FileDialog(this.dialog, "Select a map file");
+	    
+	    setButtonActions (this.customMap, this.MAP_NAME_4);
+	    this.mainPanel.add(this.customMap);
+		
+		setButtonActions (this.map1, this.MAP_NAME_1);
+		setButtonActions (this.map2, this.MAP_NAME_2);
+		setButtonActions (this.map3, this.MAP_NAME_3);
 	}
+	
+	private void initializePreview (){
+	
+	    this.previewMap1 = new JPanel();
+	    this.previewMap1.setLayout(new GridLayout(50,75,1,1));
+	    this.previewMap1.setOpaque(false);
+	    this.previewMap2 = new JPanel();
+	    this.previewMap2.setLayout(new GridLayout(50,75,1,1));
+	    this.previewMap2.setOpaque(false);
+	    this.previewMap3 = new JPanel();
+	    this.previewMap3.setLayout(new GridLayout(50,75,1,1));
+	    this.previewMap3.setOpaque(false);
+	    
+	    createGridPreview (this.previewMap1, this.MAP_NAME_1, "maps/" + this.MAP_NAME_1 + ".txt");
+	    createGridPreview (this.previewMap2, this.MAP_NAME_2, "maps/" + this.MAP_NAME_2 + ".txt");
+	    createGridPreview (this.previewMap3, this.MAP_NAME_3, "maps/" + this.MAP_NAME_3 + ".txt");
+	}
+	
+	//Displays the Preview grid corresponding to the selected file
+	private void updateCustomPreview (String mapName){
+		this.buttonGroup.clearSelection();
+		
+		this.previewCustom = new JPanel();
+	    this.previewCustom.setLayout(new GridLayout(50,75,1,1));    
+	    this.previewCustom.setOpaque(false);
+	    
+	    createGridPreview (this.previewCustom, mapName, this.selectedMapPath);
 
-	private void setSelectionActions () {
-		this.map1.addActionListener(new ActionListener() {
-	    	@Override
-	        public void actionPerformed(ActionEvent e)
-	        {
-	            //Execute when pressed
-	    		setMap1Path ();
+		CardLayout cl = (CardLayout) previewContainerPanel.getLayout();
+		cl.show(previewContainerPanel, mapName);
+	}
+	
+	//Displays the Preview grid corresponding to the selected file
+	private void updatePreview (String mapName){
+		 CardLayout cl = (CardLayout) previewContainerPanel.getLayout();
+		 cl.show(previewContainerPanel, mapName);
+	}
+	
+	
+	private void createGridPreview (JPanel mapPreview, String mapName, String selectedMapPath) {
+	
+		Grid gridPreview = new Grid();
+	    gridPreview.addObstacles(selectedMapPath);
+	    GridCell[][] cellsPreview = gridPreview.getGridCells();
+		
+		int rowCount = gridPreview.getGridRow();
+		int colCount = gridPreview.getGridCol();
+		
+		JPanel[][] cellsToDisplay = new JPanel[colCount][rowCount];   
+	    
+    	for(int i = 0; i < colCount; i++) {
+ 	       for(int j = 0; j < rowCount; j++) {
+ 	    	  cellsToDisplay[i][j] = new JPanel();
+ 	          if(cellsPreview [i][j] == GridCell.Obstacle){
+ 	        	 cellsToDisplay[i][j].setBackground(Color.decode("#A8E2FF"));
+ 	          }
+ 	          else{
+ 	        	 cellsToDisplay[i][j].setBackground(Color.lightGray);
+ 	          }
+ 	    	  mapPreview.add(cellsToDisplay[i][j]);
+ 	       }  
+ 	    }
+		
+		JPanel[][] cellsToDisplayRotate = new JPanel[cellsToDisplay[0].length][cellsToDisplay.length];
+		
+		for(int i=0; i<cellsToDisplay[0].length; i++){
+	        for(int j=cellsToDisplay.length-1; j>=0; j--){
+	        	cellsToDisplayRotate[i][j] = cellsToDisplay[j][i];
 	        }
-	    });
-		this.map2.addActionListener(new ActionListener() {
+	    }
+
+    	for(int i = 0; i < cellsToDisplayRotate.length; i++) {
+   	       for(int j = 0; j < cellsToDisplayRotate[i].length; j++) {
+   	    	   mapPreview.add(cellsToDisplayRotate[i][j]);
+   	       }
+   	    }
+    	
+     	this.previewContainerPanel.add (mapPreview, mapName);
+	}
+	
+	
+	//Adds actions to perform when RADIO BUTTON is clicked by user
+	private void setButtonActions (JRadioButton button, String mapName) {
+		final String MAP_NAME = mapName; 
+		button.addActionListener(new ActionListener() {
 	    	@Override
-	        public void actionPerformed(ActionEvent e)
-	        {
-	            //Execute when pressed
-	    		setMap2Path ();
-	        }
-	    });
-		this.map3.addActionListener(new ActionListener() {
-	    	@Override
-	        public void actionPerformed(ActionEvent e)
-	        {
-	            //Execute when pressed
-	    		setMap3Path ();
-	    		updatePreview ();
-	        }
-	    });
-		this.customMap.addActionListener(new ActionListener() {
-	    	@Override
-	        public void actionPerformed(ActionEvent e)
-	        {
-	    		setCustomPath ();
+	        public void actionPerformed(ActionEvent e) {
+	    		setMapPath (MAP_NAME);
+	    		updatePreview (MAP_NAME);
 	        }
 	    });
 	}
 	
-	private void setMap1Path (){
-    	this.selectedMapPath = "maps/map1.txt";
+	//Adds actions to perform when BUTTON is clicked by user (overloaded)
+	private void setButtonActions (JButton button, String mapName) {
+		final String MAP_NAME = mapName; 
+		button.addActionListener(new ActionListener() {
+	    	@Override
+	        public void actionPerformed(ActionEvent e) {
+	    		setMapPath (MAP_NAME);
+	    		updateCustomPreview (MAP_NAME);
+	        }
+	    });
+	}
+	
+	//Saves the path corresponding to the selected file
+	private void setMapPath (String mapName){
+		if (mapName.equals(this.MAP_NAME_4)){
+			//selectFile.setDirectory("C:\\");
+			this.selectFile.setFile("*.txt");
+		    this.selectFile.setVisible(true);
+		    String directory = this.selectFile.getDirectory();
+		    String filename = this.selectFile.getFile();
+		    if (filename != null){
+		      this.selectedMapPath = (directory + filename);
+		    }		
+		}
+		else{
+			this.selectedMapPath = "maps/" + mapName + ".txt";
+		}
     }
-	private void setMap2Path (){
-    	this.selectedMapPath = "maps/map2.txt";
-    }
-	private void setMap3Path (){
-    	this.selectedMapPath = "maps/map3.txt";
-    }
-	private void setCustomPath (){
-	    this.selectFile.setDirectory("C:\\");
-	    this.selectFile.setFile("*.xml");
-	    this.selectFile.setVisible(true);
-	    String directory = this.selectFile.getDirectory();
-	    String filename = this.selectFile.getFile();
-	    if (filename != null){
-	      this.selectedMapPath = (directory + filename);
-	    }
-    }
-
+	
+	//getters
 	public String getSelectedMapPath (){
     	return this.selectedMapPath;
     }
