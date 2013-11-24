@@ -174,7 +174,6 @@ public class GridSelectorGUI extends JOptionPane {
 	
 	//Displays the Preview grid corresponding to the selected file
 	private void updateCustomPreview (String mapName){
-		this.buttonGroup.clearSelection();
 		
 		this.previewCustom = new JPanel();
 	    this.previewCustom.setLayout(new GridLayout(50,75,1,1));    
@@ -259,7 +258,10 @@ public class GridSelectorGUI extends JOptionPane {
 	    });
 	}
 	
-	//Saves the path corresponding to the selected file
+	/**
+	 * Saves the path corresponding to the selected file
+	 * @param mapName is the name of the map
+	 */
 	private void setMapPath (String mapName){
 		if (mapName.equals(this.MAP_NAME_4)){
 			//selectFile.setDirectory("C:\\");
@@ -267,13 +269,18 @@ public class GridSelectorGUI extends JOptionPane {
 		    this.selectFile.setVisible(true);
 		    String directory = this.selectFile.getDirectory();
 		    String filename = this.selectFile.getFile();
+		    
 		    if (filename != null){
-		      this.selectedMapPath = (directory + filename);
-		    }		
+		    	if(filename.endsWith(".txt")){
+				      this.selectedMapPath = (directory + filename);
+				      this.buttonGroup.clearSelection();
+				 }
+            }
 		}
 		else{
 			this.selectedMapPath = "maps/" + mapName + ".txt";
 		}
+//		System.out.println (this.getSelectedMapPath());
     }
 	
 	//getters
@@ -283,7 +290,6 @@ public class GridSelectorGUI extends JOptionPane {
 	
 	public static void main (String [] args){
 		GridSelectorGUI test = new GridSelectorGUI();
-		System.out.println (test.getSelectedMapPath());
 	}
 }
 
