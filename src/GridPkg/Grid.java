@@ -2,8 +2,6 @@ package GridPkg;
 
 import java.io.IOException;
 
-import GUIPkg.ChooseMapsDisplay;
-
 //import java.util.Vector;
 
 public class Grid {
