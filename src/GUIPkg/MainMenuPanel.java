@@ -41,7 +41,7 @@ public class MainMenuPanel extends JPanel {
 				TronGame tron = new TronGame(userA, userB);
 			}
 		});
-		btnNewButton.setBounds(166, 213, 112, 44);
+		btnNewButton.setBounds(179, 213, 112, 44);
 		panel.add(btnNewButton);
 		
 		JButton btnTopPlayers = new JButton("Top 10 Players");
@@ -122,7 +122,7 @@ public class MainMenuPanel extends JPanel {
 				((MainFrame) getTopLevelAncestor()).swapView("loginPanel");
 			}
 		});
-		btnBack.setBounds(39, 234, 121, 23);
+		btnBack.setBounds(27, 234, 121, 23);
 		panel.add(btnBack);
 
 	}
