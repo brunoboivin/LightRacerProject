@@ -71,6 +71,19 @@ public class GridPanel extends JPanel
 	}
 	
 	/**
+	 * 
+	 */
+	public void changeGrid(TronGame tron)
+	{
+		this.game = tron;
+		Grid grid = new Grid();
+		grid.promptMapSelection();
+		this.cells = grid.getGridCells();
+		this.COL_COUNT = grid.getGridCol();
+		this.ROW_COUNT = grid.getGridRow();
+	}
+	
+	/**
 	 * Sets the tile at the desired coordinate.
 	 * @param point The coordinate of the tile.
 	 * @param type The type to set the tile to.
