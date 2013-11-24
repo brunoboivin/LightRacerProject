@@ -14,6 +14,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainMenuPanel extends JPanel {
 
@@ -39,22 +41,22 @@ public class MainMenuPanel extends JPanel {
 				TronGame tron = new TronGame(userA, userB);
 			}
 		});
-		btnNewButton.setBounds(166, 213, 112, 44);
+		btnNewButton.setBounds(179, 213, 112, 44);
 		panel.add(btnNewButton);
 		
 		JButton btnTopPlayers = new JButton("Top 10 Players");
+		btnTopPlayers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnTopPlayers.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				((MainFrame)getTopLevelAncestor()).swapView("topTenPanel");
 			}
 		});
-		btnTopPlayers.setBounds(23, 224, 121, 23);
+		btnTopPlayers.setBounds(307, 234, 121, 23);
 		panel.add(btnTopPlayers);
-		
-		JButton btnChooseMaps = new JButton("Choose Maps");
-		btnChooseMaps.setBounds(307, 224, 112, 23);
-		panel.add(btnChooseMaps);
 		
 		JLabel lblPlayer = new JLabel(playerRecord1.getUsername());
 		lblPlayer.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -120,7 +122,7 @@ public class MainMenuPanel extends JPanel {
 				((MainFrame) getTopLevelAncestor()).swapView("loginPanel");
 			}
 		});
-		btnBack.setBounds(10, 11, 77, 23);
+		btnBack.setBounds(27, 234, 121, 23);
 		panel.add(btnBack);
 
 	}

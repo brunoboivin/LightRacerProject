@@ -1,19 +1,20 @@
 package GUIPkg;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Toolkit;
-import javax.swing.JFrame;
+
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+
 import org.apache.commons.lang3.StringUtils;
+
 import UserPkg.UserManagement;
+
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -22,9 +23,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class LoginPanel extends JFrame {
+public class LoginPanel extends JPanel {
 
-	private JPanel contentPane;
 	private JPasswordField passwordField1;
 	private JPasswordField passwordField2;
 	private JTextField usernameField1;
@@ -44,36 +44,33 @@ public class LoginPanel extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginPanel frame = new LoginPanel();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}			
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					LoginPanel frame = new LoginPanel();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}			
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
 	@SuppressWarnings("deprecation")
 	public LoginPanel() {
-
-		final LoginPanel param = this; //parameter passed to other frames
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
 		
 		diabledField = Color.LIGHT_GRAY;
 		usersLoggedIn = 0;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 400);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-
+		//setBounds(100, 100, 450, 400);
+		
 		passwordField1 = new JPasswordField();
 		passwordField1.setFocusTraversalKeysEnabled(false);
 		passwordField1.addKeyListener(new KeyAdapter() {
@@ -86,11 +83,11 @@ public class LoginPanel extends JFrame {
 	});
 		passwordField1.setBounds(109, 112, 84, 28);
 		enabledField = passwordField1.getBackground();
-		contentPane.add(passwordField1);
+		panel.add(passwordField1);
 
 		passwordField2 = new JPasswordField();
 		passwordField2.setBounds(333, 112, 84, 28);
-		contentPane.add(passwordField2);
+		panel.add(passwordField2);
 
 		btnMainMenu = new JButton("Go to main menu!");
 		btnMainMenu.setEnabled(false);
@@ -98,10 +95,9 @@ public class LoginPanel extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (btnMainMenu.isEnabled()) {
-					//TronGame tron = new TronGame(UserManagement.user2, UserManagement.user1);
-					//MainFrame mainFrame = new MainFrame(param, UserManagement.user1, UserManagement.user2);
-					//mainFrame.setVisible(true);
-					//setVisible(false);
+					MainFrame.mainMenuPanel = new MainMenuPanel(UserManagement.user1, UserManagement.user2);
+					((MainFrame) getTopLevelAncestor()).swapView("mainMenuPanel");
+					(MainFrame.deck).add("mainMenuPanel", MainFrame.mainMenuPanel);
 				}
 			}
 		});
@@ -111,7 +107,7 @@ public class LoginPanel extends JFrame {
 			}
 		});
 		btnMainMenu.setBounds(117, 295, 220, 45);
-		contentPane.add(btnMainMenu);
+		panel.add(btnMainMenu);
 
 		final JButton btnLoginPlayer1 = new JButton("Login player 1");
 		btnLoginPlayer1.addMouseListener(new MouseAdapter() {
@@ -162,7 +158,7 @@ public class LoginPanel extends JFrame {
 			}
 		});
 		btnLoginPlayer1.setBounds(6, 152, 187, 29);
-		contentPane.add(btnLoginPlayer1);
+		panel.add(btnLoginPlayer1);
 
 		final JButton btnLoginPlayer2 = new JButton("Login player 2");
 		btnLoginPlayer2.addMouseListener(new MouseAdapter() {
@@ -214,7 +210,7 @@ public class LoginPanel extends JFrame {
 			} 
 		});
 		btnLoginPlayer2.setBounds(241, 152, 187, 29);
-		contentPane.add(btnLoginPlayer2);
+		panel.add(btnLoginPlayer2);
 		
 		usernameField1 = new JTextField();
 		usernameField1.setFocusTraversalKeysEnabled(false);
@@ -228,7 +224,7 @@ public class LoginPanel extends JFrame {
 			}
 		});
 		usernameField1.setBounds(109, 72, 84, 28);
-		contentPane.add(usernameField1);
+		panel.add(usernameField1);
 		usernameField1.setColumns(10);
 
 		usernameField2 = new JTextField();
@@ -242,28 +238,28 @@ public class LoginPanel extends JFrame {
 			}
 		});
 		usernameField2.setBounds(333, 72, 84, 28);
-		contentPane.add(usernameField2);
+		panel.add(usernameField2);
 		usernameField2.setColumns(10);
 
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setBounds(22, 84, 85, 16);
-		contentPane.add(lblUsername);
+		panel.add(lblUsername);
 
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setBounds(22, 118, 81, 16);
-		contentPane.add(lblPassword);
+		panel.add(lblPassword);
 
 		lblUsername_1 = new JLabel("Username:");
 		lblUsername_1.setBounds(257, 78, 84, 16);
-		contentPane.add(lblUsername_1);
+		panel.add(lblUsername_1);
 
 		lblPassword_1 = new JLabel("Password:");
 		lblPassword_1.setBounds(257, 118, 84, 16);
-		contentPane.add(lblPassword_1);
+		panel.add(lblPassword_1);
 
 		lblIfYouDont = new JLabel("Click \"Register!\" if you don't have an account");
 		lblIfYouDont.setBounds(94, 206, 296, 16);
-		contentPane.add(lblIfYouDont);
+		panel.add(lblIfYouDont);
 
 		btnRegister = new JButton("Register!");
 		btnRegister.addMouseListener(new MouseAdapter() {
@@ -274,17 +270,13 @@ public class LoginPanel extends JFrame {
 			}
 		});
 		btnRegister.setBounds(168, 234, 117, 29);
-		contentPane.add(btnRegister);
+		panel.add(btnRegister);
 
 		lblLogin = new JLabel("Login");
 		lblLogin.setFont(new Font("Lucida Grande", Font.BOLD, 24));
 		lblLogin.setBounds(184, 16, 101, 45);
-		contentPane.add(lblLogin);
+		panel.add(lblLogin);
 		
-		//center frame
-	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-	    int x = (int) ((dimension.getWidth() - getWidth()) / 2);
-	    int y = (int) ((dimension.getHeight() - getHeight()) / 2);
-	    setLocation(x, y);
+		add(panel);
 	}
 }
