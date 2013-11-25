@@ -36,6 +36,11 @@ public class LoginPanel extends JPanel {
 	private JButton btnRegister;
 	private JLabel lblLogin;
 	private JButton btnMainMenu;
+	
+	private static final Font SMALL_FONT = new Font("STARWARS", Font.PLAIN, 18);
+	private static final Font LARGE_FONT = new Font("STARWARS", Font.BOLD, 25);
+	
+	
 	int usersLoggedIn = 0;
 	boolean btn1AsLogout = false;
 	boolean btn2AsLogout = false;
@@ -106,7 +111,7 @@ public class LoginPanel extends JPanel {
 				}
 			}
 		});
-		btnMainMenu.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		btnMainMenu.setFont(SMALL_FONT);
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -290,7 +295,7 @@ public class LoginPanel extends JPanel {
 		panel.add(btnRegister);
 
 		lblLogin = new JLabel("Login");
-		lblLogin.setFont(new Font("Lucida Grande", Font.BOLD, 24));
+		lblLogin.setFont(LARGE_FONT);
 		lblLogin.setBounds(184, 16, 101, 45);
 		panel.add(lblLogin);
 
