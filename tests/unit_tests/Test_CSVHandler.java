@@ -1,17 +1,12 @@
 package unit_tests;
 
 import static org.junit.Assert.*;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Hashtable;
-
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-
 import CSVPkg.CSVHandler;
 import StatisticsPkg.PlayerRecord;
 import UserPkg.User;
