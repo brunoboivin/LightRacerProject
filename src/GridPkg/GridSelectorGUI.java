@@ -2,61 +2,18 @@ package GridPkg;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FileDialog;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
-
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
-import org.apache.commons.lang3.StringUtils;
-
-import GameGuiPkg.GridPanel;
-import GameGuiPkg.SidePanel;
-import GamePkg.GameStatus;
-import GamePkg.TronGame;
-import GridPkg.GridFileLoader;
-import UserPkg.User;
-import UserPkg.UserManagement;
-import UserPkg.login_frame;
-import UserPkg.register_frame;
-import javax.swing.JSplitPane;
-import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import javax.swing.BoxLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import java.awt.FlowLayout;
 
 public class GridSelectorGUI extends JOptionPane {
 	
@@ -174,7 +131,6 @@ public class GridSelectorGUI extends JOptionPane {
 	
 	//Displays the Preview grid corresponding to the selected file
 	private void updateCustomPreview (String mapName){
-		this.buttonGroup.clearSelection();
 		
 		this.previewCustom = new JPanel();
 	    this.previewCustom.setLayout(new GridLayout(50,75,1,1));    
@@ -259,7 +215,10 @@ public class GridSelectorGUI extends JOptionPane {
 	    });
 	}
 	
-	//Saves the path corresponding to the selected file
+	/**
+	 * Saves the path corresponding to the selected file
+	 * @param mapName is the name of the map
+	 */
 	private void setMapPath (String mapName){
 		if (mapName.equals(this.MAP_NAME_4)){
 			//selectFile.setDirectory("C:\\");
@@ -267,13 +226,18 @@ public class GridSelectorGUI extends JOptionPane {
 		    this.selectFile.setVisible(true);
 		    String directory = this.selectFile.getDirectory();
 		    String filename = this.selectFile.getFile();
+		    
 		    if (filename != null){
-		      this.selectedMapPath = (directory + filename);
-		    }		
+		    	if(filename.endsWith(".txt")){
+				      this.selectedMapPath = (directory + filename);
+				      this.buttonGroup.clearSelection();
+				 }
+            }
 		}
 		else{
 			this.selectedMapPath = "maps/" + mapName + ".txt";
 		}
+//		System.out.println (this.getSelectedMapPath());
     }
 	
 	//getters
@@ -283,7 +247,5 @@ public class GridSelectorGUI extends JOptionPane {
 	
 	public static void main (String [] args){
 		GridSelectorGUI test = new GridSelectorGUI();
-		System.out.println (test.getSelectedMapPath());
 	}
 }
-
