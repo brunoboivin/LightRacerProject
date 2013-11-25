@@ -4,12 +4,24 @@ import java.util.ArrayList;
 import org.apache.commons.lang3.StringUtils;
 import CSVPkg.CSVHandler;
 
-
+/** Class used for managing user accounts.
+ * 
+ * @author Anita Szilagyi <anita.szilagyi@mail.mcgill.ca>
+ * @version 1.0
+ * @since 2013-11-08
+ */
 public class UserManagement 
 {
 	public static User user1;
 	public static User user2;
 	
+	/**
+	 * Checks if the password introduced by a user attempting
+	 * to register respects the requirements.
+	 * 
+	 * @param password the password to be checked
+	 * @return boolean the result of the password check (true = password meets requirements; false = password does not meet requirements)
+	 */
 	public static boolean checkPasswordRequirements(String password) {
 	
 		String numbers = "0123456789";
@@ -32,6 +44,14 @@ public class UserManagement
 		return (hasUpperCase && hasLowerCase && hasDigit && hasNonAlphanumeric && hasProperLength);
 	}
 	
+	/**
+	 * Logically logs in the user that has entered his/her credentials.
+	 * 
+	 * @param userNumber integer used to identify which one of the two players to instantiate (i.e. left or right)
+	 * 		  username the username of the user attempting to log in
+	 *        password the password of the user attempting to log in
+	 * @return number representing the result of the login (0 = success; 1 = wrong password; 2 = username not found; 3 = user already logged in)
+	 */
 	public static int login(int userNumber, String username, String password) {
 
 		ArrayList<User> users = new ArrayList<User>();
@@ -61,6 +81,11 @@ public class UserManagement
 		return 2; // username not found
 	}
 
+	/**
+	 * Logically logs out a user
+	 * 
+	 * @param user the user that has clicked on the "Logout" button in the GUI
+	 */
 	public static void logout (User user) {
 		if (user1 != null) {
 			user1 = null;
@@ -69,6 +94,13 @@ public class UserManagement
 		}
 	}
 
+	/**
+	 * Registers a user into the system
+	 * 
+	 * @param username the username of choice
+	 * 		  password the password or the user
+	 * @return number representing the result of the register (0 = success; 1 = username taken; 2 = password requirements not met; 3 = error in creating user)
+	 */
 	public static int registerUser(String username, String password) {
 		
 		// read the list first to make sure the username isn't taken
