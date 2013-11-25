@@ -80,7 +80,7 @@ public class UserManagement
 					if (userNumber == 1) {
 						
 						// Check to see if the user is already logged in
-						if ((user1 != null) && ((user1.getUsername())).equals(username)) {
+						if ((user2 != null) && ((user2.getUsername())).equals(username)) {
 							return UserLoginStatus.UserLoggedIn; 
 						}
 						// If this part is reached, a new user can be created
@@ -88,7 +88,7 @@ public class UserManagement
 					}
 					// Same check is done as above in case user 2 is trying to log in
 					if (userNumber == 2) {
-						if ((user2 != null) && ((user2.getUsername())).equals(username)) {
+						if ((user1 != null) && ((user1.getUsername())).equals(username)) {
 							return UserLoginStatus.UserLoggedIn;
 						}
 						user2 = new User(username, password);					
@@ -164,11 +164,13 @@ public class UserManagement
 		users = (ArrayList<User>) CSVHandler.read("csv/user_data.csv");
 		for (User user : users) {
 			if ((user.getUsername()).equals(username)) {
-				return UserRegistrationStatus.FileError; 
+				return UserRegistrationStatus.Success; 
 			}
 		}
 		
-		// If this point is reached it means that the user was able to successfully create a new account
-		return UserRegistrationStatus.Success;
+		/* If this point is reached it means that the recently created user was not found
+		 * in the user_data.csv file
+		 */
+		return UserRegistrationStatus.FileError;
 	}
 }
