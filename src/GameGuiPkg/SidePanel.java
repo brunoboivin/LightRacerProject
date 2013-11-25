@@ -58,7 +58,8 @@ public class SidePanel extends JPanel {
 	
 	private static final int MESSAGE_STRIDE = 40;
 	
-	private static final int SIDE_OFFSET = 30;
+	private static final int SIDE_OFFSET = 20;
+	private int WIDTH=305;
 	
 	/**
 	 * The small font to draw with.
@@ -76,7 +77,7 @@ public class SidePanel extends JPanel {
 		
 		this.game = game;
 		
-		setPreferredSize(new Dimension(310, height* GridPanel.TILE_SIZE));
+		setPreferredSize(new Dimension(WIDTH, height* GridPanel.TILE_SIZE));
 		setBackground(new Color(211, 211, 211));
 		setLayout(null);
 		
@@ -90,7 +91,7 @@ public class SidePanel extends JPanel {
 		
 		
 		JLabel lblLightBattles = DefaultComponentFactory.getInstance().createTitle("Light Battles");
-		lblLightBattles.setBounds(0, 0, 310, 50);
+		lblLightBattles.setBounds(0, 0, WIDTH, 50);
 		add(lblLightBattles);
 		lblLightBattles.setForeground(TEXT_COLOR);
 		lblLightBattles.setHorizontalAlignment(SwingConstants.CENTER);
@@ -98,7 +99,7 @@ public class SidePanel extends JPanel {
 		
 		
 		this.layeredPane = new JLayeredPane();
-		layeredPane.setBounds(0, 90, 310, 300);
+		layeredPane.setBounds(0, 90, WIDTH, 300);
 		add(layeredPane);
 		layeredPane.setLayout(new MigLayout("", "[][][][]", "[][][][][][][][]"));
 		

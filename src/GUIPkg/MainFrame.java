@@ -14,9 +14,9 @@ import GridPkg.GridSelectorGUI;
 
 public class MainFrame extends JFrame{
 
-	static MainMenuPanel mainMenuPanel;
+	public static MainMenuPanel mainMenuPanel;
 	static CardLayout cardLayout;
-	static JPanel deck = new JPanel();
+	public static JPanel deck = new JPanel();
 	private JPanel contentPane;
 //	public LoginPanel loginFrame;
 
@@ -51,6 +51,9 @@ public class MainFrame extends JFrame{
 		
 		deck.add("loginPanel", loginPanel);
 //		deck.add("mainMenuPanel", mainMenuPanel);
+//		if (mainMenuPanel != null && mainMenuPanel.isFocusOwner()) {
+//			mainMenuPanel.revalidate();
+//		}
 		deck.add("topTenPanel", topTenPanel);
 		
 		//default card 

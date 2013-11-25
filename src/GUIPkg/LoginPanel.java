@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 
 import org.apache.commons.lang3.StringUtils;
 
+import UserPkg.UserLoginStatus;
 import UserPkg.UserManagement;
 
 import java.awt.Font;
@@ -38,24 +39,8 @@ public class LoginPanel extends JPanel {
 	int usersLoggedIn = 0;
 	boolean btn1AsLogout = false;
 	boolean btn2AsLogout = false;
-	int loginResult;
+	UserLoginStatus loginResult;
 	Color diabledField, enabledField;
-
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					LoginPanel frame = new LoginPanel();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}			
-//		});
-//	}
 
 	/**
 	 * Create the frame.
@@ -63,29 +48,49 @@ public class LoginPanel extends JPanel {
 	@SuppressWarnings("deprecation")
 	public LoginPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		
+
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		
+
 		diabledField = Color.LIGHT_GRAY;
 		usersLoggedIn = 0;
-		//setBounds(100, 100, 450, 400);
-		
+
 		passwordField1 = new JPasswordField();
 		passwordField1.setFocusTraversalKeysEnabled(false);
 		passwordField1.addKeyListener(new KeyAdapter() {
-		@Override
-		public void keyPressed(KeyEvent key) {
-			if (key.getKeyCode() == KeyEvent.VK_TAB) {
-				usernameField1.transferFocus();
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_TAB) {
+					if ((e.getModifiers() & ActionEvent.SHIFT_MASK) == ActionEvent.SHIFT_MASK) {
+						btnRegister.transferFocus();
+					} else {
+						if (usernameField2.isEnabled()) {
+							usernameField1.transferFocus();
+						} else {
+							passwordField2.transferFocus();
+						}
+					}
+				}
 			}
-		}
-	});
+		});
 		passwordField1.setBounds(109, 112, 84, 28);
 		enabledField = passwordField1.getBackground();
 		panel.add(passwordField1);
 
 		passwordField2 = new JPasswordField();
+		passwordField2.setFocusTraversalKeysEnabled(false);
+		passwordField2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent key) {
+				if (key.getKeyCode() == KeyEvent.VK_TAB) {
+					if ((key.getModifiers() & ActionEvent.SHIFT_MASK) == ActionEvent.SHIFT_MASK) {
+						usernameField1.transferFocus();
+					} else {
+						passwordField2.transferFocus();
+					}
+				}
+			}
+		});
 		passwordField2.setBounds(333, 112, 84, 28);
 		panel.add(passwordField2);
 
@@ -96,8 +101,8 @@ public class LoginPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				if (btnMainMenu.isEnabled()) {
 					MainFrame.mainMenuPanel = new MainMenuPanel(UserManagement.user1, UserManagement.user2);
-					((MainFrame) getTopLevelAncestor()).swapView("mainMenuPanel");
 					(MainFrame.deck).add("mainMenuPanel", MainFrame.mainMenuPanel);
+					((MainFrame) getTopLevelAncestor()).swapView("mainMenuPanel");
 				}
 			}
 		});
@@ -120,16 +125,16 @@ public class LoginPanel extends JPanel {
 					} else {		
 						loginResult = UserManagement.login(1, usernameField1.getText(), (passwordField1.getText()));
 						switch (loginResult) {
-						case 3: JOptionPane.showMessageDialog(null, "User already logged in!", "Error",
+						case UserLoggedIn: JOptionPane.showMessageDialog(null, "User already logged in!", "Error",
 								JOptionPane.ERROR_MESSAGE);
 						break;
-						case 2: JOptionPane.showMessageDialog(null, "Username not found.", "Warning",
+						case UsernameNotFound: JOptionPane.showMessageDialog(null, "Username not found.", "Warning",
 								JOptionPane.WARNING_MESSAGE);
 						break;
-						case 1: JOptionPane.showMessageDialog(null, "Provided username and password combination is invalid!", "Error",
+						case WrongPassword: JOptionPane.showMessageDialog(null, "Provided username and password combination is invalid!", "Error",
 								JOptionPane.ERROR_MESSAGE);
 						break;
-						case 0: btnLoginPlayer1.setText("Logout " + usernameField1.getText());
+						case Success: btnLoginPlayer1.setText("Logout " + usernameField1.getText());
 						btn1AsLogout = true;
 						usernameField1.setEnabled(false);
 						passwordField1.setEnabled(false);
@@ -140,7 +145,6 @@ public class LoginPanel extends JPanel {
 						passwordField1.setText("");
 						break;
 						}
-						loginResult = 5;
 						if (usersLoggedIn == 2) {
 							btnMainMenu.setEnabled(true);
 						}
@@ -151,6 +155,7 @@ public class LoginPanel extends JPanel {
 					usernameField1.setBackground(enabledField);
 					passwordField1.setBackground(enabledField);
 					usersLoggedIn--;
+					btnMainMenu.setEnabled(false);
 					btn1AsLogout = false;
 					usernameField1.setEnabled(true);
 					passwordField1.setEnabled(true);
@@ -171,17 +176,16 @@ public class LoginPanel extends JPanel {
 					} else {		
 						loginResult = UserManagement.login(2, usernameField2.getText(), (passwordField2.getText()));
 						switch (loginResult) {
-						case 3: JOptionPane.showMessageDialog(null, "User already logged in!", "Error",
+						case UserLoggedIn: JOptionPane.showMessageDialog(null, "User already logged in!", "Error",
 								JOptionPane.ERROR_MESSAGE);
 						break;
-						case 2: JOptionPane.showMessageDialog(null, "Username not found.", "Warning",
+						case UsernameNotFound: JOptionPane.showMessageDialog(null, "Username not found.", "Warning",
 								JOptionPane.WARNING_MESSAGE);
 						break;
-						case 1: JOptionPane.showMessageDialog(null, "Provided username and password combination is invalid.", "Error",
+						case WrongPassword: JOptionPane.showMessageDialog(null, "Provided username and password combination is invalid.", "Error",
 								JOptionPane.ERROR_MESSAGE);
 						break;
-						case 0: btnLoginPlayer2.setText("Logout " + usernameField2.getText());
-						//btnLoginPlayer2.sets
+						case Success: btnLoginPlayer2.setText("Logout " + usernameField2.getText());
 						btn2AsLogout = true;
 						usernameField2.setEnabled(false);
 						passwordField2.setEnabled(false);
@@ -192,7 +196,6 @@ public class LoginPanel extends JPanel {
 						usersLoggedIn++;
 						break;
 						}
-						loginResult = 5;
 						if (usersLoggedIn == 2) {
 							btnMainMenu.setEnabled(true);
 						}
@@ -202,6 +205,7 @@ public class LoginPanel extends JPanel {
 					usernameField2.setBackground(enabledField);
 					passwordField2.setBackground(enabledField);
 					usersLoggedIn--;
+					btnMainMenu.setEnabled(false);
 					btn2AsLogout = false;
 					btnLoginPlayer2.setText("Login player 2");
 					usernameField2.setEnabled(true);
@@ -211,16 +215,21 @@ public class LoginPanel extends JPanel {
 		});
 		btnLoginPlayer2.setBounds(241, 152, 187, 29);
 		panel.add(btnLoginPlayer2);
-		
+
 		usernameField1 = new JTextField();
 		usernameField1.setFocusTraversalKeysEnabled(false);
 		usernameField1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent key) {
+
 				if (key.getKeyCode() == KeyEvent.VK_TAB) {
-					//passwordField1.setEnabled(true);
-					usernameField2.transferFocus();
+					if ((key.getModifiers() & ActionEvent.SHIFT_MASK) == ActionEvent.SHIFT_MASK) {
+						btnLoginPlayer2.transferFocus();
+					} else {
+						usernameField2.transferFocus();
+					}
 				}
+
 			}
 		});
 		usernameField1.setBounds(109, 72, 84, 28);
@@ -233,7 +242,15 @@ public class LoginPanel extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent key) {
 				if (key.getKeyCode() == KeyEvent.VK_TAB) {
-					passwordField1.transferFocus();
+					if ((key.getModifiers() & ActionEvent.SHIFT_MASK) == ActionEvent.SHIFT_MASK) {
+						if (passwordField1.isEnabled()) {
+							usernameField2.transferFocus();
+						} else {
+							btnLoginPlayer2.transferFocus();
+						}
+					} else {
+						passwordField1.transferFocus();
+					}
 				}
 			}
 		});
@@ -276,7 +293,7 @@ public class LoginPanel extends JPanel {
 		lblLogin.setFont(new Font("Lucida Grande", Font.BOLD, 24));
 		lblLogin.setBounds(184, 16, 101, 45);
 		panel.add(lblLogin);
-		
+
 		add(panel);
 	}
 }

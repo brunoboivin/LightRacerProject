@@ -79,7 +79,6 @@ public class Test_CSVHandler {
 		assertTrue( record.getGamesWon() == recordRead.getGamesWon() );
 		assertTrue( record.getGamesPlayed() == recordRead.getGamesPlayed() );
 		
-		assertTrue( user.loggedIn == userRead.loggedIn );
 		assertTrue( user.password.equals(userRead.password));
 		assertTrue( user.username.equals(userRead.username));
 	}
@@ -109,7 +108,6 @@ public class Test_CSVHandler {
 		assertTrue( record.getGamesPlayed() == recordRead.getGamesPlayed() );
 		assertTrue( record.getGamesWon() == recordRead.getGamesWon() );
 		
-		assertTrue( user.loggedIn == userRead.loggedIn );
 		assertTrue( user.password.equals(userRead.password) );
 		assertTrue( user.username.equals(userRead.username) );
 	}

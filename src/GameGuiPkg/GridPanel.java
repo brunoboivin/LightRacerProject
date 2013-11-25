@@ -161,58 +161,76 @@ public class GridPanel extends JPanel
 		 */
 		if( (game.status.isGameOver()) || (game.status.isNewGame()) || (game.status.isPaused()) || (game.status.isRoundOver())) 
 		{
-			g.setColor(TEXT_COLOR);
+			
 			
 			/*
 			 * Get the center coordinates of the board.
 			 */
 			int centerX = getWidth() / 2;
 			int centerY = getHeight() / 2;
+			//System.out.println("x :"+centerX+" y: "+centerY);
+			//g.drawRect (315, 200, 345, 250);
+			//g.setColor(Color.GRAY);
 			
+			g.setColor(Color.WHITE);
+			
+			g.fillRect(200, centerY-200, 575, 325);
 			/*
 			 * Allocate the messages for and set their values based on the game
 			 * state.
 			 */
-			String largeMessage = null;
-			String smallMessage = null;
-			String gameMessage=null;
+			g.setColor(TEXT_COLOR);
+			g.drawRect(200, centerY-200, 575, 325);
+			String headerMsg ="";
+			String gameMsg ="";
+			String roundMsg	="Round ";
+			String spaceMsg ="SPACE : ";
+			String enterMsg ="ENTER : Change the Map";
+			String escMsg ="";
+			
 			if(game.status.isNewGame()) 
 			{
-				largeMessage = "Tron Game!";
-				smallMessage = "Press Enter to Start";
+				headerMsg	="Welcome!";
+				spaceMsg=spaceMsg+"Start the game";
+				roundMsg=roundMsg+game.status.getRoundNumber();
 			} 
 			else if (game.status.isRoundOver())
 			{
 				if (game.roundWinner()=="")
-					gameMessage= "Tie";
+					gameMsg= "It's a Tie";
 				else
-					gameMessage=game.roundWinner()+" Won this round";
-				largeMessage = "Round"+game.status.getRoundNumber()+" is over";
-				smallMessage = "Press Enter to start the next round";
+					gameMsg=game.roundWinner()+" won this round";
+				roundMsg =roundMsg+game.status.getRoundNumber()+" is over";
+				spaceMsg=spaceMsg+"Start the next Round";
+				//smallMessage = "Press Enter to start the next round";
 				
 			}
 			else if(game.status.isGameOver()) 
 			{
-				gameMessage=game.winnerIs()+" Won :) *****"+game.loserIs()+" Lost :(";
-				largeMessage = "Game Over!";
-				smallMessage ="Press SPACE to play Again or ESC to go back to the Main Menu";
+				gameMsg=game.winnerIs()+ "is the WINNER !";
+				roundMsg = "Game Over!";
+				spaceMsg=spaceMsg+"Play again";
+				escMsg ="ESC : Go back to the Main Menu ";
+				//smallMessage ="Press SPACE to play Again or ESC to go back to the Main Menu";
 			} 
 			else if(game.status.isPaused()) 
 			{
-				largeMessage = "Paused";
-				smallMessage = "Press P to Resume";
+				headerMsg = "Paused";
+				spaceMsg="";
+				enterMsg="";
+				roundMsg= "P : Resume";
 			}
 			
 			/*
 			 * Set the message font and draw the messages in the center of the board.
 			 */
 			g.setFont(FONT);
-			if (gameMessage != null)
-			{	
-				g.drawString(gameMessage, centerX - g.getFontMetrics().stringWidth(gameMessage) / 2, centerY-50 );
-			}
-			g.drawString(largeMessage, centerX - g.getFontMetrics().stringWidth(largeMessage) / 2, centerY);
-			g.drawString(smallMessage, centerX - g.getFontMetrics().stringWidth(smallMessage) / 2, centerY + 50);
+			g.drawString(headerMsg, centerX - g.getFontMetrics().stringWidth(headerMsg) / 2, centerY-150 );
+			g.drawString(gameMsg, centerX - g.getFontMetrics().stringWidth(gameMsg) / 2, centerY-100 );
+			g.drawString(roundMsg, centerX - g.getFontMetrics().stringWidth(roundMsg) / 2, centerY-50 );
+			g.drawString(enterMsg, centerX - g.getFontMetrics().stringWidth(enterMsg) / 2, centerY );
+			g.drawString(spaceMsg, centerX - g.getFontMetrics().stringWidth(spaceMsg) / 2, centerY+50);
+			g.drawString(escMsg, centerX - g.getFontMetrics().stringWidth(escMsg) / 2, centerY+100 );
 		}
 	}
 	

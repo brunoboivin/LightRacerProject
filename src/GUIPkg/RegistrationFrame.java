@@ -1,23 +1,30 @@
 package GUIPkg;
 
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import org.apache.commons.lang3.StringUtils;
+
 import UserPkg.UserManagement;
+import UserPkg.UserRegistrationStatus;
 
 public class RegistrationFrame extends JFrame {
 
-	public int registerResult;
+	public UserRegistrationStatus registerResult;
 
 	private JPanel contentPane;
 	private JPasswordField passwordField;
@@ -68,18 +75,18 @@ public class RegistrationFrame extends JFrame {
 						} else {
 							registerResult = UserManagement.registerUser(usernameField.getText(), (passwordField.getText()));
 							switch (registerResult) {
-							case 3: JOptionPane.showMessageDialog(null, "Success!");
+							case Success: JOptionPane.showMessageDialog(null, "Success!");
 							        dispose();
 									break;
-							case 2: JOptionPane.showMessageDialog(null, "Password must be at least 8 characters, "
+							case BadPassword: JOptionPane.showMessageDialog(null, "Password must be at least 8 characters, "
 											+ "have at least \none upper case and one lower case letter, "
 											+ "a digit and \na special character (i.e. ~!@#$%^&*()_+=-.,<>?{}[];)",
 											"Error", JOptionPane.ERROR_MESSAGE);
 									break;
-							case 1: JOptionPane.showMessageDialog(null, "Username already in use!", "Error",
+							case UsernameTaken: JOptionPane.showMessageDialog(null, "Username already in use!", "Error",
 										JOptionPane.ERROR_MESSAGE);
 									break;
-							case 0: JOptionPane.showMessageDialog(null, "Attempt failed, try again!", "Error",
+							case FileError: JOptionPane.showMessageDialog(null, "Attempt failed, try again!", "Error",
 										JOptionPane.ERROR_MESSAGE);
 									break;
 							}
