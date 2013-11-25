@@ -42,50 +42,54 @@ public class LoginPanel extends JPanel {
 	Color diabledField, enabledField;
 
 	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					LoginPanel frame = new LoginPanel();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}			
-//		});
-//	}
-
-	/**
 	 * Create the frame.
 	 */
 	@SuppressWarnings("deprecation")
 	public LoginPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		
+
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		
+
 		diabledField = Color.LIGHT_GRAY;
 		usersLoggedIn = 0;
-		//setBounds(100, 100, 450, 400);
-		
+
 		passwordField1 = new JPasswordField();
 		passwordField1.setFocusTraversalKeysEnabled(false);
 		passwordField1.addKeyListener(new KeyAdapter() {
-		@Override
-		public void keyPressed(KeyEvent key) {
-			if (key.getKeyCode() == KeyEvent.VK_TAB) {
-				usernameField1.transferFocus();
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_TAB) {
+					if ((e.getModifiers() & ActionEvent.SHIFT_MASK) == ActionEvent.SHIFT_MASK) {
+						btnRegister.transferFocus();
+					} else {
+						if (usernameField2.isEnabled()) {
+							usernameField1.transferFocus();
+						} else {
+							passwordField2.transferFocus();
+						}
+					}
+				}
 			}
-		}
-	});
+		});
 		passwordField1.setBounds(109, 112, 84, 28);
 		enabledField = passwordField1.getBackground();
 		panel.add(passwordField1);
 
 		passwordField2 = new JPasswordField();
+		passwordField2.setFocusTraversalKeysEnabled(false);
+		passwordField2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent key) {
+				if (key.getKeyCode() == KeyEvent.VK_TAB) {
+					if ((key.getModifiers() & ActionEvent.SHIFT_MASK) == ActionEvent.SHIFT_MASK) {
+						usernameField1.transferFocus();
+					} else {
+						passwordField2.transferFocus();
+					}
+				}
+			}
+		});
 		passwordField2.setBounds(333, 112, 84, 28);
 		panel.add(passwordField2);
 
@@ -96,8 +100,8 @@ public class LoginPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				if (btnMainMenu.isEnabled()) {
 					MainFrame.mainMenuPanel = new MainMenuPanel(UserManagement.user1, UserManagement.user2);
-					((MainFrame) getTopLevelAncestor()).swapView("mainMenuPanel");
 					(MainFrame.deck).add("mainMenuPanel", MainFrame.mainMenuPanel);
+					((MainFrame) getTopLevelAncestor()).swapView("mainMenuPanel");
 				}
 			}
 		});
@@ -151,6 +155,7 @@ public class LoginPanel extends JPanel {
 					usernameField1.setBackground(enabledField);
 					passwordField1.setBackground(enabledField);
 					usersLoggedIn--;
+					btnMainMenu.setEnabled(false);
 					btn1AsLogout = false;
 					usernameField1.setEnabled(true);
 					passwordField1.setEnabled(true);
@@ -202,6 +207,7 @@ public class LoginPanel extends JPanel {
 					usernameField2.setBackground(enabledField);
 					passwordField2.setBackground(enabledField);
 					usersLoggedIn--;
+					btnMainMenu.setEnabled(false);
 					btn2AsLogout = false;
 					btnLoginPlayer2.setText("Login player 2");
 					usernameField2.setEnabled(true);
@@ -211,16 +217,21 @@ public class LoginPanel extends JPanel {
 		});
 		btnLoginPlayer2.setBounds(241, 152, 187, 29);
 		panel.add(btnLoginPlayer2);
-		
+
 		usernameField1 = new JTextField();
 		usernameField1.setFocusTraversalKeysEnabled(false);
 		usernameField1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent key) {
+
 				if (key.getKeyCode() == KeyEvent.VK_TAB) {
-					//passwordField1.setEnabled(true);
-					usernameField2.transferFocus();
+					if ((key.getModifiers() & ActionEvent.SHIFT_MASK) == ActionEvent.SHIFT_MASK) {
+						btnLoginPlayer2.transferFocus();
+					} else {
+						usernameField2.transferFocus();
+					}
 				}
+
 			}
 		});
 		usernameField1.setBounds(109, 72, 84, 28);
@@ -233,7 +244,15 @@ public class LoginPanel extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent key) {
 				if (key.getKeyCode() == KeyEvent.VK_TAB) {
-					passwordField1.transferFocus();
+					if ((key.getModifiers() & ActionEvent.SHIFT_MASK) == ActionEvent.SHIFT_MASK) {
+						if (passwordField1.isEnabled()) {
+							usernameField2.transferFocus();
+						} else {
+							btnLoginPlayer2.transferFocus();
+						}
+					} else {
+						passwordField1.transferFocus();
+					}
 				}
 			}
 		});
@@ -276,7 +295,7 @@ public class LoginPanel extends JPanel {
 		lblLogin.setFont(new Font("Lucida Grande", Font.BOLD, 24));
 		lblLogin.setBounds(184, 16, 101, 45);
 		panel.add(lblLogin);
-		
+
 		add(panel);
 	}
 }
