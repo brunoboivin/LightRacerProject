@@ -121,10 +121,11 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		 * screen and display it.
 		 */
 		pack();
+		setVisible(true);
 		setLocationRelativeTo(null);
 		//setVisible(true);
 		//setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setVisible(true);
+		
 		
 	}
 
@@ -401,7 +402,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 			/*
 			 * Reset the game if one is not currently in progress.
 			 */
-			case KeyEvent.VK_ENTER:
+			case KeyEvent.VK_SPACE:
 				if(status.isNewGame() || status.isRoundOver())
 				{
 					if(!status.isGameOver())
@@ -412,15 +413,15 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 							resetGame();					
 						}
 				}
+				else if(status.isGameOver())
+				{	
+					this.replayGame();
+					resetGame();
+					//this.dispose();
+				}
 				break;
-			case KeyEvent.VK_SPACE:
-				if(status.isGameOver())
-					{	
-						this.replayGame();
-						resetGame();
-						//this.dispose();
-					}
-				else if(status.isRoundOver())
+			case KeyEvent.VK_ENTER:
+				if(status.isRoundOver() || status.isGameOver() || status.isNewGame())
 				{
 					this.board.changeGrid(this);
 					this.board.repaint();
