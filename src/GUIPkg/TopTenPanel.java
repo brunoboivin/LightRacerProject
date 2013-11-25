@@ -19,7 +19,7 @@ import StatisticsPkg.Statistics;
 public class TopTenPanel extends JPanel {
 
 	/**
-	 * Create the panel.
+	 * Panel that contains a table in which the best 10 players and their respective statistics are displayed.
 	 */
 	public TopTenPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
