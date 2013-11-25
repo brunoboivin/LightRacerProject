@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 
 import org.apache.commons.lang3.StringUtils;
 
+import UserPkg.UserLoginStatus;
 import UserPkg.UserManagement;
 
 import java.awt.Font;
@@ -38,7 +39,7 @@ public class LoginPanel extends JPanel {
 	int usersLoggedIn = 0;
 	boolean btn1AsLogout = false;
 	boolean btn2AsLogout = false;
-	int loginResult;
+	UserLoginStatus loginResult;
 	Color diabledField, enabledField;
 
 	/**
@@ -124,16 +125,16 @@ public class LoginPanel extends JPanel {
 					} else {		
 						loginResult = UserManagement.login(1, usernameField1.getText(), (passwordField1.getText()));
 						switch (loginResult) {
-						case 3: JOptionPane.showMessageDialog(null, "User already logged in!", "Error",
+						case UserLoggedIn: JOptionPane.showMessageDialog(null, "User already logged in!", "Error",
 								JOptionPane.ERROR_MESSAGE);
 						break;
-						case 2: JOptionPane.showMessageDialog(null, "Username not found.", "Warning",
+						case UsernameNotFound: JOptionPane.showMessageDialog(null, "Username not found.", "Warning",
 								JOptionPane.WARNING_MESSAGE);
 						break;
-						case 1: JOptionPane.showMessageDialog(null, "Provided username and password combination is invalid!", "Error",
+						case WrongPassword: JOptionPane.showMessageDialog(null, "Provided username and password combination is invalid!", "Error",
 								JOptionPane.ERROR_MESSAGE);
 						break;
-						case 0: btnLoginPlayer1.setText("Logout " + usernameField1.getText());
+						case Success: btnLoginPlayer1.setText("Logout " + usernameField1.getText());
 						btn1AsLogout = true;
 						usernameField1.setEnabled(false);
 						passwordField1.setEnabled(false);
@@ -144,7 +145,6 @@ public class LoginPanel extends JPanel {
 						passwordField1.setText("");
 						break;
 						}
-						loginResult = 5;
 						if (usersLoggedIn == 2) {
 							btnMainMenu.setEnabled(true);
 						}
@@ -176,17 +176,16 @@ public class LoginPanel extends JPanel {
 					} else {		
 						loginResult = UserManagement.login(2, usernameField2.getText(), (passwordField2.getText()));
 						switch (loginResult) {
-						case 3: JOptionPane.showMessageDialog(null, "User already logged in!", "Error",
+						case UserLoggedIn: JOptionPane.showMessageDialog(null, "User already logged in!", "Error",
 								JOptionPane.ERROR_MESSAGE);
 						break;
-						case 2: JOptionPane.showMessageDialog(null, "Username not found.", "Warning",
+						case UsernameNotFound: JOptionPane.showMessageDialog(null, "Username not found.", "Warning",
 								JOptionPane.WARNING_MESSAGE);
 						break;
-						case 1: JOptionPane.showMessageDialog(null, "Provided username and password combination is invalid.", "Error",
+						case WrongPassword: JOptionPane.showMessageDialog(null, "Provided username and password combination is invalid.", "Error",
 								JOptionPane.ERROR_MESSAGE);
 						break;
-						case 0: btnLoginPlayer2.setText("Logout " + usernameField2.getText());
-						//btnLoginPlayer2.sets
+						case Success: btnLoginPlayer2.setText("Logout " + usernameField2.getText());
 						btn2AsLogout = true;
 						usernameField2.setEnabled(false);
 						passwordField2.setEnabled(false);
@@ -197,7 +196,6 @@ public class LoginPanel extends JPanel {
 						usersLoggedIn++;
 						break;
 						}
-						loginResult = 5;
 						if (usersLoggedIn == 2) {
 							btnMainMenu.setEnabled(true);
 						}
