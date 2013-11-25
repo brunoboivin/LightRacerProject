@@ -1,4 +1,4 @@
-package TestPkg;
+package unit_tests;
 
 import static org.junit.Assert.*;
 

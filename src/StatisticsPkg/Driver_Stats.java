@@ -25,20 +25,22 @@ class Driver_Stats {
 
 		
 		//REINITIALIZES BOTH CSV FILES
-		
+		/*
 		Hashtable<String, PlayerRecord> playerRecords = new Hashtable<String, PlayerRecord>();
 		ArrayList<PairRecord> pairRecords = new ArrayList<PairRecord>();
 
 		CSVHandler.write(playerRecords, StatisticsFiles.PLAYER_RECORDS.getPath());
 		CSVHandler.write(pairRecords, StatisticsFiles.PAIR_RECORDS.getPath());
-		
+		*/
 		 
-		//PRINT USERNAMES/PASSWORDS
+		//PRINT USERNAMES/PASSWORDS\
+		/*
 		ArrayList<User> users = (ArrayList<User>) CSVHandler.read("csv/user_data.csv");
 
 		for (User user : users){
 			System.out.println(user.username+": "+user.password);
 		}
+		*/
 		
 		//PRINT EVERYTHING (PRINTS CONTENT OF BOTH CSV FILES)
 		/*
