@@ -42,13 +42,13 @@ public class UserManagement
 			if ((user.getUsername()).equals(username)) {
 				if ((user.getPassword()).equals(password)) {
 					if (userNumber == 1) {
-						if ((user2 != null) && ((user2.getUsername())).equals(username)) {
+						if ((user1 != null) && ((user1.getUsername())).equals(username)) {
 							return 3;
 						}
 						user1 = new User(username, password);
 					}
 					if (userNumber == 2) {
-						if ((user1 != null) && ((user1.getUsername())).equals(username)) {
+						if ((user2 != null) && ((user2.getUsername())).equals(username)) {
 							return 3;
 						}
 						user2 = new User(username, password);					
@@ -64,7 +64,7 @@ public class UserManagement
 	}
 
 	public static void logout (User user) {
-		if ((user1).equals(user)) {
+		if (user1 != null) {
 			user1 = null;
 		} else {
 			user2 = null;
