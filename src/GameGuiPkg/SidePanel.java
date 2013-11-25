@@ -132,11 +132,11 @@ public class SidePanel extends JPanel {
 		
 		JLabel Yoda = new JLabel("");
 		layeredPane.add(Yoda, "cell 0 1");
-		Yoda.setIcon(new ImageIcon(SidePanel.class.getResource("/GameGuiPkg/yodaSideIcon.gif")));
+		Yoda.setIcon(new ImageIcon("img/yodaSideIcon.gif"));
 		
 		JLabel DarthVader = new JLabel("");
 		layeredPane.add(DarthVader, "cell 0 5");
-		DarthVader.setIcon(new ImageIcon(SidePanel.class.getResource("/GameGuiPkg/darthVaderSideIcon.gif")));
+		DarthVader.setIcon(new ImageIcon("img/darthVaderSideIcon.gif"));
 		this.painted1=false;
 		this.painted2=false;
 		this.painted3=false;
@@ -208,9 +208,9 @@ public class SidePanel extends JPanel {
 	}
 	private void winnerCell (ID id,JLayeredPane layeredPane,int round)
 	{
-		ImageIcon yoda=new ImageIcon(SidePanel.class.getResource("/GameGuiPkg/greenLightSaber.gif"));
-		ImageIcon darthVader=new ImageIcon(SidePanel.class.getResource("/GameGuiPkg/redLightSaber.gif"));
-		ImageIcon blank=new ImageIcon(SidePanel.class.getResource("/GameGuiPkg/grayLightSaber.gif"));
+		ImageIcon yoda=new ImageIcon("img/greenLightSaber.gif");
+		ImageIcon darthVader=new ImageIcon("img/redLightSaber.gif");
+		ImageIcon blank=new ImageIcon("img/grayLightSaber.gif");
 		switch(id)
 		{
 			case YODA:
