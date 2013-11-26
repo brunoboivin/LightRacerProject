@@ -45,7 +45,9 @@ public class MainMenuPanel extends JPanel {
 		btnTopPlayers.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				((MainFrame)getTopLevelAncestor()).swapView("topTenPanel");
+				MainFrame.topTenPanel = new TopTenPanel();
+			    (MainFrame.deck).add("topTenPanel", MainFrame.topTenPanel);
+				((MainFrame) getTopLevelAncestor()).swapView("topTenPanel");
 			}
 		});
 		btnTopPlayers.setBounds(307, 234, 121, 23);

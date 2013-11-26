@@ -16,6 +16,7 @@ public class MainFrame extends JFrame{
 
 	public static MainMenuPanel mainMenuPanel;
 	public static PlayerStatsPanel playerStatsPanel;
+	public static TopTenPanel topTenPanel;
 	static CardLayout cardLayout;
 	public static JPanel deck = new JPanel();
 	private JPanel contentPane;
@@ -48,7 +49,7 @@ public class MainFrame extends JFrame{
 		deck.setLayout(cardLayout = new CardLayout());
 		
 		LoginPanel loginPanel = new LoginPanel();
-		TopTenPanel topTenPanel = new TopTenPanel();
+		topTenPanel = new TopTenPanel();
 		
 		deck.add("loginPanel", loginPanel);
 //		deck.add("mainMenuPanel", mainMenuPanel);
