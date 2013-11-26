@@ -4,8 +4,10 @@ import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
 import GamePkg.TronGame;
 import UserPkg.User;
+
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -81,8 +83,7 @@ public class MainMenuPanel extends JPanel {
 		btnPlayerStats.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PlayerStatsFrame stats = new PlayerStatsFrame(userA, userB);
-				stats.setVisible(true);
+				((MainFrame) getTopLevelAncestor()).swapView("playerStatsPanel");
 			}
 		});
 		btnPlayerStats.setBounds(307, 199, 121, 23);

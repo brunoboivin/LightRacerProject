@@ -15,6 +15,7 @@ import GridPkg.GridSelectorGUI;
 public class MainFrame extends JFrame{
 
 	public static MainMenuPanel mainMenuPanel;
+	public static PlayerStatsPanel playerStatsPanel;
 	static CardLayout cardLayout;
 	public static JPanel deck = new JPanel();
 	private JPanel contentPane;
