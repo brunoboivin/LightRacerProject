@@ -207,7 +207,7 @@ public class GridPanel extends JPanel
 			}
 			else if(game.status.isGameOver()) 
 			{
-				gameMsg=game.winnerIs()+ "is the WINNER !";
+				gameMsg=game.winnerIs()+ " is the WINNER !";
 				roundMsg = "Game Over!";
 				spaceMsg=spaceMsg+"Play again";
 				escMsg ="ESC : Go back to the Main Menu ";
