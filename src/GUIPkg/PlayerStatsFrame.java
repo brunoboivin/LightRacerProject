@@ -28,7 +28,7 @@ public class PlayerStatsFrame extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -41,9 +41,10 @@ public class PlayerStatsFrame extends JFrame {
 			}
 		});
 	}
-
+	*/
+	
 	/**
-	 * Create the frame.
+	 * Frame used to display both individual and pair scores.
 	 */
 	public PlayerStatsFrame(final User userA, final User userB) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,16 +71,6 @@ public class PlayerStatsFrame extends JFrame {
 		username2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		username2.setBounds(187, 11, 110, 27);
 		contentPane.add(username2);
-		
-		JButton btnClose = new JButton("Close");
-		btnClose.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				dispose();
-			}
-		});
-		btnClose.setBounds(116, 168, 89, 23);
-		contentPane.add(btnClose);
 		
 		JLabel gamesWonP1 = new JLabel(playerRecord1.getGamesWon()+"");
 		gamesWonP1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -125,5 +116,16 @@ public class PlayerStatsFrame extends JFrame {
 		pairScore.setHorizontalAlignment(SwingConstants.CENTER);
 		pairScore.setBounds(116, 9, 76, 33);
 		contentPane.add(pairScore);
+		
+		//close button
+		JButton btnClose = new JButton("Close");
+		btnClose.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				dispose();
+			}
+		});
+		btnClose.setBounds(116, 168, 89, 23);
+		contentPane.add(btnClose);
 	}
 }
