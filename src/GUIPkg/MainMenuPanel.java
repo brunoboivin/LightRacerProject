@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 
 import GamePkg.TronGame;
 import UserPkg.User;
+import UserPkg.UserManagement;
 
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -83,6 +84,8 @@ public class MainMenuPanel extends JPanel {
 		btnPlayerStats.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				MainFrame.playerStatsPanel = new PlayerStatsPanel(UserManagement.user1, UserManagement.user2);
+			    (MainFrame.deck).add("playerStatsPanel", MainFrame.playerStatsPanel);
 				((MainFrame) getTopLevelAncestor()).swapView("playerStatsPanel");
 			}
 		});
