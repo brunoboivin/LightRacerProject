@@ -47,7 +47,6 @@ public class PlayerStatsFrame extends JFrame {
 	 * Frame used to display both individual and pair scores.
 	 */
 	public PlayerStatsFrame(final User userA, final User userB) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 322, 241);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

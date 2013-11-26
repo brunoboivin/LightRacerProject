@@ -82,6 +82,7 @@ public class MainMenuPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				PlayerStatsFrame stats = new PlayerStatsFrame(userA, userB);
+				stats.setVisible(true);
 			}
 		});
 		btnPlayerStats.setBounds(307, 199, 121, 23);
