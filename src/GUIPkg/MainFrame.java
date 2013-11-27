@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import UserPkg.User;
 import UserPkg.UserManagement;
 import GridPkg.GridSelectorGUI;
+import javax.swing.BoxLayout;
 
 public class MainFrame extends JFrame{
 
@@ -20,7 +21,8 @@ public class MainFrame extends JFrame{
 	static CardLayout cardLayout;
 	public static JPanel deck = new JPanel();
 	private JPanel contentPane;
-//	public LoginPanel loginFrame;
+	public static int x;
+	public static int y;
 
 	/**
 	 * Launch the application.
@@ -52,6 +54,9 @@ public class MainFrame extends JFrame{
 		topTenPanel = new TopTenPanel();
 		
 		deck.add("loginPanel", loginPanel);
+		loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.X_AXIS));
+		mainMenuPanel = new MainMenuPanel();
+	    deck.add("mainMenuPanel", mainMenuPanel);
 //		deck.add("mainMenuPanel", mainMenuPanel);
 //		if (mainMenuPanel != null && mainMenuPanel.isFocusOwner()) {
 //			mainMenuPanel.revalidate();
@@ -69,8 +74,8 @@ public class MainFrame extends JFrame{
 		
 		//center frame
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-	    int x = (int) ((dimension.getWidth() - getWidth()) / 2);
-	    int y = (int) ((dimension.getHeight() - getHeight()) / 2);
+	    x = (int) ((dimension.getWidth() - getWidth()) / 2);
+	    y = (int) ((dimension.getHeight() - getHeight()) / 2);
 	    setLocation(x, y);
 	}
 	
