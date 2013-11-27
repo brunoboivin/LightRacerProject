@@ -34,14 +34,20 @@ public class Grid {
 	}	
 	
 	
-	public void promptMapSelection () {
+	public void promptMapSelection (Grid currentGrid) {
 			
 		//Prompt user to select a map
 		GridSelectorGUI selectGrid = new GridSelectorGUI();
 		
-		//Add obstacles corresponding to the selected map
-		addObstacles(selectGrid.getSelectedMapPath());
-
+//		//Add obstacles corresponding to the selected map
+//		addObstacles(selectGrid.getSelectedMapPath());
+		
+		if (selectGrid.getSelectedMapPath() != null){
+			currentGrid.setGridCells(selectGrid.getSelectedGridCells());
+		} 
+		else{
+			System.out.println("NULL");
+		}
 	}	
 	
 	
@@ -85,10 +91,10 @@ public class Grid {
 			}
 			
 			//Note: for the user, origin (0,0) is the lower-left corner of map
-			xCoord1 = this.colCount - obstacleCoordsPair[0];
-			xCoord2 = this.colCount - obstacleCoordsPair[2];
-			yCoord1 = obstacleCoordsPair[1];
-			yCoord2 = obstacleCoordsPair[3];
+			xCoord1 = obstacleCoordsPair[0];
+			xCoord2 = obstacleCoordsPair[2];
+			yCoord1 = this.rowCount - obstacleCoordsPair[1];
+			yCoord2 = this.rowCount - obstacleCoordsPair[3];
 			
 			if (xCoord1 <= xCoord2){
 				xStart = xCoord1;
@@ -138,6 +144,11 @@ public class Grid {
 	
 	public int getGridCol (){
 		return this.colCount;
+	}
+	
+	//setters
+	public void setGridCells (GridCell[][] gridCells){
+		this.gridCells = gridCells;
 	}
 
 }

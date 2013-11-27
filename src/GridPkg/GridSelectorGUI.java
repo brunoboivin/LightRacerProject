@@ -20,6 +20,13 @@ public class GridSelectorGUI extends JOptionPane {
 	//Path to map file
 	private String selectedMapPath;
 	
+	private String selectedMapName;
+	
+	private GridCell [][] gridCells1;
+	private GridCell [][] gridCells2;
+	private GridCell [][] gridCells3;
+	private GridCell [][] gridCellsCustom;
+	
 	//GUI swing elements
 	private JDialog dialog;
 	private JOptionPane optionPane;
@@ -38,6 +45,7 @@ public class GridSelectorGUI extends JOptionPane {
 	private ButtonGroup buttonGroup;
 	
 	private JButton customMap;
+	
 		
 	private FileDialog selectFile;
 	//Set map names used throughout class
@@ -49,7 +57,8 @@ public class GridSelectorGUI extends JOptionPane {
 	//Constructor
 	public GridSelectorGUI () {
 		
-		this.selectedMapPath = "maps/map1.txt";
+//		this.selectedMapPath = "maps/map1.txt";
+		this.selectedMapName = null;
 		initializeGUIElements ();
 		
 	}
@@ -99,7 +108,7 @@ public class GridSelectorGUI extends JOptionPane {
 		buttonGroup.add(this.map1);
 		buttonGroup.add(this.map2);
 		buttonGroup.add(this.map3);
-		this.map1.setSelected(true);
+//		this.map1.setSelected(true);
 		
 		this.customMap = new JButton("Select File");
 		this.selectFile = new FileDialog(this.dialog, "Select a map file");
@@ -154,6 +163,19 @@ public class GridSelectorGUI extends JOptionPane {
 		Grid gridPreview = new Grid();
 	    gridPreview.addObstacles(selectedMapPath);
 	    GridCell[][] cellsPreview = gridPreview.getGridCells();
+	    
+	    if (mapName.equals(this.MAP_NAME_1)){
+	    	this.gridCells1 = cellsPreview;
+	    }
+	    else if (mapName.equals(this.MAP_NAME_2)){
+	    	this.gridCells2 = cellsPreview;
+	    }
+	    else if (mapName.equals(this.MAP_NAME_3)){
+	    	this.gridCells3 = cellsPreview;
+	    }
+	    else {
+	    	this.gridCellsCustom = cellsPreview;
+	    }
 		
 		int rowCount = gridPreview.getGridRow();
 		int colCount = gridPreview.getGridCol();
@@ -225,17 +247,18 @@ public class GridSelectorGUI extends JOptionPane {
 			this.selectFile.setFile("*.txt");
 		    this.selectFile.setVisible(true);
 		    String directory = this.selectFile.getDirectory();
-		    String filename = this.selectFile.getFile();
-		    
+		    String filename = this.selectFile.getFile(); 
 		    if (filename != null){
 		    	if(filename.endsWith(".txt")){
 				      this.selectedMapPath = (directory + filename);
+				      this.selectedMapName = mapName;
 				      this.buttonGroup.clearSelection();
 				 }
             }
 		}
 		else{
 			this.selectedMapPath = "maps/" + mapName + ".txt";
+			this.selectedMapName = mapName;
 		}
 //		System.out.println (this.getSelectedMapPath());
     }
@@ -243,6 +266,24 @@ public class GridSelectorGUI extends JOptionPane {
 	//getters
 	public String getSelectedMapPath (){
     	return this.selectedMapPath;
+    }
+	
+	public GridCell [][] getSelectedGridCells (){
+    	if (this.selectedMapName.equals(MAP_NAME_1)){
+    		return this.gridCells1;
+    	}
+    	if (this.selectedMapName.equals(MAP_NAME_2)){
+    		return this.gridCells2;
+    	}
+    	if (this.selectedMapName.equals(MAP_NAME_3)){
+    		return this.gridCells3;
+    	}
+    	if (this.selectedMapName.equals(MAP_NAME_4)){
+    		return this.gridCellsCustom;
+    	}
+    	else{
+    		return null;
+    	}
     }
 	
 	public static void main (String [] args){
