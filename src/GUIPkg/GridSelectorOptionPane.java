@@ -6,6 +6,8 @@ import java.awt.FileDialog;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -19,7 +21,7 @@ import GridPkg.Grid;
 import GridPkg.GridCell;
 
 
-public class GridSelectorOptionPane extends JOptionPane {
+public class GridSelectorOptionPane {
 	
 	//Path to map file
 	private String selectedMapPath;
@@ -95,7 +97,19 @@ public class GridSelectorOptionPane extends JOptionPane {
 		
 		//Show everything after they have all been loaded
 		this.dialog = optionPane.createDialog(null, "MAPS"); 
+		this.dialog.setDefaultCloseOperation(
+			    JDialog.DISPOSE_ON_CLOSE);
+			dialog.addWindowListener(new WindowAdapter() {
+			    public void windowClosing(WindowEvent we) {
+//			        System.out.println("Thwarted user attempt to close window.");
+			        cancelMapSeletion();
+			    }
+		});
 	    this.dialog.setVisible(true);
+	}
+	
+	private void cancelMapSeletion (){
+		this.selectedMapPath = null;
 	}
 	
 	private void initializeSelection (){
@@ -286,6 +300,7 @@ public class GridSelectorOptionPane extends JOptionPane {
     		return this.gridCellsCustom;
     	}
     	else{
+    		System.out.println("YO");
     		return null;
     	}
     }
