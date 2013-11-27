@@ -120,7 +120,9 @@ public class StatisticsPanel extends JPanel {
 		
 		//close button
 		JButton btnBack = new JButton("Back");
-		btnBack.setFont(new Font("Dialog", Font.PLAIN, 17));
+		btnBack.setForeground(new Color(255, 255, 0));
+		btnBack.setBackground(Color.BLACK);
+		btnBack.setFont(new Font("STARWARS", Font.PLAIN, 20));
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -133,7 +135,7 @@ public class StatisticsPanel extends JPanel {
 		add(panel);
 		
 		JLabel lblTop = new JLabel("Top 10");
-		lblTop.setFont(new Font("Dialog", Font.PLAIN, 25));
+		lblTop.setFont(new Font("STARWARS", Font.PLAIN, 25));
 		lblTop.setForeground(new Color(255, 255, 0));
 		lblTop.setBackground(new Color(0, 0, 0));
 		lblTop.setBounds(277, 284, 97, 47);
@@ -142,12 +144,12 @@ public class StatisticsPanel extends JPanel {
 		JLabel lblPairScores = new JLabel("Pair Scores");
 		lblPairScores.setBackground(new Color(0, 0, 0));
 		lblPairScores.setForeground(new Color(255, 255, 0));
-		lblPairScores.setFont(new Font("Dialog", Font.PLAIN, 25));
-		lblPairScores.setBounds(262, 82, 133, 61);
+		lblPairScores.setFont(new Font("STARWARS", Font.PLAIN, 25));
+		lblPairScores.setBounds(245, 82, 179, 61);
 		panel.add(lblPairScores);
 		
 		JLabel lblNewLabel = new JLabel("STATISTICS");
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 30));
+		lblNewLabel.setFont(new Font("STARWARS", Font.BOLD, 30));
 		lblNewLabel.setBackground(new Color(0, 0, 0));
 		lblNewLabel.setForeground(new Color(255, 255, 0));
 		lblNewLabel.setBounds(235, 17, 196, 72);
