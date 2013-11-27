@@ -73,6 +73,10 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	 * The winner of the game
 	 */
 	private String gameWinner;
+	
+	
+	public String yodaUser;
+	public String darthUser;
 	/**
 	 * The loser of the game
 	 */
@@ -83,14 +87,14 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	 * @param asDarthVader
 	 * @param asYoda
 	 */
-	
 	public TronGame(User asDarthVader,User asYoda) 
 	{
-		super("Tron Prototype1");
+		super("Light Battles Demo");
 		setLayout(new BorderLayout());
 		//setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		
+		yodaUser=asYoda.getUsername();
+		darthUser=asDarthVader.getUsername();
 		
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -254,8 +258,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	/**
 	 * Returns the maximum number of wins between two Racers.
 	 * @return maxWin
-	 */
-	
+	 */	
 	public int totalRoundWins()
 	{
 		if(this.racerB.wonRounds> this.racerA.wonRounds)

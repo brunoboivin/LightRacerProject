@@ -75,7 +75,7 @@ public class GridPanel extends JPanel
 	{
 		this.game = tron;
 	//	Grid grid = new Grid();
-		grid.promptMapSelection();
+		grid.promptMapSelection(grid);
 		this.cells = grid.getGridCells();
 		this.COL_COUNT = grid.getGridCol();
 		this.ROW_COUNT = grid.getGridRow();

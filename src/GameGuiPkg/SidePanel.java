@@ -49,6 +49,13 @@ public class SidePanel extends JPanel {
 	private JLabel lblRound1;
 	private JLabel lblRound2;
 	private JLabel lblRound3;
+	
+	private JLabel lblUserA;
+	private JLabel lblUserB;
+	
+	private String YODA;
+	private String DARTHVADER;
+	
 	private String round;
 	private int counter;
 	
@@ -80,7 +87,8 @@ public class SidePanel extends JPanel {
 		setPreferredSize(new Dimension(WIDTH, height* GridPanel.TILE_SIZE));
 		setBackground(new Color(211, 211, 211));
 		setLayout(null);
-		
+		this.YODA=game.yodaUser;
+		this.DARTHVADER=game.darthUser;
 		paintHeaders(1);
 	
 		
@@ -127,6 +135,18 @@ public class SidePanel extends JPanel {
 		lblRound3.setForeground(TEXT_COLOR);
 		lblRound3.setFont(SMALL_FONT);
 		layeredPane.add(lblRound3, "cell 3 0");
+		
+		
+		
+		lblUserA =DefaultComponentFactory.getInstance().createTitle(this.YODA);
+		lblUserA.setForeground(TEXT_COLOR);
+		lblUserA.setFont(SMALL_FONT);
+		layeredPane.add(lblUserA, "cell 0 2,alignx center,aligny center");
+		
+		lblUserB =DefaultComponentFactory.getInstance().createTitle(this.DARTHVADER);
+		lblUserB.setForeground(TEXT_COLOR);
+		lblUserB.setFont(SMALL_FONT);
+		layeredPane.add(lblUserB, "cell 0 6,alignx center,aligny center");
 		
 		
 		
