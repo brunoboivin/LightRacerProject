@@ -73,7 +73,7 @@ public class TopTenPanel extends JPanel {
 		lblTopPlayers.setForeground(new Color(255, 255, 0));
 		lblTopPlayers.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTopPlayers.setFont(new Font("STARWARS", Font.BOLD, 30));
-		lblTopPlayers.setBounds(199, 46, 259, 61);
+		lblTopPlayers.setBounds(0, 46, 650, 61);
 		container.add(lblTopPlayers);
 
 		//back button

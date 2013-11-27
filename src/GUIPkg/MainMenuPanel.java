@@ -74,12 +74,12 @@ public class MainMenuPanel extends JPanel {
 		
 		JLabel lblPlayerDV = new JLabel((UserManagement.user1).getUsername());
 		lblPlayerDV.setForeground(new Color(255, 99, 71));
-		lblPlayerDV.setFont(new Font("STARWARS", Font.BOLD, 17));
+		lblPlayerDV.setFont(new Font("STARWARS", Font.BOLD, 20));
 		panel.add(lblPlayerDV, "4, 4, center, fill");
 		
 		JLabel lblPlayerY = new JLabel(UserManagement.user2.getUsername());
 		lblPlayerY.setForeground(new Color(144, 238, 144));
-		lblPlayerY.setFont(new Font("STARWARS", Font.BOLD, 17));
+		lblPlayerY.setFont(new Font("STARWARS", Font.BOLD, 20));
 		panel.add(lblPlayerY, "8, 4, center, fill");
 		
 		JButton btnPlayerStats = new JButton("Statistics");
@@ -102,6 +102,10 @@ public class MainMenuPanel extends JPanel {
 		JLabel MainYoda = new JLabel("");
 		MainYoda.setIcon(new ImageIcon("img/Main_Yoda.png"));
 		panel.add(MainYoda, "7, 6, 2, 1, right, center");
+		
+		JLabel DVKeys = new JLabel("");
+		DVKeys.setIcon(new ImageIcon("img/Key_WASD.png"));
+		panel.add(DVKeys, "4, 8, 1, 3, center, center");
 		panel.add(btnPlayerStats, "6, 8, fill, fill");
 		
 		JButton btnChooseMap = new JButton("Choose map");
@@ -116,6 +120,10 @@ public class MainMenuPanel extends JPanel {
 				//lblSelectedMap.setText("");
 			}
 		});
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon("img/Key_Arrow.png"));
+		panel.add(label, "8, 8, 1, 3, center, fill");
 		panel.add(btnChooseMap, "6, 10, fill, fill");
 		
 		
