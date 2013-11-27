@@ -20,7 +20,7 @@ public class MainMenuPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public MainMenuPanel(final User userA, final User userB) {
+	public MainMenuPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 				
 		JPanel panel = new JPanel();
@@ -31,7 +31,7 @@ public class MainMenuPanel extends JPanel {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				TronGame tron = new TronGame(userA, userB);
+				TronGame tron = new TronGame(UserManagement.user1, UserManagement.user2);
 			}
 		});
 		btnNewButton.setBounds(168, 124, 112, 44);
@@ -53,12 +53,12 @@ public class MainMenuPanel extends JPanel {
 		btnTopPlayers.setBounds(307, 234, 121, 23);
 		panel.add(btnTopPlayers);
 		
-		JLabel lblPlayer = new JLabel(userA.getUsername());
+		JLabel lblPlayer = new JLabel(UserManagement.user1.getUsername());
 		lblPlayer.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblPlayer.setBounds(44, 57, 72, 38);
 		panel.add(lblPlayer);
 		
-		JLabel lblNewLabel = new JLabel(userB.getUsername());
+		JLabel lblNewLabel = new JLabel(UserManagement.user2.getUsername());
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setBounds(337, 57, 72, 38);
 		panel.add(lblNewLabel);
