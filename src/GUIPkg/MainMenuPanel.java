@@ -15,6 +15,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
 
 public class MainMenuPanel extends JPanel {
 
@@ -28,64 +32,31 @@ public class MainMenuPanel extends JPanel {
 				
 		JPanel panel = new JPanel();
 		add(panel);
-		panel.setLayout(null);
-		
-		JButton btnNewButton = new JButton("Start Game");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				TronGame tron = new TronGame(UserManagement.user1, UserManagement.user2, MainFrame.grid);
-			}
-		});
-		btnNewButton.setBounds(168, 124, 112, 44);
-		panel.add(btnNewButton);
-		
-		JButton btnTopPlayers = new JButton("Top 10 Players");
-		btnTopPlayers.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnTopPlayers.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				MainFrame.topTenPanel = new TopTenPanel();
-			    (MainFrame.deck).add("topTenPanel", MainFrame.topTenPanel);
-				((MainFrame) getTopLevelAncestor()).swapView("topTenPanel");
-			}
-		});
-		btnTopPlayers.setBounds(307, 234, 121, 23);
-		panel.add(btnTopPlayers);
-		
-		JLabel lblPlayer = new JLabel((UserManagement.user1).getUsername());
-		lblPlayer.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblPlayer.setBounds(44, 57, 72, 38);
-		panel.add(lblPlayer);
-		
-		JLabel lblNewLabel = new JLabel(UserManagement.user2.getUsername());
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel.setBounds(337, 57, 72, 38);
-		panel.add(lblNewLabel);
-		
-		JLabel label = new JLabel("");
-		label.setBounds(41, 213, 46, 14);
-		panel.add(label);
-		
-		JLabel lblNewLabel_1 = new JLabel("MAIN MENU");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_1.setBounds(168, 32, 112, 14);
-		panel.add(lblNewLabel_1);
-		
-		JButton btnBack = new JButton("Back");
-		btnBack.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				((MainFrame) getTopLevelAncestor()).swapView("loginPanel");
-			}
-		});
-		btnBack.setBounds(27, 234, 121, 23);
-		panel.add(btnBack);
+		panel.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("center:21px"),
+				ColumnSpec.decode("121px"),
+				ColumnSpec.decode("25px"),
+				ColumnSpec.decode("112px"),
+				ColumnSpec.decode("25px"),
+				ColumnSpec.decode("121px"),},
+			new RowSpec[] {
+				RowSpec.decode("32px"),
+				RowSpec.decode("14px"),
+				FormFactory.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("35px"),
+				RowSpec.decode("40px"),
+				RowSpec.decode("40px"),
+				RowSpec.decode("31px"),
+				RowSpec.decode("28px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("25px"),}));
 		
 		JButton btnPlayerStats = new JButton("Statistics");
+		btnPlayerStats.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		btnPlayerStats.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -94,15 +65,18 @@ public class MainMenuPanel extends JPanel {
 				((MainFrame) getTopLevelAncestor()).swapView("playerStatsPanel");
 			}
 		});
-		btnPlayerStats.setBounds(307, 199, 121, 23);
-		panel.add(btnPlayerStats);
+		panel.add(btnPlayerStats, "3, 5, 3, 1, fill, fill");
 		
+		JLabel lblPlayer = new JLabel((UserManagement.user1).getUsername());
+		lblPlayer.setFont(new Font("STARWARS", Font.BOLD, 17));
+		panel.add(lblPlayer, "2, 4, center, fill");
 		
-		final JLabel lblSelectedMap = new JLabel("");
-		lblSelectedMap.setBounds(168, 269, 97, 19);
-		panel.add(lblSelectedMap);
+		JLabel lblNewLabel = new JLabel(UserManagement.user2.getUsername());
+		lblNewLabel.setFont(new Font("STARWARS", Font.BOLD, 17));
+		panel.add(lblNewLabel, "6, 4, center, fill");
 		
 		JButton btnChooseMap = new JButton("Choose map");
+		btnChooseMap.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		btnChooseMap.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -111,7 +85,37 @@ public class MainMenuPanel extends JPanel {
 				//lblSelectedMap.setText("");
 			}
 		});
-		btnChooseMap.setBounds(307, 269, 121, 25);
-		panel.add(btnChooseMap);
+		panel.add(btnChooseMap, "3, 6, 3, 1, fill, fill");
+		
+		JLabel label = new JLabel("");
+		panel.add(label, "2, 8, center, center");
+		
+		JLabel lblNewLabel_1 = new JLabel("MAIN MENU");
+		lblNewLabel_1.setFont(new Font("STARWARS", Font.BOLD, 30));
+		panel.add(lblNewLabel_1, "3, 1, 3, 2, center, fill");
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.setFont(new Font("STARWARS", Font.PLAIN, 14));
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				((MainFrame) getTopLevelAncestor()).swapView("loginPanel");
+			}
+		});
+		
+		JButton btnNewButton = new JButton("Start Game");
+		btnNewButton.setFont(new Font("STARWARS", Font.PLAIN, 20));
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				TronGame tron = new TronGame(UserManagement.user1, UserManagement.user2, MainFrame.grid);
+			}
+		});
+		panel.add(btnNewButton, "3, 8, 3, 3, fill, fill");
+		panel.add(btnBack, "4, 12, fill, fill");
+		
+		
+		final JLabel lblSelectedMap = new JLabel("");
+		panel.add(lblSelectedMap, "4, 14, fill, fill");
 	}
 }
