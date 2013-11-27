@@ -106,6 +106,8 @@ public class LoginPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				if (btnMainMenu.isEnabled()) {
 					//add MainMenuPanel to MainFrame
+					MainFrame.mainMenuPanel = new MainMenuPanel();
+				    MainFrame.deck.add("mainMenuPanel", MainFrame.mainMenuPanel);
 					((MainFrame) getTopLevelAncestor()).swapView("mainMenuPanel");
 					
 					//add PlayerStatsPanel to MainFrame
