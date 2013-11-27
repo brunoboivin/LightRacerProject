@@ -31,7 +31,7 @@ public class StatisticsPanel extends JPanel {
 		setLayout(null);
 		
 		JBackgroundPanel panel = new JBackgroundPanel();
-		panel.setBounds(0, 24, 650, 650);
+		panel.setBounds(0, 0, 650, 650);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setLayout(null);
 		
@@ -127,7 +127,7 @@ public class StatisticsPanel extends JPanel {
 				((MainFrame)getTopLevelAncestor()).swapView("mainMenuPanel");
 			}
 		});
-		btnBack.setBounds(253, 540, 142, 47);
+		btnBack.setBounds(253, 555, 142, 47);
 		panel.add(btnBack);
 		
 		add(panel);
