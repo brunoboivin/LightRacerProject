@@ -1,9 +1,14 @@
 package GUIPkg;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -23,6 +28,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class LoginPanel extends JPanel {
 
@@ -37,7 +46,7 @@ public class LoginPanel extends JPanel {
 	private JLabel lblLogin;
 	private JButton btnMainMenu;
 	
-	private static final Font SMALL_FONT = new Font("STARWARS", Font.PLAIN, 18);
+	private static final Font SMALL_FONT = new Font("STARWARS", Font.PLAIN, 15);
 	private static final Font LARGE_FONT = new Font("STARWARS", Font.BOLD, 25);
 	
 	
@@ -47,43 +56,58 @@ public class LoginPanel extends JPanel {
 	UserLoginStatus loginResult;
 	Color diabledField, enabledField;
 	private JButton btnTopPlayers;
+	private JLabel label;
+	private JLabel lblNewLabel;
+	private JLabel label_1;
 
 	/**
 	 * Create the frame.
 	 */
 	@SuppressWarnings("deprecation")
-	public LoginPanel() {
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-
+	public LoginPanel() 
+	{
+		setPreferredSize(new Dimension(650,650));
+		setLayout(null);
+		
+		JBackgroundPanel panel = new JBackgroundPanel();
+		panel.setBounds(0, 24, 650, 315);
+        panel.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("25px"),
+				ColumnSpec.decode("116px"),
+				ColumnSpec.decode("5px"),
+				ColumnSpec.decode("116px"),
+				ColumnSpec.decode("5px"),
+				ColumnSpec.decode("116px"),
+				ColumnSpec.decode("5px"),
+				ColumnSpec.decode("116px"),
+				ColumnSpec.decode("5px"),
+				ColumnSpec.decode("116px"),
+				ColumnSpec.decode("25px"),},
+			new RowSpec[] {
+				RowSpec.decode("25px"),
+				RowSpec.decode("70px"),
+				RowSpec.decode("5px"),
+				RowSpec.decode("40px"),
+				RowSpec.decode("5px"),
+				RowSpec.decode("40px"),
+				RowSpec.decode("5px"),
+				RowSpec.decode("40px"),
+				RowSpec.decode("5px"),
+				RowSpec.decode("40px"),
+				RowSpec.decode("40px"),}));
+        
+        add(panel);
 		diabledField = Color.LIGHT_GRAY;
 		usersLoggedIn = 0;
-
-		passwordField1 = new JPasswordField();
-		passwordField1.setFocusTraversalKeysEnabled(false);
-		passwordField1.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_TAB) {
-					if ((e.getModifiers() & ActionEvent.SHIFT_MASK) == ActionEvent.SHIFT_MASK) {
-						btnRegister.transferFocus();
-					} else {
-						if (usernameField2.isEnabled()) {
-							usernameField1.transferFocus();
-						} else {
-							passwordField2.transferFocus();
-						}
-					}
-				}
-			}
-		});
-		passwordField1.setBounds(109, 112, 84, 28);
-		enabledField = passwordField1.getBackground();
-		panel.add(passwordField1);
+		
+		
+		//label = new JLabel(background);
+		//add(label, "1, 1, 1, 11, center, default");
+		//this.repaint();
+		//add(passwordField1, "4, 6, fill, fill");
 
 		passwordField2 = new JPasswordField();
+		passwordField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		passwordField2.setFocusTraversalKeysEnabled(false);
 		passwordField2.addKeyListener(new KeyAdapter() {
 			@Override
@@ -97,35 +121,33 @@ public class LoginPanel extends JPanel {
 				}
 			}
 		});
-		passwordField2.setBounds(333, 112, 84, 28);
-		panel.add(passwordField2);
-
-		btnMainMenu = new JButton("Go to main menu!");
-		btnMainMenu.setEnabled(false);
-		btnMainMenu.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (btnMainMenu.isEnabled()) {
-					//add MainMenuPanel to MainFrame
-					MainFrame.mainMenuPanel = new MainMenuPanel();
-				    MainFrame.deck.add("mainMenuPanel", MainFrame.mainMenuPanel);
-					((MainFrame) getTopLevelAncestor()).swapView("mainMenuPanel");
-					
-					//add PlayerStatsPanel to MainFrame
-					MainFrame.playerStatsPanel = new StatisticsPanel(UserManagement.user1, UserManagement.user2);
-				    (MainFrame.deck).add("playerStatsPanel", MainFrame.playerStatsPanel);
-				}
-			}
-		});
-		btnMainMenu.setFont(SMALL_FONT);
-		btnMainMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnMainMenu.setBounds(117, 295, 220, 45);
-		panel.add(btnMainMenu);
+		
+				passwordField1 = new JPasswordField();
+				passwordField1.setFont(new Font("STARWARS", Font.PLAIN, 15));
+				passwordField1.setFocusTraversalKeysEnabled(false);
+				passwordField1.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyPressed(KeyEvent e) {
+						if (e.getKeyCode() == KeyEvent.VK_TAB) {
+							if ((e.getModifiers() & ActionEvent.SHIFT_MASK) == ActionEvent.SHIFT_MASK) {
+								btnRegister.transferFocus();
+							} else {
+								if (usernameField2.isEnabled()) {
+									usernameField1.transferFocus();
+								} else {
+									passwordField2.transferFocus();
+								}
+							}
+						}
+					}
+				});
+				enabledField = passwordField1.getBackground();
+				
+				panel.add(passwordField1, "4, 6, fill, fill");
+		panel.add(passwordField2, "10, 6, fill, fill");
 
 		final JButton btnLoginPlayer1 = new JButton("Login player 1");
+		btnLoginPlayer1.setFont(new Font("STARWARS", Font.PLAIN, 20));
 		btnLoginPlayer1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -173,10 +195,10 @@ public class LoginPanel extends JPanel {
 				}
 			}
 		});
-		btnLoginPlayer1.setBounds(6, 152, 187, 29);
-		panel.add(btnLoginPlayer1);
+		panel.add(btnLoginPlayer1, "2, 8, 3, 1, fill, fill");
 
 		final JButton btnLoginPlayer2 = new JButton("Login player 2");
+		btnLoginPlayer2.setFont(new Font("STARWARS", Font.PLAIN, 20));
 		btnLoginPlayer2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -224,10 +246,10 @@ public class LoginPanel extends JPanel {
 				}
 			} 
 		});
-		btnLoginPlayer2.setBounds(241, 152, 187, 29);
-		panel.add(btnLoginPlayer2);
+		panel.add(btnLoginPlayer2, "8, 8, 3, 1, fill, fill");
 
 		usernameField1 = new JTextField();
+		usernameField1.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		usernameField1.setFocusTraversalKeysEnabled(false);
 		usernameField1.addKeyListener(new KeyAdapter() {
 			@Override
@@ -243,11 +265,11 @@ public class LoginPanel extends JPanel {
 
 			}
 		});
-		usernameField1.setBounds(109, 72, 84, 28);
-		panel.add(usernameField1);
+		panel.add(usernameField1, "4, 4, center, fill");
 		usernameField1.setColumns(10);
 
 		usernameField2 = new JTextField();
+		usernameField2.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		usernameField2.setFocusTraversalKeysEnabled(false);
 		usernameField2.addKeyListener(new KeyAdapter() {
 			@Override
@@ -265,58 +287,91 @@ public class LoginPanel extends JPanel {
 				}
 			}
 		});
-		usernameField2.setBounds(333, 72, 84, 28);
-		panel.add(usernameField2);
+		panel.add(usernameField2, "10, 4, fill, fill");
 		usernameField2.setColumns(10);
 
 		JLabel lblUsername = new JLabel("Username:");
-		lblUsername.setBounds(22, 84, 85, 16);
-		panel.add(lblUsername);
+		lblUsername.setFont(new Font("STARWARS", Font.PLAIN, 15));
+		panel.add(lblUsername, "2, 4, center, center");
 
 		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(22, 118, 81, 16);
-		panel.add(lblPassword);
+		lblPassword.setFont(new Font("STARWARS", Font.PLAIN, 15));
+		panel.add(lblPassword, "2, 6, center, center");
 
 		lblUsername_1 = new JLabel("Username:");
-		lblUsername_1.setBounds(257, 78, 84, 16);
-		panel.add(lblUsername_1);
+		lblUsername_1.setFont(new Font("STARWARS", Font.PLAIN, 15));
+		panel.add(lblUsername_1, "8, 4, center, center");
 
 		lblPassword_1 = new JLabel("Password:");
-		lblPassword_1.setBounds(257, 118, 84, 16);
-		panel.add(lblPassword_1);
-
-		lblIfYouDont = new JLabel("Click \"Register!\" if you don't have an account");
-		lblIfYouDont.setBounds(94, 206, 296, 16);
-		panel.add(lblIfYouDont);
-
-		btnRegister = new JButton("Register!");
-		btnRegister.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				RegistrationFrame frame = new RegistrationFrame();
-				frame.setVisible(true);
-			}
-		});
-		btnRegister.setBounds(168, 234, 117, 29);
-		panel.add(btnRegister);
+		lblPassword_1.setFont(new Font("STARWARS", Font.PLAIN, 15));
+		panel.add(lblPassword_1, "8, 6, center, center");
 
 		lblLogin = new JLabel("Login");
-		lblLogin.setFont(LARGE_FONT);
-		lblLogin.setBounds(184, 16, 101, 45);
-		panel.add(lblLogin);
-
-		add(panel);
+		lblLogin.setFont(new Font("STARWARS", Font.BOLD, 25));
+		panel.add(lblLogin, "4, 2, 5, 1, center, center");
+						
+								btnMainMenu = new JButton("Go to Main Menu!");
+								btnMainMenu.setEnabled(false);
+								btnMainMenu.addMouseListener(new MouseAdapter() {
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										if (btnMainMenu.isEnabled()) {
+											//add MainMenuPanel to MainFrame
+											MainFrame.mainMenuPanel = new MainMenuPanel();
+										    MainFrame.deck.add("mainMenuPanel", MainFrame.mainMenuPanel);
+											((MainFrame) getTopLevelAncestor()).swapView("mainMenuPanel");
+											
+											//add PlayerStatsPanel to MainFrame
+											MainFrame.playerStatsPanel = new StatisticsPanel(UserManagement.user1, UserManagement.user2);
+										    (MainFrame.deck).add("playerStatsPanel", MainFrame.playerStatsPanel);
+										}
+									}
+								});
+								btnMainMenu.setFont(new Font("STARWARS", Font.PLAIN, 15));
+								btnMainMenu.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent arg0) {
+									}
+								});
+								
+										//panel.add(panel);
+										
+										btnTopPlayers = new JButton("Top 10 players");
+										btnTopPlayers.setFont(new Font("STARWARS", Font.PLAIN, 15));
+										btnTopPlayers.addMouseListener(new MouseAdapter() {
+											@Override
+											public void mouseClicked(MouseEvent e) {
+												MainFrame.topTenPanel = new TopTenPanel();
+											    (MainFrame.deck).add("topTenPanel", MainFrame.topTenPanel);
+												((MainFrame) getTopLevelAncestor()).swapView("topTenPanel");
+											}
+										});
+										panel.add(btnTopPlayers, "2, 10, 3, 1, fill, fill");
+								panel.add(btnMainMenu, "8, 10, 3, 1, fill, fill");
+								
+										lblIfYouDont = new JLabel("Click \"Register!\" if you don't have an account");
+										lblIfYouDont.setFont(new Font("STARWARS", Font.PLAIN, 10));
+										panel.add(lblIfYouDont, "2, 11, 3, 1, center, fill");
+										
+												btnRegister = new JButton("Register!");
+												btnRegister.setFont(new Font("STARWARS", Font.PLAIN, 15));
+												btnRegister.addMouseListener(new MouseAdapter() {
+													@Override
+													public void mouseClicked(MouseEvent e) {
+														RegistrationFrame frame = new RegistrationFrame();
+														frame.setVisible(true);
+													}
+												});
+												panel.add(btnRegister, "6, 11, fill, fill");
+												
+	
+												lblNewLabel = new JLabel("test");
+												lblNewLabel.setBounds(0, 0, 650, 650);
+												lblNewLabel.setIcon(new ImageIcon("img/starWarsBackground.gif"));
+												//panel.add(lblNewLabel);
+												
 		
-		btnTopPlayers = new JButton("Top 10 players");
-		btnTopPlayers.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				MainFrame.topTenPanel = new TopTenPanel();
-			    (MainFrame.deck).add("topTenPanel", MainFrame.topTenPanel);
-				((MainFrame) getTopLevelAncestor()).swapView("topTenPanel");
-			}
-		});
-		btnTopPlayers.setBounds(6, 234, 117, 29);
-		panel.add(btnTopPlayers);
 	}
+	
 }
+
+

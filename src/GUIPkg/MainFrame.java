@@ -51,7 +51,7 @@ public class MainFrame extends JFrame{
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = (JPanel) getContentPane();
-		
+		setResizable(false);
 		
 		grid = new Grid();
 		deck.setLayout(cardLayout = new CardLayout());
@@ -75,13 +75,14 @@ public class MainFrame extends JFrame{
 		contentPane.add(deck);
 		
 		//set frame parameters
-		setSize(450,400);
-		
+		//setSize(650,650);
+		pack();
 		//center frame
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 	    x = (int) ((dimension.getWidth() - getWidth()) / 2);
 	    y = (int) ((dimension.getHeight() - getHeight()) / 2);
 	    setLocation(x, y);
+	    
 	}
 	
 	public void swapView(String key){
