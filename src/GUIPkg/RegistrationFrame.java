@@ -103,15 +103,15 @@ public class RegistrationFrame extends JFrame {
 		lblRegister.setBackground(new Color(0, 0, 0));
 		lblRegister.setForeground(new Color(255, 255, 0));
 		lblRegister.setBounds(97, 20, 113, 35);
-		lblRegister.setFont(new Font("Dialog", Font.PLAIN, 23));
+		lblRegister.setFont(new Font("STARWARS", Font.PLAIN, 23));
 
-		btnCreate.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnCreate.setFont(new Font("STARWARS", Font.PLAIN, 15));
 
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setBackground(new Color(0, 0, 0));
 		lblUsername.setForeground(new Color(255, 255, 0));
-		lblUsername.setBounds(33, 75, 87, 21);
-		lblUsername.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblUsername.setBounds(22, 78, 113, 21);
+		lblUsername.setFont(new Font("STARWARS", Font.PLAIN, 17));
 
 		passwordField = new JPasswordField();
 		passwordField.setBounds(132, 113, 134, 29);
@@ -123,8 +123,8 @@ public class RegistrationFrame extends JFrame {
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setBackground(new Color(0, 0, 0));
 		lblPassword.setForeground(new Color(255, 255, 0));
-		lblPassword.setBounds(33, 116, 82, 21);
-		lblPassword.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblPassword.setBounds(22, 118, 102, 21);
+		lblPassword.setFont(new Font("STARWARS", Font.PLAIN, 17));
 		contentPane.setLayout(null);
 		contentPane.add(lblRegister);
 		contentPane.add(btnCreate);
@@ -142,7 +142,7 @@ public class RegistrationFrame extends JFrame {
 				dispose();
 			}
 		});
-		btnExit.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btnExit.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		btnExit.setBounds(25, 166, 95, 29);
 		contentPane.add(btnExit);
 	}
