@@ -2,12 +2,6 @@ package GUIPkg;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
@@ -30,8 +24,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
 
 public class LoginPanel extends JPanel {
 
@@ -46,8 +40,8 @@ public class LoginPanel extends JPanel {
 	private JLabel lblLogin;
 	private JButton btnMainMenu;
 	
-	private static final Font SMALL_FONT = new Font("STARWARS", Font.PLAIN, 15);
-	private static final Font LARGE_FONT = new Font("STARWARS", Font.BOLD, 25);
+	//private static final Font SMALL_FONT = new Font("STARWARS", Font.PLAIN, 15);
+	//private static final Font LARGE_FONT = new Font("STARWARS", Font.BOLD, 25);
 	
 	
 	int usersLoggedIn = 0;
@@ -56,9 +50,9 @@ public class LoginPanel extends JPanel {
 	UserLoginStatus loginResult;
 	Color diabledField, enabledField;
 	private JButton btnTopPlayers;
-	private JLabel label;
-	private JLabel lblNewLabel;
-	private JLabel label_1;
+	//private JLabel label;
+	//private JLabel lblNewLabel;
+	//private JLabel label_1;
 
 	/**
 	 * Create the frame.
@@ -70,31 +64,35 @@ public class LoginPanel extends JPanel {
 		setLayout(null);
 		
 		JBackgroundPanel panel = new JBackgroundPanel();
-		panel.setBounds(0, 24, 650, 315);
+		panel.setBounds(0, 24, 650, 650);
         panel.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("25px"),
-				ColumnSpec.decode("116px"),
-				ColumnSpec.decode("5px"),
-				ColumnSpec.decode("116px"),
-				ColumnSpec.decode("5px"),
-				ColumnSpec.decode("116px"),
-				ColumnSpec.decode("5px"),
-				ColumnSpec.decode("116px"),
-				ColumnSpec.decode("5px"),
-				ColumnSpec.decode("116px"),
-				ColumnSpec.decode("25px"),},
-			new RowSpec[] {
-				RowSpec.decode("25px"),
-				RowSpec.decode("70px"),
-				RowSpec.decode("5px"),
-				RowSpec.decode("40px"),
-				RowSpec.decode("5px"),
-				RowSpec.decode("40px"),
-				RowSpec.decode("5px"),
-				RowSpec.decode("40px"),
-				RowSpec.decode("5px"),
-				RowSpec.decode("40px"),
-				RowSpec.decode("40px"),}));
+        		ColumnSpec.decode("25px"),
+        		ColumnSpec.decode("116px"),
+        		ColumnSpec.decode("5px"),
+        		ColumnSpec.decode("116px"),
+        		ColumnSpec.decode("5px"),
+        		ColumnSpec.decode("116px"),
+        		ColumnSpec.decode("5px"),
+        		ColumnSpec.decode("116px"),
+        		ColumnSpec.decode("5px"),
+        		ColumnSpec.decode("116px"),
+        		ColumnSpec.decode("25px"),},
+        	new RowSpec[] {
+        		RowSpec.decode("25px"),
+        		RowSpec.decode("70px"),
+        		RowSpec.decode("5px"),
+        		RowSpec.decode("40px"),
+        		RowSpec.decode("5px"),
+        		RowSpec.decode("40px"),
+        		RowSpec.decode("5px"),
+        		RowSpec.decode("40px"),
+        		RowSpec.decode("5px"),
+        		RowSpec.decode("40px"),
+        		RowSpec.decode("40px"),
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,}));
         
         add(panel);
 		diabledField = Color.LIGHT_GRAY;
@@ -107,6 +105,8 @@ public class LoginPanel extends JPanel {
 		//add(passwordField1, "4, 6, fill, fill");
 
 		passwordField2 = new JPasswordField();
+		passwordField2.setForeground(new Color(255, 255, 255));
+		passwordField2.setBackground(new Color(0, 0, 0));
 		passwordField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		passwordField2.setFocusTraversalKeysEnabled(false);
 		passwordField2.addKeyListener(new KeyAdapter() {
@@ -123,7 +123,9 @@ public class LoginPanel extends JPanel {
 		});
 		
 				passwordField1 = new JPasswordField();
-				passwordField1.setFont(new Font("STARWARS", Font.PLAIN, 15));
+				passwordField1.setForeground(new Color(255, 255, 255));
+				passwordField1.setBackground(new Color(0, 0, 0));
+				passwordField1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 				passwordField1.setFocusTraversalKeysEnabled(false);
 				passwordField1.addKeyListener(new KeyAdapter() {
 					@Override
@@ -147,6 +149,8 @@ public class LoginPanel extends JPanel {
 		panel.add(passwordField2, "10, 6, fill, fill");
 
 		final JButton btnLoginPlayer1 = new JButton("Login player 1");
+		btnLoginPlayer1.setBackground(new Color(0, 0, 0));
+		btnLoginPlayer1.setForeground(new Color(255, 255, 0));
 		btnLoginPlayer1.setFont(new Font("STARWARS", Font.PLAIN, 20));
 		btnLoginPlayer1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -198,6 +202,8 @@ public class LoginPanel extends JPanel {
 		panel.add(btnLoginPlayer1, "2, 8, 3, 1, fill, fill");
 
 		final JButton btnLoginPlayer2 = new JButton("Login player 2");
+		btnLoginPlayer2.setBackground(new Color(0, 0, 0));
+		btnLoginPlayer2.setForeground(new Color(255, 255, 0));
 		btnLoginPlayer2.setFont(new Font("STARWARS", Font.PLAIN, 20));
 		btnLoginPlayer2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -249,6 +255,8 @@ public class LoginPanel extends JPanel {
 		panel.add(btnLoginPlayer2, "8, 8, 3, 1, fill, fill");
 
 		usernameField1 = new JTextField();
+		usernameField1.setForeground(new Color(255, 255, 255));
+		usernameField1.setBackground(new Color(0, 0, 0));
 		usernameField1.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		usernameField1.setFocusTraversalKeysEnabled(false);
 		usernameField1.addKeyListener(new KeyAdapter() {
@@ -269,6 +277,8 @@ public class LoginPanel extends JPanel {
 		usernameField1.setColumns(10);
 
 		usernameField2 = new JTextField();
+		usernameField2.setForeground(new Color(255, 255, 255));
+		usernameField2.setBackground(new Color(0, 0, 0));
 		usernameField2.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		usernameField2.setFocusTraversalKeysEnabled(false);
 		usernameField2.addKeyListener(new KeyAdapter() {
@@ -291,26 +301,33 @@ public class LoginPanel extends JPanel {
 		usernameField2.setColumns(10);
 
 		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setForeground(new Color(255, 255, 0));
 		lblUsername.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		panel.add(lblUsername, "2, 4, center, center");
 
 		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setForeground(new Color(255, 255, 0));
 		lblPassword.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		panel.add(lblPassword, "2, 6, center, center");
 
 		lblUsername_1 = new JLabel("Username:");
+		lblUsername_1.setForeground(new Color(255, 255, 0));
 		lblUsername_1.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		panel.add(lblUsername_1, "8, 4, center, center");
 
 		lblPassword_1 = new JLabel("Password:");
+		lblPassword_1.setForeground(new Color(255, 255, 0));
 		lblPassword_1.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		panel.add(lblPassword_1, "8, 6, center, center");
 
 		lblLogin = new JLabel("Login");
+		lblLogin.setForeground(new Color(255, 255, 0));
 		lblLogin.setFont(new Font("STARWARS", Font.BOLD, 25));
 		panel.add(lblLogin, "4, 2, 5, 1, center, center");
 						
 								btnMainMenu = new JButton("Go to Main Menu!");
+								btnMainMenu.setBackground(new Color(0, 0, 0));
+								btnMainMenu.setForeground(new Color(255, 255, 0));
 								btnMainMenu.setEnabled(false);
 								btnMainMenu.addMouseListener(new MouseAdapter() {
 									@Override
@@ -336,6 +353,8 @@ public class LoginPanel extends JPanel {
 										//panel.add(panel);
 										
 										btnTopPlayers = new JButton("Top 10 players");
+										btnTopPlayers.setBackground(new Color(0, 0, 0));
+										btnTopPlayers.setForeground(new Color(255, 255, 0));
 										btnTopPlayers.setFont(new Font("STARWARS", Font.PLAIN, 15));
 										btnTopPlayers.addMouseListener(new MouseAdapter() {
 											@Override
@@ -347,12 +366,9 @@ public class LoginPanel extends JPanel {
 										});
 										panel.add(btnTopPlayers, "2, 10, 3, 1, fill, fill");
 								panel.add(btnMainMenu, "8, 10, 3, 1, fill, fill");
-								
-										lblIfYouDont = new JLabel("Click \"Register!\" if you don't have an account");
-										lblIfYouDont.setFont(new Font("STARWARS", Font.PLAIN, 10));
-										panel.add(lblIfYouDont, "2, 11, 3, 1, center, fill");
 										
 												btnRegister = new JButton("Register!");
+												btnRegister.setForeground(new Color(255, 255, 0));
 												btnRegister.setFont(new Font("STARWARS", Font.PLAIN, 15));
 												btnRegister.addMouseListener(new MouseAdapter() {
 													@Override
@@ -362,12 +378,13 @@ public class LoginPanel extends JPanel {
 													}
 												});
 												panel.add(btnRegister, "6, 11, fill, fill");
+														
+																lblIfYouDont = new JLabel("Click \"Register!\" if you don't have an account");
+																lblIfYouDont.setForeground(new Color(255, 255, 0));
+																lblIfYouDont.setFont(new Font("STARWARS", Font.PLAIN, 10));
+																panel.add(lblIfYouDont, "4, 13, 6, 3, center, fill");
 												
 	
-												lblNewLabel = new JLabel("test");
-												lblNewLabel.setBounds(0, 0, 650, 650);
-												lblNewLabel.setIcon(new ImageIcon("img/starWarsBackground.gif"));
-												//panel.add(lblNewLabel);
 												
 		
 	}
