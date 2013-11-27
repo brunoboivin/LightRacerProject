@@ -114,11 +114,13 @@ public class RegistrationFrame extends JFrame {
 		lblUsername.setFont(new Font("STARWARS", Font.PLAIN, 17));
 
 		passwordField = new JPasswordField();
+		passwordField.setCaretColor(new Color(255, 255, 0));
 		passwordField.setForeground(new Color(255, 255, 0));
 		passwordField.setBackground(new Color(0, 0, 0));
 		passwordField.setBounds(132, 113, 134, 29);
 
 		usernameField = new JTextField();
+		usernameField.setCaretColor(new Color(255, 255, 0));
 		usernameField.setForeground(new Color(255, 255, 0));
 		usernameField.setBackground(new Color(0, 0, 0));
 		usernameField.setBounds(132, 73, 134, 28);
