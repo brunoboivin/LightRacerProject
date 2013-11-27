@@ -63,7 +63,7 @@ public class GridPanel extends JPanel
 	
 	public int heightSize()
 	{
-		return ROW_COUNT* TILE_SIZE;
+		return (ROW_COUNT* TILE_SIZE);
 	}
 	/**
 	 * Clears all of the cells on the board and sets their values to null. this has to be done by the Grid Class

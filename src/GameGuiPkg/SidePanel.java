@@ -87,7 +87,7 @@ public class SidePanel extends JPanel {
 		
 		this.game = game;
 		this.HEIGHT=height;
-		setPreferredSize(new Dimension(WIDTH, height));
+		setPreferredSize(new Dimension(WIDTH,height));
 		
 		setBackground(new Color(211, 211, 211));
 		setLayout(null);

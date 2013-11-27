@@ -21,6 +21,8 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import java.awt.Color;
+import javax.swing.ImageIcon;
+import java.awt.Label;
 
 public class MainMenuPanel extends JPanel {
 
@@ -51,48 +53,34 @@ public class MainMenuPanel extends JPanel {
 			new RowSpec[] {
 				RowSpec.decode("25px"),
 				RowSpec.decode("70px"),
+				RowSpec.decode("6px"),
+				RowSpec.decode("40px"),
+				RowSpec.decode("6px"),
+				RowSpec.decode("260px"),
 				RowSpec.decode("5px"),
 				RowSpec.decode("40px"),
-				RowSpec.decode("5px"),
+				RowSpec.decode("6px"),
 				RowSpec.decode("40px"),
-				RowSpec.decode("5px"),
-				RowSpec.decode("40px"),
-				RowSpec.decode("5px"),
-				RowSpec.decode("40px"),
-				RowSpec.decode("40px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("6px"),
 				RowSpec.decode("75px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("6px"),
 				RowSpec.decode("40px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,}));
+				RowSpec.decode("25px"),}));
 		
-		JLabel lblNewLabel_1 = new JLabel("MAIN MENU");
-		lblNewLabel_1.setForeground(new Color(255, 255, 0));
-		lblNewLabel_1.setFont(new Font("STARWARS", Font.BOLD, 30));
-		panel.add(lblNewLabel_1, "4, 2, 5, 1, center, fill");
+		JLabel lblMainMenu = new JLabel("MAIN MENU");
+		lblMainMenu.setForeground(new Color(255, 255, 0));
+		lblMainMenu.setFont(new Font("STARWARS", Font.BOLD, 30));
+		panel.add(lblMainMenu, "4, 2, 5, 1, center, fill");
 		
-		JLabel lblPlayer = new JLabel((UserManagement.user1).getUsername());
-		lblPlayer.setForeground(new Color(255, 99, 71));
-		lblPlayer.setFont(new Font("STARWARS", Font.BOLD, 17));
-		panel.add(lblPlayer, "4, 4, center, fill");
+		JLabel lblPlayerDV = new JLabel((UserManagement.user1).getUsername());
+		lblPlayerDV.setForeground(new Color(255, 99, 71));
+		lblPlayerDV.setFont(new Font("STARWARS", Font.BOLD, 17));
+		panel.add(lblPlayerDV, "4, 4, center, fill");
 		
-		JLabel lblNewLabel = new JLabel(UserManagement.user2.getUsername());
-		lblNewLabel.setForeground(new Color(144, 238, 144));
-		lblNewLabel.setFont(new Font("STARWARS", Font.BOLD, 17));
-		panel.add(lblNewLabel, "8, 4, center, fill");
+		JLabel lblPlayerY = new JLabel(UserManagement.user2.getUsername());
+		lblPlayerY.setForeground(new Color(144, 238, 144));
+		lblPlayerY.setFont(new Font("STARWARS", Font.BOLD, 17));
+		panel.add(lblPlayerY, "8, 4, center, fill");
 		
 		JButton btnPlayerStats = new JButton("Statistics");
 		btnPlayerStats.setBackground(new Color(0, 0, 0));
@@ -106,10 +94,15 @@ public class MainMenuPanel extends JPanel {
 				((MainFrame) getTopLevelAncestor()).swapView("playerStatsPanel");
 			}
 		});
-		panel.add(btnPlayerStats, "6, 6, fill, fill");
 		
-		JLabel label = new JLabel("");
-		panel.add(label, "2, 8, center, center");
+		JLabel MainDarthVader = new JLabel("");
+		MainDarthVader.setIcon(new ImageIcon("img/Main_Vader.png"));
+		panel.add(MainDarthVader, "4, 6, 2, 1, left, center");
+		
+		JLabel MainYoda = new JLabel("");
+		MainYoda.setIcon(new ImageIcon("img/Main_Yoda.png"));
+		panel.add(MainYoda, "7, 6, 2, 1, right, center");
+		panel.add(btnPlayerStats, "6, 8, fill, fill");
 		
 		JButton btnChooseMap = new JButton("Choose map");
 		btnChooseMap.setForeground(new Color(255, 255, 0));
@@ -123,7 +116,7 @@ public class MainMenuPanel extends JPanel {
 				//lblSelectedMap.setText("");
 			}
 		});
-		panel.add(btnChooseMap, "6, 8, fill, fill");
+		panel.add(btnChooseMap, "6, 10, fill, fill");
 		
 		
 		final JLabel lblSelectedMap = new JLabel("");
@@ -136,10 +129,10 @@ public class MainMenuPanel extends JPanel {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				TronGame tron = new TronGame(UserManagement.user1, UserManagement.user2, MainFrame.grid);
+				new TronGame(UserManagement.user1, UserManagement.user2, MainFrame.grid);
 			}
 		});
-		panel.add(btnNewButton, "4, 23, 5, 1, fill, fill");
+		panel.add(btnNewButton, "4, 12, 5, 1, fill, fill");
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setBackground(new Color(0, 0, 0));
@@ -151,6 +144,6 @@ public class MainMenuPanel extends JPanel {
 				((MainFrame) getTopLevelAncestor()).swapView("loginPanel");
 			}
 		});
-		panel.add(btnBack, "6, 27, fill, fill");
+		panel.add(btnBack, "6, 14, fill, fill");
 	}
 }

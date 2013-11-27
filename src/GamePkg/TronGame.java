@@ -1,6 +1,7 @@
 package GamePkg;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -113,12 +114,18 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		 * Initialize the game's panels and add them to the window.
 		 */
 		this.board = new GridPanel(this,gameGrid);
+	//	System.out.println("height is"+TronGame.HEIGHT);
 		this.side = new SidePanel(this,board.heightSize());
+		
+		//setPreferredSize(new Dimension(305+board.getGridPanelCol()*13,board.heightSize()));
+		
 		
 		add(board, BorderLayout.CENTER);
 		
 		add(side, BorderLayout.WEST);
 		
+		
+		this.pack();
 		/*
 		 * Adds a new key listener to the frame to process input. 
 		 */
@@ -134,7 +141,9 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		 * e
 		 * screen and display it.
 		 */
-		pack();
+		
+		
+		//System.out.println("height is"+TronGame.HEIGHT);
 		setVisible(true);
 		setLocationRelativeTo(null);
 		//setVisible(true);
@@ -467,7 +476,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		this.logicTimer = new Clock(30.0f);
 		this.status.setNewGame(true);
 		this.status.setRoundOver(false);
-		
+		this.pack();
 		
 		//Set the timer to paused initially.
 		logicTimer.setPaused(true);
