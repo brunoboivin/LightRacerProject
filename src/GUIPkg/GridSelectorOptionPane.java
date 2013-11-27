@@ -20,6 +20,8 @@ import javax.swing.JRadioButton;
 
 import GridPkg.Grid;
 import GridPkg.GridCell;
+import java.awt.Rectangle;
+import java.awt.Font;
 
 
 public class GridSelectorOptionPane {
@@ -77,6 +79,8 @@ public class GridSelectorOptionPane {
 
 		//Level 2: Load OptionPane (within Dialog)
 		this.optionPane = new JOptionPane();
+		optionPane.setFont(new Font("STARWARS", Font.PLAIN, 17));
+		optionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
 		
 	    this.optionPane.setMessage("SELECT A MAP");
 //	    this.optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
@@ -89,10 +93,12 @@ public class GridSelectorOptionPane {
 	    this.optionPane.add(mainPanel);
 	    
 	    this.previewContainerPanel = new JPanel(new CardLayout());
+	   // previewContainerPanel.setBounds(new Rectangle(0, 0, 375, 0));
 	    this.previewContainerPanel.setBorder(BorderFactory.createLineBorder(Color.gray));
+	    this.previewContainerPanel.setBounds(0, 0, 375, 250);
 	    this.previewContainerPanel.setBackground(Color.gray);
 	    this.optionPane.add(this.previewContainerPanel);
-	    
+	    //this.pack();
 	    //Level 4: Load Elements (within Panels)
 	    initializeSelection ();
 		initializePreview ();
@@ -200,37 +206,11 @@ public class GridSelectorOptionPane {
 		int rowCount = gridPreview.getGridRow();
 		int colCount = gridPreview.getGridCol();
 		
-		JPanel[][] cellsToDisplay = new JPanel[colCount][rowCount];   
-	    Dimension dim=new Dimension(5,5);
-    	for(int i = 0; i < colCount; i++) {
- 	       for(int j = 0; j < rowCount; j++) {
- 	    	  cellsToDisplay[i][j] = new JPanel();
- 	    	  cellsToDisplay[i][j].setPreferredSize(dim);
- 	          if(cellsPreview [i][j] == GridCell.Obstacle){
- 	        	 cellsToDisplay[i][j].setBackground(Color.decode("#A8E2FF"));
- 	          }
- 	          else{
- 	        	 cellsToDisplay[i][j].setBackground(Color.lightGray);
- 	          }
- 	    	  mapPreview.add(cellsToDisplay[i][j]);
- 	       }  
- 	    }
-		
-		JPanel[][] cellsToDisplayRotate = new JPanel[cellsToDisplay[0].length][cellsToDisplay.length];
-		
-		for(int i=0; i<cellsToDisplay[0].length; i++){
-	        for(int j=cellsToDisplay.length-1; j>=0; j--){
-	        	cellsToDisplayRotate[i][j] = cellsToDisplay[j][i];
-	        }
-	    }
-
-    	for(int i = 0; i < cellsToDisplayRotate.length; i++) {
-   	       for(int j = 0; j < cellsToDisplayRotate[i].length; j++) {
-   	    	   mapPreview.add(cellsToDisplayRotate[i][j]);
-   	       }
-   	    }
-    	
-     	this.previewContainerPanel.add (mapPreview, mapName);
+		PreviewGrid gridPrev=new PreviewGrid(cellsPreview);
+		gridPrev.repaint();
+     	this.previewContainerPanel.add (gridPrev, mapName);
+     	//gridPrev.setLayout(null);
+     	//pack();
 	}
 	
 	
