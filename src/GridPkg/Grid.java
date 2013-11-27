@@ -36,7 +36,7 @@ public class Grid {
 	}	
 	
 	
-	public void promptMapSelection (Grid currentGrid) {
+	public static Grid promptMapSelection (Grid currentGrid) {
 			
 		//Prompt user to select a map
 		GridSelectorOptionPane selectGrid = new GridSelectorOptionPane();
@@ -47,9 +47,7 @@ public class Grid {
 		if (selectGrid.getSelectedMapPath() != null){
 			currentGrid.setGridCells(selectGrid.getSelectedGridCells());
 		} 
-		else{
-			System.out.println("NULL");
-		}
+		return currentGrid;
 	}	
 	
 	

@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import UserPkg.User;
 import UserPkg.UserManagement;
 import GUIPkg.GridSelectorOptionPane;
+import GridPkg.Grid;
+
 import javax.swing.BoxLayout;
 
 public class MainFrame extends JFrame{
@@ -18,6 +20,7 @@ public class MainFrame extends JFrame{
 	public static MainMenuPanel mainMenuPanel;
 	public static PlayerStatsPanel playerStatsPanel;
 	public static TopTenPanel topTenPanel;
+	public static Grid grid;
 	static CardLayout cardLayout;
 	public static JPanel deck = new JPanel();
 	private JPanel contentPane;
@@ -49,6 +52,8 @@ public class MainFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = (JPanel) getContentPane();
 		
+		
+		grid = new Grid();
 		deck.setLayout(cardLayout = new CardLayout());
 		
 		LoginPanel loginPanel = new LoginPanel();

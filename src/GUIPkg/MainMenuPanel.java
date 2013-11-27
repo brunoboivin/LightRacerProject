@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import GamePkg.TronGame;
+import GridPkg.Grid;
 import UserPkg.User;
 import UserPkg.UserManagement;
 
@@ -20,7 +21,9 @@ public class MainMenuPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	
 	public MainMenuPanel() {
+		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 				
 		JPanel panel = new JPanel();
@@ -31,7 +34,7 @@ public class MainMenuPanel extends JPanel {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				TronGame tron = new TronGame(UserManagement.user1, UserManagement.user2);
+				TronGame tron = new TronGame(UserManagement.user1, UserManagement.user2, MainFrame.grid);
 			}
 		});
 		btnNewButton.setBounds(168, 124, 112, 44);
@@ -103,8 +106,9 @@ public class MainMenuPanel extends JPanel {
 		btnChooseMap.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				GridSelectorOptionPane gridSelector = new GridSelectorOptionPane();
-				lblSelectedMap.setText("");
+				//GridSelectorOptionPane gridSelector = new GridSelectorOptionPane();
+				MainFrame.grid = Grid.promptMapSelection(MainFrame.grid);
+				//lblSelectedMap.setText("");
 			}
 		});
 		btnChooseMap.setBounds(307, 269, 121, 25);

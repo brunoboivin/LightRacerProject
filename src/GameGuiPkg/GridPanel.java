@@ -70,6 +70,7 @@ public class GridPanel extends JPanel
 	private void initGrid(Grid newGrid)
 	{
 		//this.game = tron;
+		this.gameGrid=newGrid;
 		this.cells = newGrid.getGridCells();
 		this.COL_COUNT = newGrid.getGridCol();
 		this.ROW_COUNT = newGrid.getGridRow();
@@ -82,8 +83,9 @@ public class GridPanel extends JPanel
 		//this.game = tron;
 	//	Grid grid = new Grid();
 		//Grid newGrid=prom
-		gameGrid.promptMapSelection(gameGrid);
-		initGrid(this.gameGrid);
+		Grid newGrid = Grid.promptMapSelection(gameGrid);
+		this.initGrid(newGrid);
+		
 		
 	}
 	

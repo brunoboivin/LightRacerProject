@@ -46,6 +46,7 @@ public class LoginPanel extends JPanel {
 	boolean btn2AsLogout = false;
 	UserLoginStatus loginResult;
 	Color diabledField, enabledField;
+	private JButton btnTopPlayers;
 
 	/**
 	 * Create the frame.
@@ -305,5 +306,17 @@ public class LoginPanel extends JPanel {
 		panel.add(lblLogin);
 
 		add(panel);
+		
+		btnTopPlayers = new JButton("Top 10 players");
+		btnTopPlayers.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainFrame.topTenPanel = new TopTenPanel();
+			    (MainFrame.deck).add("topTenPanel", MainFrame.topTenPanel);
+				((MainFrame) getTopLevelAncestor()).swapView("topTenPanel");
+			}
+		});
+		btnTopPlayers.setBounds(6, 234, 117, 29);
+		panel.add(btnTopPlayers);
 	}
 }
