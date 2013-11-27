@@ -3,6 +3,8 @@ package GameGuiPkg;
 import javax.swing.JPanel;
 import java.awt.Canvas;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.List;
 import javax.swing.JLabel;
 
@@ -61,20 +63,21 @@ public class SidePanel extends JPanel {
 	
 	
 	
-	private static final int CONTROLS_OFFSET = 390;
+	private static final int CONTROLS_OFFSET = 430;
 	
 	private static final int MESSAGE_STRIDE = 40;
 	
 	private static final int SIDE_OFFSET = 20;
 	private int WIDTH=305;
-	
+	private int HEIGHT;
+	private Image backgroundImg;
 	/**
 	 * The small font to draw with.
 	 */
 	private static final Font SMALL_FONT = new Font("STARWARS", Font.PLAIN, 15);
 	private static final Font HEADER_FONT = new Font("STARWARS", Font.PLAIN, 20);
-	private static final Font TITLE_FONT = new Font("STARWARS", Font.PLAIN, 40);
-	private static final Color TEXT_COLOR=new Color(25, 25, 112);
+	private static final Font TITLE_FONT = new Font("STARWARS", Font.PLAIN, 30);
+	private static final Color TEXT_COLOR=new Color(255, 255, 0);
 	//private 
 	/**
 	 * Create the panel.
@@ -83,14 +86,18 @@ public class SidePanel extends JPanel {
 	{
 		
 		this.game = game;
-		
+		this.HEIGHT=height;
 		setPreferredSize(new Dimension(WIDTH, height));
+		
 		setBackground(new Color(211, 211, 211));
 		setLayout(null);
 		this.YODA=game.yodaUser;
 		this.DARTHVADER=game.darthUser;
 		paintHeaders(1);
-	
+		
+		ImageIcon background = new ImageIcon("img/starWarsBackground.gif");
+		
+		backgroundImg=background.getImage();
 		
 	
 	}
@@ -98,7 +105,7 @@ public class SidePanel extends JPanel {
 	{
 		
 		
-		JLabel lblLightBattles = DefaultComponentFactory.getInstance().createTitle("Light Battles");
+		JLabel lblLightBattles = DefaultComponentFactory.getInstance().createTitle("LIGHT BATTLES");
 		lblLightBattles.setBounds(0, 0, WIDTH, 50);
 		add(lblLightBattles);
 		lblLightBattles.setForeground(TEXT_COLOR);
@@ -174,6 +181,10 @@ public class SidePanel extends JPanel {
 		super.paintComponent(g);
 		
 		
+		//g.drawImage(backgroundImg,0,0,null);
+		Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(backgroundImg, 0, 0,WIDTH,HEIGHT, this); 
+		
 		//ID winner=this.game.winnerId();
 		int round=this.game.status.getRoundNumber();
 		//System.out.println("current round is "+round);
@@ -213,8 +224,9 @@ public class SidePanel extends JPanel {
 		
 		}
 		
-		
+			
 			g.setColor(TEXT_COLOR);
+			g.drawLine(0, CONTROLS_OFFSET-30, WIDTH,CONTROLS_OFFSET-30 );
 			g.setFont(HEADER_FONT);
 			g.drawString("Controls", SIDE_OFFSET, CONTROLS_OFFSET);
 			g.setFont(SMALL_FONT);
