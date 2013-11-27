@@ -53,7 +53,7 @@ public class MainMenuPanel extends JPanel {
 		btnTopPlayers.setBounds(307, 234, 121, 23);
 		panel.add(btnTopPlayers);
 		
-		JLabel lblPlayer = new JLabel(UserManagement.user1.getUsername());
+		JLabel lblPlayer = new JLabel((UserManagement.user1).getUsername());
 		lblPlayer.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblPlayer.setBounds(44, 57, 72, 38);
 		panel.add(lblPlayer);
