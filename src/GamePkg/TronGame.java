@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import RacerPkg.*;
 import StatisticsPkg.Statistics;
 import UserPkg.User;
+import GUIPkg.MainFrame;
 import GameGuiPkg.GridPanel;
 import GameGuiPkg.SidePanel;
 import GridPkg.*;
@@ -443,6 +444,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 			case KeyEvent.VK_ESCAPE:
 				if(status.isGameOver() || status.isNewGame())
 					{	
+						MainFrame.grid = new Grid();
 						this.dispose();
 					}
 				break;
