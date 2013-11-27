@@ -102,12 +102,19 @@ public class StatisticsPanel extends JPanel {
 		lblGamesPlayed.setBackground(new Color(0, 0, 0));
 		lblGamesPlayed.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGamesPlayed.setFont(new Font("Dialog", Font.PLAIN, 18));
-		lblGamesPlayed.setBounds(253, 230, 133, 27);
+		lblGamesPlayed.setBounds(253, 230, 148, 27);
 		panel.add(lblGamesPlayed);
 		
+		JLabel label = new JLabel(pairRecord.getGamesWonPlayerA() + " - " + pairRecord.getGamesWonPlayerB());
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Dialog", Font.BOLD, 19));
+		label.setSize(88, 40);
+		label.setLocation(286, 133);
+		label.setForeground(new Color(255, 255, 0));
+		label.setBackground(new Color(0, 0, 0));
 		JLabel pairScore = 
 				pairRecord.getPlayerA().equals(userA.getUsername()) //condition
-				? new JLabel(pairRecord.getGamesWonPlayerA() + " - " + pairRecord.getGamesWonPlayerB()) //result if true
+				? label //result if true
 				: new JLabel(pairRecord.getGamesWonPlayerB() + " - " + pairRecord.getGamesWonPlayerA()); //result if false
 		pairScore.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		pairScore.setHorizontalAlignment(SwingConstants.CENTER);
@@ -149,10 +156,11 @@ public class StatisticsPanel extends JPanel {
 		panel.add(lblPairScores);
 		
 		JLabel lblNewLabel = new JLabel("STATISTICS");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("STARWARS", Font.BOLD, 30));
 		lblNewLabel.setBackground(new Color(0, 0, 0));
 		lblNewLabel.setForeground(new Color(255, 255, 0));
-		lblNewLabel.setBounds(235, 17, 196, 72);
+		lblNewLabel.setBounds(213, 17, 223, 72);
 		panel.add(lblNewLabel);
 	}
 
