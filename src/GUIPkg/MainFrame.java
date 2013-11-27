@@ -18,7 +18,7 @@ import javax.swing.BoxLayout;
 public class MainFrame extends JFrame{
 
 	public static MainMenuPanel mainMenuPanel;
-	public static PlayerStatsPanel playerStatsPanel;
+	public static StatisticsPanel playerStatsPanel;
 	public static TopTenPanel topTenPanel;
 	public static Grid grid;
 	static CardLayout cardLayout;

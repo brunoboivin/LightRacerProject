@@ -3,22 +3,26 @@ package GUIPkg;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
 import StatisticsPkg.PairRecord;
 import StatisticsPkg.PlayerRecord;
 import StatisticsPkg.Statistics;
 import UserPkg.User;
 
-public class PlayerStatsPanel extends JPanel {
+public class StatisticsPanel extends JPanel {
 	
 	/**
 	 * Panel used to display both individual and pair scores.
 	 */
-	public PlayerStatsPanel(final User userA, final User userB) {
+	public StatisticsPanel(final User userA, final User userB) {
 		setBounds(100, 100, 322, 241);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
@@ -86,16 +90,20 @@ public class PlayerStatsPanel extends JPanel {
 		pairScore.setBounds(116, 9, 76, 33);
 		add(pairScore);
 		
+		JScrollPane scrollPane = new JScrollPane(TopTenPanel.createTable());
+		scrollPane.setBounds(13, 170, 388, 184);
+		add(scrollPane);	
+		
 		//close button
-		JButton btnClose = new JButton("Back");
-		btnClose.addMouseListener(new MouseAdapter() {
+		JButton btnBack = new JButton("Back");
+		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				((MainFrame)getTopLevelAncestor()).swapView("mainMenuPanel");
 			}
 		});
-		btnClose.setBounds(10, 192, 89, 23);
-		add(btnClose);
+		btnBack.setBounds(10, 300, 89, 23);
+		add(btnBack);
 	}
 
 }

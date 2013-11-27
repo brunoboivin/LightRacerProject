@@ -112,7 +112,7 @@ public class LoginPanel extends JPanel {
 					((MainFrame) getTopLevelAncestor()).swapView("mainMenuPanel");
 					
 					//add PlayerStatsPanel to MainFrame
-					MainFrame.playerStatsPanel = new PlayerStatsPanel(UserManagement.user1, UserManagement.user2);
+					MainFrame.playerStatsPanel = new StatisticsPanel(UserManagement.user1, UserManagement.user2);
 				    (MainFrame.deck).add("playerStatsPanel", MainFrame.playerStatsPanel);
 				}
 			}
