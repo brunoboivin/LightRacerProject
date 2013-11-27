@@ -84,10 +84,11 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	/**
 	 * The constructor of the TronGame which initializes
 	 * the frame and its components.
-	 * @param asDarthVader
-	 * @param asYoda
+	 * @param User as DarthVader
+	 * @param User asYoda
+	 * @param The Game Grid
 	 */
-	public TronGame(User asDarthVader,User asYoda) 
+	public TronGame(User asDarthVader,User asYoda, Grid gameGrid) 
 	{
 		super("Light Battles Demo");
 		setLayout(new BorderLayout());
@@ -110,7 +111,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		/*
 		 * Initialize the game's panels and add them to the window.
 		 */
-		this.board = new GridPanel(this);
+		this.board = new GridPanel(this,gameGrid);
 		this.side = new SidePanel(this,this.board.getGridPanelRow());
 		
 		add(board, BorderLayout.CENTER);
@@ -329,7 +330,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	{
 		User uA=new User("darthVader","a");
 		User uB=new User("yoda","b");
-		new TronGame(uA,uB);
+	//	new TronGame(uA,uB);
 		//tron.startGame(userA,userB);
 	}
 	
@@ -434,7 +435,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 			case KeyEvent.VK_ENTER:
 				if(status.isRoundOver() || status.isGameOver() || status.isNewGame())
 				{
-					this.board.changeGrid(this);
+					this.board.changeGrid();
 					this.board.repaint();
 					//resetGame();
 				}

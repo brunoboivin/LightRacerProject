@@ -43,18 +43,18 @@ public class GridPanel extends JPanel
 	private static final Color TEXT_COLOR=new Color(25, 25, 112);
 	
 	private TronGame game;
-	private Grid grid;
+	private Grid gameGrid;
 	/**
 	 * Creates a new GridPanel instance.
 	 * @param game The TronGame instance.
 	 */
 	//private GameStatus status;
 	
-	public GridPanel(TronGame game) 
+	public GridPanel(TronGame game, Grid grid) 
 	{
 		this.game = game;
-		this.grid = new Grid();
-		this.changeGrid(game);
+		this.gameGrid = grid;
+		this.initGrid(this.gameGrid);
 		
 		
 		setPreferredSize(new Dimension(COL_COUNT * TILE_SIZE, ROW_COUNT * TILE_SIZE));
@@ -67,18 +67,24 @@ public class GridPanel extends JPanel
 	public void clearBoard() {
 		Grid.resetGrid(this.cells);
 	}
-	
+	private void initGrid(Grid newGrid)
+	{
+		//this.game = tron;
+		this.cells = newGrid.getGridCells();
+		this.COL_COUNT = newGrid.getGridCol();
+		this.ROW_COUNT = newGrid.getGridRow();
+	}
 	/**
 	 * 
 	 */
-	public void changeGrid(TronGame tron)
+	public void changeGrid()
 	{
-		this.game = tron;
+		//this.game = tron;
 	//	Grid grid = new Grid();
-		grid.promptMapSelection(grid);
-		this.cells = grid.getGridCells();
-		this.COL_COUNT = grid.getGridCol();
-		this.ROW_COUNT = grid.getGridRow();
+		//Grid newGrid=prom
+		gameGrid.promptMapSelection(gameGrid);
+		initGrid(this.gameGrid);
+		
 	}
 	
 	/**
