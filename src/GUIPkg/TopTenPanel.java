@@ -72,13 +72,13 @@ public class TopTenPanel extends JPanel {
 		lblTopPlayers.setBackground(new Color(0, 0, 0));
 		lblTopPlayers.setForeground(new Color(255, 255, 0));
 		lblTopPlayers.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTopPlayers.setFont(new Font("Dialog", Font.BOLD, 30));
+		lblTopPlayers.setFont(new Font("STARWARS", Font.BOLD, 30));
 		lblTopPlayers.setBounds(199, 46, 259, 61);
 		container.add(lblTopPlayers);
 
 		//back button
 		JButton btnBack = new JButton("Back");
-		btnBack.setFont(new Font("Dialog", Font.PLAIN, 20));
+		btnBack.setFont(new Font("STARWARS", Font.PLAIN, 20));
 		btnBack.setBackground(new Color(0, 0, 0));
 		btnBack.setForeground(new Color(255, 255, 0));
 		btnBack.setBounds(261, 510, 134, 50);
