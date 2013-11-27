@@ -113,7 +113,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		 * Initialize the game's panels and add them to the window.
 		 */
 		this.board = new GridPanel(this,gameGrid);
-		this.side = new SidePanel(this,this.board.getGridPanelRow());
+		this.side = new SidePanel(this,board.heightSize());
 		
 		add(board, BorderLayout.CENTER);
 		
@@ -331,7 +331,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	{
 		User uA=new User("darthVader","a");
 		User uB=new User("yoda","b");
-	//	new TronGame(uA,uB);
+	    new TronGame(uA,uB,new Grid());
 		//tron.startGame(userA,userB);
 	}
 	

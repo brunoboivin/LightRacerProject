@@ -84,7 +84,7 @@ public class SidePanel extends JPanel {
 		
 		this.game = game;
 		
-		setPreferredSize(new Dimension(WIDTH, height* GridPanel.TILE_SIZE));
+		setPreferredSize(new Dimension(WIDTH, height));
 		setBackground(new Color(211, 211, 211));
 		setLayout(null);
 		this.YODA=game.yodaUser;
