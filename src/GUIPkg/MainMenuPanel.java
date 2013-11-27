@@ -93,6 +93,21 @@ public class MainMenuPanel extends JPanel {
 		});
 		btnPlayerStats.setBounds(307, 199, 121, 23);
 		panel.add(btnPlayerStats);
-
+		
+		
+		final JLabel lblSelectedMap = new JLabel("");
+		lblSelectedMap.setBounds(168, 269, 97, 19);
+		panel.add(lblSelectedMap);
+		
+		JButton btnChooseMap = new JButton("Choose map");
+		btnChooseMap.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				GridSelectorOptionPane gridSelector = new GridSelectorOptionPane();
+				lblSelectedMap.setText("");
+			}
+		});
+		btnChooseMap.setBounds(307, 269, 121, 25);
+		panel.add(btnChooseMap);
 	}
 }

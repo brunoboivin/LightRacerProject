@@ -2,6 +2,8 @@ package GridPkg;
 
 import java.io.IOException;
 
+import GUIPkg.GridSelectorOptionPane;
+
 //import java.util.Vector;
 
 public class Grid {
@@ -37,7 +39,7 @@ public class Grid {
 	public void promptMapSelection (Grid currentGrid) {
 			
 		//Prompt user to select a map
-		GridSelectorGUI selectGrid = new GridSelectorGUI();
+		GridSelectorOptionPane selectGrid = new GridSelectorOptionPane();
 		
 //		//Add obstacles corresponding to the selected map
 //		addObstacles(selectGrid.getSelectedMapPath());

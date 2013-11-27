@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 import UserPkg.User;
 import UserPkg.UserManagement;
-import GridPkg.GridSelectorGUI;
+import GUIPkg.GridSelectorOptionPane;
 import javax.swing.BoxLayout;
 
 public class MainFrame extends JFrame{
