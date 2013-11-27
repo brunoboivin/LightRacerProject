@@ -48,6 +48,7 @@ public class MainFrame extends JFrame{
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = (JPanel) getContentPane();
+		
 		deck.setLayout(cardLayout = new CardLayout());
 		
 		LoginPanel loginPanel = new LoginPanel();
@@ -55,8 +56,7 @@ public class MainFrame extends JFrame{
 		
 		deck.add("loginPanel", loginPanel);
 		loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.X_AXIS));
-		mainMenuPanel = new MainMenuPanel();
-	    deck.add("mainMenuPanel", mainMenuPanel);
+
 //		deck.add("mainMenuPanel", mainMenuPanel);
 //		if (mainMenuPanel != null && mainMenuPanel.isFocusOwner()) {
 //			mainMenuPanel.revalidate();
