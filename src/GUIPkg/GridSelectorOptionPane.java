@@ -2,6 +2,7 @@ package GUIPkg;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FileDialog;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -76,6 +77,7 @@ public class GridSelectorOptionPane {
 
 		//Level 2: Load OptionPane (within Dialog)
 		this.optionPane = new JOptionPane();
+		
 	    this.optionPane.setMessage("SELECT A MAP");
 //	    this.optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
 	    this.optionPane.setOptionType(JOptionPane.DEFAULT_OPTION);
@@ -199,10 +201,11 @@ public class GridSelectorOptionPane {
 		int colCount = gridPreview.getGridCol();
 		
 		JPanel[][] cellsToDisplay = new JPanel[colCount][rowCount];   
-	    
+	    Dimension dim=new Dimension(5,5);
     	for(int i = 0; i < colCount; i++) {
  	       for(int j = 0; j < rowCount; j++) {
  	    	  cellsToDisplay[i][j] = new JPanel();
+ 	    	  cellsToDisplay[i][j].setPreferredSize(dim);
  	          if(cellsPreview [i][j] == GridCell.Obstacle){
  	        	 cellsToDisplay[i][j].setBackground(Color.decode("#A8E2FF"));
  	          }
