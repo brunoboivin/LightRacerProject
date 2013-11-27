@@ -102,7 +102,7 @@ public class StatisticsPanel extends JPanel {
 				((MainFrame)getTopLevelAncestor()).swapView("mainMenuPanel");
 			}
 		});
-		btnBack.setBounds(10, 300, 89, 23);
+		btnBack.setBounds(10, 140, 89, 23);
 		add(btnBack);
 	}
 
