@@ -60,7 +60,7 @@ public class MainMenuPanel extends JPanel {
 		btnPlayerStats.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MainFrame.playerStatsPanel = new PlayerStatsPanel(UserManagement.user1, UserManagement.user2);
+				MainFrame.playerStatsPanel = new StatisticsPanel(UserManagement.user1, UserManagement.user2);
 			    (MainFrame.deck).add("playerStatsPanel", MainFrame.playerStatsPanel);
 				((MainFrame) getTopLevelAncestor()).swapView("playerStatsPanel");
 			}
