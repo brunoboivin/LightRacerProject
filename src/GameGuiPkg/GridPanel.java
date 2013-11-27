@@ -75,7 +75,7 @@ public class GridPanel extends JPanel
 	{
 		this.game = tron;
 	//	Grid grid = new Grid();
-		grid.promptMapSelection(grid);
+		grid.promptMapSelection();
 		this.cells = grid.getGridCells();
 		this.COL_COUNT = grid.getGridCol();
 		this.ROW_COUNT = grid.getGridRow();
@@ -191,6 +191,7 @@ public class GridPanel extends JPanel
 				headerMsg	="Welcome!";
 				spaceMsg=spaceMsg+"Start the game";
 				roundMsg=roundMsg+game.status.getRoundNumber();
+				escMsg ="ESC : Go back to the Main Menu ";
 			} 
 			else if (game.status.isRoundOver())
 			{

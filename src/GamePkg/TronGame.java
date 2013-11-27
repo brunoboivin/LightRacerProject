@@ -5,8 +5,11 @@ import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import RacerPkg.*;
 import StatisticsPkg.Statistics;
@@ -85,7 +88,12 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	{
 		super("Tron Prototype1");
 		setLayout(new BorderLayout());
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		
+		
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
 		
 		setResizable(false);
 		//setVisible(true);
@@ -429,7 +437,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 				}
 				break;
 			case KeyEvent.VK_ESCAPE:
-				if(status.isGameOver())
+				if(status.isGameOver() || status.isNewGame())
 					{	
 						this.dispose();
 					}
