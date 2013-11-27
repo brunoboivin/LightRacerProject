@@ -1,5 +1,6 @@
 package GUIPkg;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -16,6 +17,7 @@ import StatisticsPkg.PairRecord;
 import StatisticsPkg.PlayerRecord;
 import StatisticsPkg.Statistics;
 import UserPkg.User;
+import java.awt.Color;
 
 public class StatisticsPanel extends JPanel {
 	
@@ -23,9 +25,15 @@ public class StatisticsPanel extends JPanel {
 	 * Panel used to display both individual and pair scores.
 	 */
 	public StatisticsPanel(final User userA, final User userB) {
-		setBounds(100, 100, 322, 241);
-		setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		setPreferredSize(new Dimension(650,650));
+		
 		setLayout(null);
+		
+		JBackgroundPanel panel = new JBackgroundPanel();
+		panel.setBounds(0, 24, 650, 650);
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
 		
 		//get stats
 		PlayerRecord playerRecord1 = Statistics.getPlayerStat(userA.getUsername());
@@ -34,52 +42,68 @@ public class StatisticsPanel extends JPanel {
 
 		//create labels and update their values using the records fetched from the csv file
 		JLabel username1 = new JLabel(playerRecord1.getUsername());
+		username1.setForeground(new Color(255, 255, 0));
+		username1.setBackground(new Color(0, 0, 0));
 		username1.setHorizontalAlignment(SwingConstants.CENTER);
-		username1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		username1.setBounds(10, 11, 110, 27);
-		add(username1);
+		username1.setFont(new Font("Dialog", Font.BOLD, 19));
+		username1.setBounds(95, 139, 142, 27);
+		panel.add(username1);
 		
 		JLabel username2 = new JLabel(playerRecord2.getUsername());
+		username2.setForeground(new Color(255, 255, 0));
+		username2.setBackground(new Color(0, 0, 0));
 		username2.setHorizontalAlignment(SwingConstants.CENTER);
-		username2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		username2.setBounds(187, 11, 110, 27);
-		add(username2);
+		username2.setFont(new Font("Dialog", Font.BOLD, 19));
+		username2.setBounds(421, 139, 133, 27);
+		panel.add(username2);
 		
 		JLabel gamesWonP1 = new JLabel(playerRecord1.getGamesWon()+"");
+		gamesWonP1.setForeground(new Color(255, 255, 0));
+		gamesWonP1.setBackground(new Color(0, 0, 0));
 		gamesWonP1.setHorizontalAlignment(SwingConstants.CENTER);
-		gamesWonP1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		gamesWonP1.setBounds(10, 63, 77, 27);
-		add(gamesWonP1);
+		gamesWonP1.setFont(new Font("Dialog", Font.PLAIN, 18));
+		gamesWonP1.setBounds(122, 191, 77, 27);
+		panel.add(gamesWonP1);
 		
 		JLabel gamesPlayedP1 = new JLabel(playerRecord1.getGamesPlayed()+"");
+		gamesPlayedP1.setBackground(new Color(0, 0, 0));
+		gamesPlayedP1.setForeground(new Color(255, 255, 0));
 		gamesPlayedP1.setHorizontalAlignment(SwingConstants.CENTER);
-		gamesPlayedP1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		gamesPlayedP1.setBounds(10, 113, 77, 27);
-		add(gamesPlayedP1);
+		gamesPlayedP1.setFont(new Font("Dialog", Font.PLAIN, 18));
+		gamesPlayedP1.setBounds(122, 230, 77, 27);
+		panel.add(gamesPlayedP1);
 		
 		JLabel gamesWonP2 = new JLabel(playerRecord2.getGamesWon()+"");
+		gamesWonP2.setForeground(new Color(255, 255, 0));
+		gamesWonP2.setBackground(new Color(0, 0, 0));
 		gamesWonP2.setHorizontalAlignment(SwingConstants.CENTER);
-		gamesWonP2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		gamesWonP2.setBounds(218, 63, 77, 27);
-		add(gamesWonP2);
+		gamesWonP2.setFont(new Font("Dialog", Font.PLAIN, 18));
+		gamesWonP2.setBounds(454, 191, 77, 27);
+		panel.add(gamesWonP2);
 		
 		JLabel gamesPlayedP2 = new JLabel(playerRecord2.getGamesPlayed()+"");
+		gamesPlayedP2.setForeground(new Color(255, 255, 0));
+		gamesPlayedP2.setBackground(new Color(0, 0, 0));
 		gamesPlayedP2.setHorizontalAlignment(SwingConstants.CENTER);
-		gamesPlayedP2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		gamesPlayedP2.setBounds(218, 113, 77, 27);
-		add(gamesPlayedP2);
+		gamesPlayedP2.setFont(new Font("Dialog", Font.PLAIN, 18));
+		gamesPlayedP2.setBounds(454, 230, 77, 27);
+		panel.add(gamesPlayedP2);
 		
 		JLabel lblGamesWon = new JLabel("Games Won");
+		lblGamesWon.setForeground(new Color(255, 255, 0));
+		lblGamesWon.setBackground(new Color(0, 0, 0));
 		lblGamesWon.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGamesWon.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblGamesWon.setBounds(116, 63, 77, 27);
-		add(lblGamesWon);
+		lblGamesWon.setFont(new Font("Dialog", Font.PLAIN, 18));
+		lblGamesWon.setBounds(262, 191, 124, 27);
+		panel.add(lblGamesWon);
 		
 		JLabel lblGamesPlayed = new JLabel("Games Played");
+		lblGamesPlayed.setForeground(new Color(255, 255, 0));
+		lblGamesPlayed.setBackground(new Color(0, 0, 0));
 		lblGamesPlayed.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGamesPlayed.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblGamesPlayed.setBounds(109, 113, 96, 27);
-		add(lblGamesPlayed);
+		lblGamesPlayed.setFont(new Font("Dialog", Font.PLAIN, 18));
+		lblGamesPlayed.setBounds(253, 230, 133, 27);
+		panel.add(lblGamesPlayed);
 		
 		JLabel pairScore = 
 				pairRecord.getPlayerA().equals(userA.getUsername()) //condition
@@ -88,22 +112,46 @@ public class StatisticsPanel extends JPanel {
 		pairScore.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		pairScore.setHorizontalAlignment(SwingConstants.CENTER);
 		pairScore.setBounds(116, 9, 76, 33);
-		add(pairScore);
+		panel.add(pairScore);
 		
 		JScrollPane scrollPane = new JScrollPane(TopTenPanel.createTable());
-		scrollPane.setBounds(13, 170, 388, 184);
-		add(scrollPane);	
+		scrollPane.setBounds(131, 343, 388, 184);
+		panel.add(scrollPane);	
 		
 		//close button
 		JButton btnBack = new JButton("Back");
+		btnBack.setFont(new Font("Dialog", Font.PLAIN, 17));
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				((MainFrame)getTopLevelAncestor()).swapView("mainMenuPanel");
 			}
 		});
-		btnBack.setBounds(10, 140, 89, 23);
-		add(btnBack);
+		btnBack.setBounds(253, 540, 142, 47);
+		panel.add(btnBack);
+		
+		add(panel);
+		
+		JLabel lblTop = new JLabel("Top 10");
+		lblTop.setFont(new Font("Dialog", Font.PLAIN, 25));
+		lblTop.setForeground(new Color(255, 255, 0));
+		lblTop.setBackground(new Color(0, 0, 0));
+		lblTop.setBounds(277, 284, 97, 47);
+		panel.add(lblTop);
+		
+		JLabel lblPairScores = new JLabel("Pair Scores");
+		lblPairScores.setBackground(new Color(0, 0, 0));
+		lblPairScores.setForeground(new Color(255, 255, 0));
+		lblPairScores.setFont(new Font("Dialog", Font.PLAIN, 25));
+		lblPairScores.setBounds(262, 82, 133, 61);
+		panel.add(lblPairScores);
+		
+		JLabel lblNewLabel = new JLabel("STATISTICS");
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 30));
+		lblNewLabel.setBackground(new Color(0, 0, 0));
+		lblNewLabel.setForeground(new Color(255, 255, 0));
+		lblNewLabel.setBounds(235, 17, 196, 72);
+		panel.add(lblNewLabel);
 	}
 
 }
