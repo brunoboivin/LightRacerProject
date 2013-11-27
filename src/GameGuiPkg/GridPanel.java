@@ -33,7 +33,7 @@ public class GridPanel extends JPanel
 	/**
 	 * The size of each tile in pixels.
 	 */
-	public static final int TILE_SIZE = 13;
+	public static final int CELL_SIZE = 13;
 	private static final Font FONT = new Font("STARWARS", Font.BOLD, 25);
 	/**
 	 * The array of cells that make up this board.
@@ -57,13 +57,13 @@ public class GridPanel extends JPanel
 		this.initGrid(this.gameGrid);
 		
 		
-		setPreferredSize(new Dimension(COL_COUNT * TILE_SIZE, ROW_COUNT * TILE_SIZE));
+		setPreferredSize(new Dimension(COL_COUNT * CELL_SIZE, ROW_COUNT * CELL_SIZE));
 		setBackground(Color.WHITE);
 	}
 	
 	public int heightSize()
 	{
-		return (ROW_COUNT* TILE_SIZE);
+		return (ROW_COUNT* CELL_SIZE);
 	}
 	/**
 	 * Clears all of the cells on the board and sets their values to null. this has to be done by the Grid Class
@@ -144,7 +144,7 @@ public class GridPanel extends JPanel
 				GridCell type = getCell(x, y);
 				if(type != null) 
 				{
-					drawCell(x * TILE_SIZE, y * TILE_SIZE, type, g);
+					drawCell(x * CELL_SIZE, y * CELL_SIZE, type, g);
 				}
 			}
 		}
@@ -189,7 +189,7 @@ public class GridPanel extends JPanel
 			 * Allocate the messages for and set their values based on the game
 			 * state.
 			 */
-			g.setColor(TEXT_COLOR);
+			g.setColor(Color.BLACK);
 			g.drawRect(200, centerY-200, 575, 325);
 			String headerMsg ="";
 			String gameMsg ="";
@@ -255,7 +255,7 @@ public class GridPanel extends JPanel
 		
 		case Obstacle:
 			g.setColor(Color.GRAY);
-			g.fillRect(x + 2, y + 2, TILE_SIZE - 1, TILE_SIZE - 1);
+			g.fillRect(x + 2, y + 2, CELL_SIZE - 1, CELL_SIZE - 1);
 			break;	
 		/*
 		 * The Racer1 body is depicted as a blue square that takes up the
@@ -264,25 +264,25 @@ public class GridPanel extends JPanel
 		case YodaIcon:
 			ImageIcon yoda = new ImageIcon("img/yodaRacer.gif");
 			Image yodaImg=yoda.getImage();
-			g.drawImage(yodaImg, x-10, y-10, TILE_SIZE+15, TILE_SIZE+15, null);
+			g.drawImage(yodaImg, x-10, y-10, CELL_SIZE+15, CELL_SIZE+15, null);
 			break;
 		
 		case DarthVaderIcon :
 			ImageIcon darthVader = new ImageIcon("img/darthVaderRacer.gif");
 			Image darthVaderImg=darthVader.getImage();
-			g.drawImage(darthVaderImg, x-10, y-10, TILE_SIZE+15, TILE_SIZE+15, null);
+			g.drawImage(darthVaderImg, x-10, y-10, CELL_SIZE+15, CELL_SIZE+15, null);
 			break;
 
 		case GreenLight:
 			//Fill the tile in with green.
 			g.setColor(new Color(144, 238, 144));
-			g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+			g.fillRect(x, y, CELL_SIZE, CELL_SIZE);
 			break;
 		
 		case RedLight:
 			//Fill the tile in with red.
 			g.setColor(new Color(255, 99, 71));
-			g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+			g.fillRect(x, y, CELL_SIZE, CELL_SIZE);
 			break;
 		
 			

@@ -26,6 +26,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+import java.awt.Cursor;
 
 public class LoginPanel extends JPanel {
 
@@ -109,6 +110,8 @@ public class LoginPanel extends JPanel {
 		//add(passwordField1, "4, 6, fill, fill");
 
 		passwordField2 = new JPasswordField();
+		passwordField2.setDisabledTextColor(new Color(0, 0, 0));
+		passwordField2.setCaretColor(new Color(255, 255, 0));
 		passwordField2.setForeground(new Color(255, 255, 255));
 		passwordField2.setBackground(new Color(0, 0, 0));
 		passwordField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -127,8 +130,11 @@ public class LoginPanel extends JPanel {
 		});
 		
 				passwordField1 = new JPasswordField();
+				passwordField1.setCaretColor(new Color(255, 255, 0));
+				passwordField1.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+				passwordField1.setDisabledTextColor(Color.BLACK);
 				passwordField1.setForeground(new Color(255, 255, 255));
-				passwordField1.setBackground(new Color(0, 0, 0));
+				passwordField1.setBackground(Color.BLACK);
 				passwordField1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 				passwordField1.setFocusTraversalKeysEnabled(false);
 				passwordField1.addKeyListener(new KeyAdapter() {
@@ -267,8 +273,10 @@ public class LoginPanel extends JPanel {
 		panel.add(btnLoginPlayer2, "8, 10, 3, 1, fill, fill");
 
 		usernameField1 = new JTextField();
+		usernameField1.setCaretColor(new Color(255, 255, 0));
+		usernameField1.setDisabledTextColor(Color.BLACK);
 		usernameField1.setForeground(new Color(255, 255, 255));
-		usernameField1.setBackground(new Color(0, 0, 0));
+		usernameField1.setBackground(Color.BLACK);
 		usernameField1.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		usernameField1.setFocusTraversalKeysEnabled(false);
 		usernameField1.addKeyListener(new KeyAdapter() {
@@ -289,6 +297,8 @@ public class LoginPanel extends JPanel {
 		usernameField1.setColumns(10);
 
 		usernameField2 = new JTextField();
+		usernameField2.setDisabledTextColor(new Color(0, 0, 0));
+		usernameField2.setCaretColor(new Color(255, 255, 0));
 		usernameField2.setForeground(new Color(255, 255, 255));
 		usernameField2.setBackground(new Color(0, 0, 0));
 		usernameField2.setFont(new Font("STARWARS", Font.PLAIN, 15));

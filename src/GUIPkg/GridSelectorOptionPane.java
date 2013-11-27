@@ -122,12 +122,15 @@ public class GridSelectorOptionPane {
 	
 	private void initializeSelection (){
 		this.map1 = new JRadioButton(this.MAP_NAME_1);
+		map1.setFont(new Font("STARWARS", Font.PLAIN, 11));
 		this.mainPanel.add(this.map1);
 		
 		this.map2 = new JRadioButton(this.MAP_NAME_2);
+		map2.setFont(new Font("STARWARS", Font.PLAIN, 11));
 		this.mainPanel.add(this.map2);
 		
 		this.map3 = new JRadioButton(this.MAP_NAME_3);
+		map3.setFont(new Font("STARWARS", Font.PLAIN, 11));
 		this.mainPanel.add(this.map3);
 	
 		this.buttonGroup = new ButtonGroup();
@@ -137,6 +140,7 @@ public class GridSelectorOptionPane {
 //		this.map1.setSelected(true);
 		
 		this.customMap = new JButton("Select File");
+		customMap.setFont(new Font("STARWARS", Font.PLAIN, 11));
 		this.selectFile = new FileDialog(this.dialog, "Select a map file");
 	    
 	    setButtonActions (this.customMap, this.MAP_NAME_4);
@@ -203,8 +207,8 @@ public class GridSelectorOptionPane {
 	    	this.gridCellsCustom = cellsPreview;
 	    }
 		
-		int rowCount = gridPreview.getGridRow();
-		int colCount = gridPreview.getGridCol();
+		//int rowCount = gridPreview.getGridRow();
+		//int colCount = gridPreview.getGridCol();
 		
 		PreviewGrid gridPrev=new PreviewGrid(cellsPreview);
 		gridPrev.repaint();
