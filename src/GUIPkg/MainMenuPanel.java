@@ -26,8 +26,10 @@ import java.awt.Label;
 
 public class MainMenuPanel extends JPanel {
 
-	/**
-	 * Create the panel.
+	/** Description: Class creates the Main Menu Panel and buttons and labels on it.
+	 * @authors	Anita Szilagyi, Bruno Boivin, Kaichen Wang, Salman Hashmi, Shahrzad Ti
+	 * @version	1.4
+	 * @since	2013-11-23	
 	 */
 	
 	public MainMenuPanel() {
@@ -87,6 +89,11 @@ public class MainMenuPanel extends JPanel {
 		btnPlayerStats.setForeground(new Color(255, 255, 0));
 		btnPlayerStats.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		btnPlayerStats.addMouseListener(new MouseAdapter() {
+			/**
+			 * Description: Invoked when the mouse button has been clicked (pressed and released) on a component.
+			 * @param	e of MouseEvent which indicates if a mouse action occurred in a component in this case a click to pull player stats.
+			 * @return void
+			 */
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				MainFrame.playerStatsPanel = new StatisticsPanel(UserManagement.user1, UserManagement.user2);
@@ -113,6 +120,11 @@ public class MainMenuPanel extends JPanel {
 		btnChooseMap.setBackground(new Color(0, 0, 0));
 		btnChooseMap.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		btnChooseMap.addMouseListener(new MouseAdapter() {
+			/**
+			 * Description: Invoked when the mouse button has been clicked (pressed and released) on a component.
+			 * @param	arg0 of MouseEvent which indicates if a mouse action occurred in a component in this case a click to prompt for map selection.
+			 * @return void
+			 */
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				//GridSelectorOptionPane gridSelector = new GridSelectorOptionPane();
@@ -135,6 +147,11 @@ public class MainMenuPanel extends JPanel {
 		btnNewButton.setForeground(new Color(255, 255, 0));
 		btnNewButton.setFont(new Font("STARWARS", Font.PLAIN, 25));
 		btnNewButton.addMouseListener(new MouseAdapter() {
+			/**
+			 * Description: Invoked when the mouse button has been clicked (pressed and released) on a component.
+			 * @param	arg0 of MouseEvent which indicates if a mouse action such as a click occurred in a component.
+			 * @return void
+			 */
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				new TronGame(UserManagement.user1, UserManagement.user2, MainFrame.grid);
@@ -147,6 +164,11 @@ public class MainMenuPanel extends JPanel {
 		btnBack.setForeground(new Color(255, 255, 0));
 		btnBack.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		btnBack.addMouseListener(new MouseAdapter() {
+			/**
+			 * Description: Invoked when the mouse button has been clicked (pressed and released) on a component.
+			 * @param	e of MouseEvent which indicates if a mouse action occurred in a component in this case a click to swap panels.
+			 * @return void
+			 */
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				((MainFrame) getTopLevelAncestor()).swapView("loginPanel");
