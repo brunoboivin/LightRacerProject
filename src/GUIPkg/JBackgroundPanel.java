@@ -14,7 +14,7 @@ public class JBackgroundPanel extends JPanel {
 	  public JBackgroundPanel() {
 	    // load the background image
 	    try {
-	      img = ImageIO.read(new File("img/starWarsBackground.gif"));
+	      img = ImageIO.read(new File("res/img/starWarsBackground.gif"));
 	    } catch(IOException e) {
 	      e.printStackTrace();
 	    }

@@ -103,15 +103,15 @@ public class MainMenuPanel extends JPanel {
 		});
 		
 		JLabel MainDarthVader = new JLabel("");
-		MainDarthVader.setIcon(new ImageIcon("img/Main_Vader.png"));
+		MainDarthVader.setIcon(new ImageIcon("res/img/Main_Vader.png"));
 		panel.add(MainDarthVader, "4, 6, 2, 1, left, center");
 		
 		JLabel MainYoda = new JLabel("");
-		MainYoda.setIcon(new ImageIcon("img/Main_Yoda.png"));
+		MainYoda.setIcon(new ImageIcon("res/img/Main_Yoda.png"));
 		panel.add(MainYoda, "7, 6, 2, 1, right, center");
 		
 		JLabel DVKeys = new JLabel("");
-		DVKeys.setIcon(new ImageIcon("img/Key_WASD.png"));
+		DVKeys.setIcon(new ImageIcon("res/img/Key_WASD.png"));
 		panel.add(DVKeys, "4, 8, 1, 3, center, center");
 		panel.add(btnPlayerStats, "6, 8, fill, fill");
 		
@@ -134,7 +134,7 @@ public class MainMenuPanel extends JPanel {
 		});
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("img/Key_Arrow.png"));
+		label.setIcon(new ImageIcon("res/img/Key_Arrow.png"));
 		panel.add(label, "8, 8, 1, 3, center, fill");
 		panel.add(btnChooseMap, "6, 10, fill, fill");
 		

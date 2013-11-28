@@ -156,11 +156,11 @@ public class LoginPanel extends JPanel {
 				enabledField = passwordField1.getBackground();
 				
 				DarthVader = new JLabel("");
-				DarthVader.setIcon(new ImageIcon("img/Login_Vader.png"));
+				DarthVader.setIcon(new ImageIcon("res/img/Login_Vader.png"));
 				panel.add(DarthVader, "2, 4, 4, 1, center, center");
 				
 				Yoda = new JLabel("");
-				Yoda.setIcon(new ImageIcon("img/Login_Yoda.png"));
+				Yoda.setIcon(new ImageIcon("res/img/Login_Yoda.png"));
 				panel.add(Yoda, "8, 4, 3, 1, center, center");
 				
 				panel.add(passwordField1, "4, 8, fill, fill");

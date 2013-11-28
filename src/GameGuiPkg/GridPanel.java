@@ -262,13 +262,13 @@ public class GridPanel extends JPanel
 		 * entire tile.
 		 */
 		case YodaIcon:
-			ImageIcon yoda = new ImageIcon("img/yodaRacer.gif");
+			ImageIcon yoda = new ImageIcon("res/img/yodaRacer.gif");
 			Image yodaImg=yoda.getImage();
 			g.drawImage(yodaImg, x-10, y-10, CELL_SIZE+15, CELL_SIZE+15, null);
 			break;
 		
 		case DarthVaderIcon :
-			ImageIcon darthVader = new ImageIcon("img/darthVaderRacer.gif");
+			ImageIcon darthVader = new ImageIcon("res/img/darthVaderRacer.gif");
 			Image darthVaderImg=darthVader.getImage();
 			g.drawImage(darthVaderImg, x-10, y-10, CELL_SIZE+15, CELL_SIZE+15, null);
 			break;
