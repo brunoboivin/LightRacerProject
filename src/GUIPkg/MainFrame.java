@@ -49,6 +49,8 @@ public class MainFrame extends JFrame{
 	 */
 	public MainFrame() {
 		
+		super("Light Battles Demo");
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = (JPanel) getContentPane();
 		setResizable(false);

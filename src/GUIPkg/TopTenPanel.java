@@ -38,7 +38,7 @@ public class TopTenPanel extends JPanel {
 		}
 
 		JTable table = new JTable(rowData, columnNames);
-
+		table.setBackground(Color.YELLOW);
 		//center table data
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(JLabel.CENTER);

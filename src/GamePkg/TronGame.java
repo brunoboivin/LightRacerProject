@@ -125,7 +125,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		add(side, BorderLayout.WEST);
 		
 		
-		this.pack();
+		
 		/*
 		 * Adds a new key listener to the frame to process input. 
 		 */
@@ -142,7 +142,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		 * screen and display it.
 		 */
 		
-		
+		this.pack();
 		//System.out.println("height is"+TronGame.HEIGHT);
 		setVisible(true);
 		setLocationRelativeTo(null);
@@ -476,7 +476,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		this.logicTimer = new Clock(30.0f);
 		this.status.setNewGame(true);
 		this.status.setRoundOver(false);
-		this.pack();
+		//this.pack();
 		
 		//Set the timer to paused initially.
 		logicTimer.setPaused(true);
