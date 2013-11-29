@@ -18,8 +18,10 @@ import javax.swing.BoxLayout;
  * @authors Anita Szilagyi <anita.szilagyi@mail.mcgill.ca>, Shahrzad
  *          Tighnavardmollasaraei
  *          <shahrzad.tighnavardmollasaraei@mail.mcgill.ca>, Bruno Boivin
- *          <bruno.boivin@mail.mcgill.ca>
+ *          <bruno.boivin@mail.mcgill.ca>, Salman Hashmi
+ *          <salman.hashmi2@mail.mcgill.ca>
  * @version 1.0
+ * @since	2013-11-23
  */
 public class MainFrame extends JFrame {
 
@@ -95,6 +97,7 @@ public class MainFrame extends JFrame {
 	/**
 	 * Method used to swap the panels based on user input
 	 * @param key the name of the next panel to display
+	 * @return void
 	 */
 	public void swapView(String key) {
 		cardLayout.show(deck, key);

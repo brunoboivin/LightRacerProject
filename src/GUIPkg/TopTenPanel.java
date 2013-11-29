@@ -94,6 +94,10 @@ public class TopTenPanel extends JPanel {
 		btnBack.setForeground(new Color(255, 255, 0));
 		btnBack.setBounds(261, 510, 134, 50);
 		btnBack.addMouseListener(new MouseAdapter() {
+			/**
+			 * Invoked when the mouse button has been clicked (pressed and released) on a component.
+			 * @param	e of MouseEvent which indicates if a mouse action occurred in a component in this case a click to swap view to the login panel
+			 */
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				((MainFrame) getTopLevelAncestor()).swapView("loginPanel");
