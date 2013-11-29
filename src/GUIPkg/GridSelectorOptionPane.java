@@ -66,7 +66,6 @@ public class GridSelectorOptionPane {
 	//Constructor
 	public GridSelectorOptionPane () {
 		
-//		this.selectedMapPath = "maps/map1.txt";
 		this.selectedMapName = null;
 		initializeGUIElements ();
 		
@@ -163,9 +162,9 @@ public class GridSelectorOptionPane {
 	    this.previewMap3.setLayout(new GridLayout(50,75,1,1));
 	    this.previewMap3.setOpaque(false);
 	    
-	    createGridPreview (this.previewMap1, this.MAP_NAME_1, "maps/" + this.MAP_NAME_1 + ".txt");
-	    createGridPreview (this.previewMap2, this.MAP_NAME_2, "maps/" + this.MAP_NAME_2 + ".txt");
-	    createGridPreview (this.previewMap3, this.MAP_NAME_3, "maps/" + this.MAP_NAME_3 + ".txt");
+	    createGridPreview (this.previewMap1, this.MAP_NAME_1, "res/maps/" + this.MAP_NAME_1 + ".txt");
+	    createGridPreview (this.previewMap2, this.MAP_NAME_2, "res/maps/" + this.MAP_NAME_2 + ".txt");
+	    createGridPreview (this.previewMap3, this.MAP_NAME_3, "res/maps/" + this.MAP_NAME_3 + ".txt");
 	}
 	
 	//Displays the Preview grid corresponding to the selected file
@@ -262,7 +261,7 @@ public class GridSelectorOptionPane {
             }
 		}
 		else{
-			this.selectedMapPath = "maps/" + mapName + ".txt";
+			this.selectedMapPath = "res/maps/" + mapName + ".txt";
 			this.selectedMapName = mapName;
 		}
 //		System.out.println (this.getSelectedMapPath());

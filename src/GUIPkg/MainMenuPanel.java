@@ -5,7 +5,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import GamePkg.TronGame;
+import GamePkg.Game;
 import GridPkg.Grid;
 import UserPkg.User;
 import UserPkg.UserManagement;
@@ -154,7 +154,7 @@ public class MainMenuPanel extends JPanel {
 			 */
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				new TronGame(UserManagement.user1, UserManagement.user2, MainFrame.grid);
+				new Game(UserManagement.user1, UserManagement.user2, MainFrame.grid);
 			}
 		});
 		panel.add(btnNewButton, "4, 12, 5, 1, fill, fill");

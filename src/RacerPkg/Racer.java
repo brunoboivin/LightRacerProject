@@ -5,8 +5,16 @@ import java.util.LinkedList;
 
 import UserPkg.User;
 
-import GameGuiPkg.GridPanel;
+import GameGUIPkg.GridPanel;
 import GridPkg.GridCell;
+
+
+/** Class used to define a racer.
+ * 
+ * @author Shahrzad Tighnavardmollasaraei <shahrzad.tighnavardmollasaraei@mail.mcgill.ca>
+ * @version 1.0
+ * @since 2013-11-08
+ */
 
 public class Racer 
 {
@@ -40,8 +48,8 @@ public class Racer
 	public ID racerId;
 	/**
 	 * The Racer Constructor
-	 * @param user
-	 * @param id
+	 * @param user User instance of the Racer
+	 * @param id ID of the Racer
 	 */
 	public Racer(User user,ID id)
 	{
@@ -61,6 +69,8 @@ public class Racer
 				this.headCell=GridCell.DarthVaderIcon;
 				this.bodyCell=GridCell.RedLight;
 				break;
+			default:
+				throw new IllegalArgumentException();
 		}
 	}
 	public User getUser()
@@ -72,8 +82,9 @@ public class Racer
 	}
 	/**
 	 * Racer gets set up to be placed on the grid.
-	 * @param head
-	 * @param start
+	 * 
+	 * @param head Starting Point
+	 * @param start Starting Direction
 	 */
 	public void setUpRacer(Point head,Direction start)
 	{

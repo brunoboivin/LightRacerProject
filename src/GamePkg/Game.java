@@ -16,35 +16,34 @@ import RacerPkg.*;
 import StatisticsPkg.Statistics;
 import UserPkg.User;
 import GUIPkg.MainFrame;
-import GameGuiPkg.GridPanel;
-import GameGuiPkg.SidePanel;
+import GameGUIPkg.GridPanel;
+import GameGUIPkg.SidePanel;
 import GridPkg.*;
 
+/** Class used to create the JFrame for the Game and running it.
+ * 
+ * @author Shahrzad Tighnavardmollasaraei <shahrzad.tighnavardmollasaraei@mail.mcgill.ca>
+ * @version 1.0
+ * @since 2013-11-08
+ */
 
 
-
-public class TronGame extends JFrame implements Runnable,KeyListener
+public class Game extends JFrame implements Runnable,KeyListener
 {
-	
-	
 	/**
 	 * The number of milliseconds that should pass between each frame.
 	 */
 	private static final long FRAME_TIME = 1000L / 50L;
-		
-	
-	
+
 	/**
 	 * The GridPanel instance.
 	 */
 	private GridPanel board;
 	
-	
 	/**
 	 * The SidePanel instance.
 	 */
 	protected SidePanel side;
-	
 	
 	/**
 	 * The Clock instance for handling the game logic.
@@ -52,49 +51,53 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	private Clock logicTimer;
 	
 	/**
-	 * The GameStatus instance for checking the status of the current game
+	 * The GameStatus instance for checking the status of the current game.
 	 * 	 
 	 */
 	public GameStatus status;
 	
 	/**
-	 * The RacerA instance (Darth Vader)
+	 * The RacerA instance (Darth Vader).
 	 */
 	private Racer racerA;
 	
 	/**
-	 * The RacerB instance (Yoda)
+	 * The RacerB instance (Yoda).
 	 */
 	private Racer racerB;
 
 	/**
-	 * The winner of the current round
+	 * The Racer instance for the winner of the current round.
 	 */
 	private Racer roundWinner;
 	/**
-	 * The winner of the game
+	 * The String name of the winner of the game.
 	 */
 	private String gameWinner;
-	
-	
+	/**
+	 * The String username of the Yoda Racer.
+	 */
 	public String yodaUser;
+	/**
+	 * The String username of the DarthVader Racer.
+	 */
 	public String darthUser;
 	/**
-	 * The loser of the game
+	 * The String username of the loser of the game
 	 */
 	private String gameLoser;
 	/**
 	 * The constructor of the TronGame which initializes
 	 * the frame and its components.
-	 * @param User as DarthVader
-	 * @param User asYoda
-	 * @param The Game Grid
+	 * @param asDarthVader User as DarthVader
+	 * @param asYoda User as Yoda
+	 * @param gameGrid The Game Grid
 	 */
-	public TronGame(User asDarthVader,User asYoda, Grid gameGrid) 
+	public Game(User asDarthVader,User asYoda, Grid gameGrid) 
 	{
 		super("Light Battles Demo");
 		setLayout(new BorderLayout());
-		//setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 		
 		yodaUser=asYoda.getUsername();
 		darthUser=asDarthVader.getUsername();
@@ -103,9 +106,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 
 		
 		setResizable(false);
-		//setVisible(true);
-		//setExtendedState(JFrame.MAXIMIZED_BOTH);
-
+		
 		/*
 		 * Initialize the game's status
 		 */
@@ -137,13 +138,12 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	
 		new Thread(this).start();
 		/*
-		 * Resize the window to the appropriate size, center it on th
-		 * e
+		 * Resize the window to the appropriate size, center it on the
 		 * screen and display it.
 		 */
 		
 		this.pack();
-		//System.out.println("height is"+TronGame.HEIGHT);
+		
 		setVisible(true);
 		setLocationRelativeTo(null);
 		//setVisible(true);
@@ -164,14 +164,11 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 		 */
 		GridCell collisionA = racerA.updateRacer(board);
 		GridCell collisionB = racerB.updateRacer(board);
-		//System.out.println("colA"+collisionA);
-		//System.out.println("colB"+collisionB);
+	
 		/*
 		 * Here we handle the different possible collisions.
 		 * 
 		 */
-		//System.out.println("colA :"+collisionA+" colB: "+collisionB);
-		//System.out.println("this is :"+(collisionA== GridCell.RacerABody && collisionB==GridCell.RacerBBody));
 		
 		//If they collide with their own light or the wall at the same time
 		if(collisionA== GridCell.RedLight && collisionB==GridCell.GreenLight) 
@@ -207,8 +204,8 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	
 	/**
 	 * Initializes the Racer instances.
-	 * @param userA
-	 * @param userB
+	 * @param userA First User as DarthVader Racer
+	 * @param userB	Second User as Yoda Racer
 	 */
 	private void initRacers(User userA,User userB) 
 	{
@@ -225,14 +222,9 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	/**
 	 * Resets the game.
 	 */
-	
 	private void resetGame() 
 	{
-		/*
-		 * Reset the score statistics. 
-		 */
-		//this.score = 0;
-				
+		
 		/*
 		 * Reset both the new game and game over flags.
 		 */
@@ -268,7 +260,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	}
 	/**
 	 * Returns the maximum number of wins between two Racers.
-	 * @return maxWin
+	 * @return maxWin The maximum number of rounds won.
 	 */	
 	public int totalRoundWins()
 	{
@@ -287,7 +279,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	}
 	/**
 	 * Returns the winner of the current round as a String.
-	 * @return roundWinner
+	 * @return roundWinner The username of the winnner of the racer.
 	 */
 	public String roundWinner()
 	{
@@ -295,6 +287,10 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 			return "";
 		return roundWinner.getUser().username;
 	}
+	/**
+	 * Return the ID of the Winner Racer. (NULL if it was a tie.)
+	 * @return ID of the Winner
+	 */
 	public ID winnerId()
 	{
 		if(roundWinner==null)
@@ -324,30 +320,15 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 	{
 		this.status=new GameStatus(this);
 		this.initRacers(racerA.getUser(), racerB.getUser());
-		//this.side.dispose();
+		
 		this.side.removeAll();
 		this.side.paintHeaders(1);
-		//this.side=new SidePanel(this, this.board.getGridPanelRow());
-		//this.add(side);
-		//side.repaint();		
+				
 	}
 
-	/**
-	 * Entry point of the program.
-	 * @param args Unused.
-	 */
-	public static void main(String[] args) 
-	{
-		User uA=new User("darthVader","a");
-		User uB=new User("yoda","b");
-	    new TronGame(uA,uB,new Grid());
-		//tron.startGame(userA,userB);
-	}
-	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-
+		
 		switch(e.getKeyCode()) 
 		{
 
@@ -429,9 +410,6 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 				{
 					if(!status.isGameOver())
 						{
-							
-							//side.clean();
-							//side.repaint();
 							resetGame();					
 						}
 				}
@@ -439,7 +417,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 				{	
 					this.replayGame();
 					resetGame();
-					//this.dispose();
+					
 				}
 				break;
 			case KeyEvent.VK_ENTER:
@@ -447,7 +425,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 				{
 					this.board.changeGrid();
 					this.board.repaint();
-					//resetGame();
+					
 				}
 				break;
 			case KeyEvent.VK_ESCAPE:
@@ -462,23 +440,21 @@ public class TronGame extends JFrame implements Runnable,KeyListener
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
+	
+	/**
+	 * The runnable method of the class
+	 */
 	public void run()
 	{
 		this.logicTimer = new Clock(30.0f);
 		this.status.setNewGame(true);
 		this.status.setRoundOver(false);
-		//this.pack();
 		
-		//Set the timer to paused initially.
 		logicTimer.setPaused(true);
 		/*
          * This is the game loop. It will update and render the game and will
@@ -486,7 +462,7 @@ public class TronGame extends JFrame implements Runnable,KeyListener
          */
         while(true) 
         {
-        	//System.out.println(System.currentTimeMillis());
+        	
                 //Get the current frame's start time.
                 long start = System.nanoTime();
                 
