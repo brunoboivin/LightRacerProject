@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
-/**
- * 
- * @author Kaichen
- *
+/** 
+ * Description: Takes data from a ".txt" file (specific format) and returns the contained integers as coordinates
+ * @authors	Anita Szilagyi, Bruno Boivin, Kaichen Wang, Salman Hashmi, Shahrzad Ti
+ * @version	1.4
+ * @since	2013-11-23	
  */
 
 public class GridFileLoader {

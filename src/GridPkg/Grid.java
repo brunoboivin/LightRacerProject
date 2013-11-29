@@ -4,11 +4,13 @@ import java.io.IOException;
 
 import GUIPkg.GridSelectorOptionPane;
 
-/**
- * 
- * @author Kaichen
- *
+/** 
+ * Description: Grid is a mapping of a 2D surface in a cartesian plane; composed of square cells
+ * @authors	Anita Szilagyi, Bruno Boivin, Kaichen Wang, Salman Hashmi, Shahrzad Ti
+ * @version	1.4
+ * @since	2013-11-23	
  */
+
 public class Grid {
 
 	/**
