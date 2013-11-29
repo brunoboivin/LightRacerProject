@@ -59,5 +59,8 @@ LIST OF THIRD-PARTY LIBRARIES
 
 INSTRUCTIONS FOR COMPILING AND RUNNING THE CODE
 	Step 1: Run build.xml (as an Ant build if inside Eclipse)
+			**Make sure that the environment variable JAVA_HOME is pointing to the JDK installed on your pc.
+				To do that, click on Run -> External Tools -> External Tools Configurations
+									 Select the JRE tab and click on edit to change set the path to your JDK folder.
 	Step 2: Launch the main method of MainFrame.java, which is located inside the GUIPkg.
 			Or alternatively, simply launch the executable Tron.jar file.
