@@ -1,19 +1,11 @@
 package GamePkg;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import RacerPkg.*;
-import StatisticsPkg.Statistics;
 import UserPkg.User;
 import GUIPkg.MainFrame;
 import GameGUIPkg.GridPanel;
