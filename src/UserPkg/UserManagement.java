@@ -7,7 +7,7 @@ import CSVPkg.CSVHandler;
 /**
  * Class used for managing user accounts.
  * 
- * @authors Anita Szilagyi, Bruno Boivin, Kaichen Wang, Salman Hashmi, Shahrzad Ti
+ * @author Anita Szilagyi <anita.szilagyi@mail.mcgill.ca>
  * @version 1.0
  * @since 2013-11-08
  */
@@ -29,8 +29,7 @@ public class UserManagement {
 		// Declare and initialize a String containing all digits
 		String numbers = "0123456789";
 
-		// Declare and initialize a String containing all allowable special
-		// characters
+		// Declare and initialize a String containing all allowable special characters
 		String specialChars = "~!@#$%^&*()_+=-.,<>?{}[];";
 
 		boolean hasUpperCase = false, hasLowerCase = false, hasDigit = false, hasNonAlphanumeric = false, hasProperLength = false;
@@ -50,8 +49,7 @@ public class UserManagement {
 			hasNonAlphanumeric = true;
 		}
 
-		// Fourth check, if the password contains at least one upper case and at
-		// least one lower case letter
+		// Fourth check, if the password contains at least one upper case and at least one lower case letter
 		if ((!(StringUtils.upperCase(password)).equals(password))
 				&& (!(StringUtils.lowerCase(password)).equals(password))) {
 			hasUpperCase = true;
@@ -97,8 +95,7 @@ public class UserManagement {
 						// If this part is reached, a new user can be created
 						user1 = new User(username, password);
 					}
-					// Same check is done as above in case user 2 is trying to
-					// log in
+					// Same check is done as above in case user 2 is trying to log in
 					if (userNumber == 2) {
 						if ((user1 != null)
 								&& ((user1.getUsername())).equals(username)) {
@@ -129,8 +126,7 @@ public class UserManagement {
 	 *            the user that has clicked on the "Logout" button in the GUI
 	 */
 	public static void logout(User user) {
-		// User1 not being null signals a logged in user, who, therefore can be
-		// logged out
+		// User1 not being null signals a logged in user, who, therefore can be logged out
 		if ((user1 != null) && (user1.equals(user))) {
 			user1 = null;
 		} else {
@@ -167,8 +163,7 @@ public class UserManagement {
 				return UserRegistrationStatus.UsernameTaken;
 			}
 		}
-		// If the password provided does not meet requirements, return
-		// appropriate BadPassword status
+		// If the password provided does not meet requirements, return appropriate BadPassword status
 		if (!checkPasswordRequirements(password)) {
 			return UserRegistrationStatus.BadPassword;
 		}
