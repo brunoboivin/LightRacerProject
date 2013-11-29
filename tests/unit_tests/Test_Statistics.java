@@ -1,9 +1,12 @@
 package unit_tests;
 
 import static org.junit.Assert.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Hashtable;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -109,20 +112,73 @@ public class Test_Statistics {
 		assertTrue(result.getGamesPlayed() == 2 && result.getGamesWon() == 1);
 	}
 
-	//
+	//findXHighestScores should return an empty list when asked to return the best 0 elements
 	@Test
-	public void test_findXHighestScore() {
-		//findXHighestScore
-		//TO BE COMPLETED
-		
-		/*
-		 * Test scenarios:
-		 * 1. Empty list
-		 * 2. Return 1 element
-		 * 3. Return many elements
-		 * 4. Return n elements from a list of size < n
-		 */
+	public void test_findXHighestScore1() throws Exception{
+		ArrayList<PlayerRecord> records = getXHighestScore(playerRecords, 0);
+		assertTrue(records.size() == 0);
 	}	
+	
+	//findXHighestScores should return an empty list when given an empty Hashtable
+	@Test
+	public void test_findXHighestScore2() throws Exception {
+		playerRecords.clear();
+		ArrayList<PlayerRecord> records = getXHighestScore(playerRecords, 5);
+		assertTrue(records.size() == 0);
+	}	
+	
+	//findXHighestScores of Hashtable that contains 1 elements should return that element no matter how many elements are requested
+	@Test
+	public void test_findXHighestScore3() throws Exception {
+		playerRecords.clear();
+		playerRecords.put("John", new PlayerRecord("John"));
+		
+		ArrayList<PlayerRecord> records = getXHighestScore(playerRecords, 5);
+		
+		assertTrue(records.size() == 1);
+		
+		PlayerRecord record = records.get(0);
+		assertTrue(record.getUsername().equals("John"));
+		assertTrue(record.getGamesPlayed() == 0);
+		assertTrue(record.getGamesWon() == 0);
+	}	
+	
+	//findXHighestScores of Hashtable that contains n equivalent elements should return X of them
+	@Test
+	public void test_findXHighestScore4() throws Exception {		
+		playerRecords.get("Bruno").wonGame();
+		playerRecords.get("Anita").wonGame();
+		playerRecords.get("Neve").wonGame();
+		
+		ArrayList<PlayerRecord> records = getXHighestScore(playerRecords, 2);
+		assertTrue(records.size() == 2);
+		
+		String name1 = records.get(0).getUsername();
+		String name2 = records.get(1).getUsername();
+		
+		assertTrue( (name1.equals("Bruno") || name1.equals("Anita") || name1.equals("Neve"))
+					&&
+					(name2.equals("Bruno") || name2.equals("Anita") || name2.equals("Neve"))
+					&&
+					!name1.equals(name2)
+				);
+	}	
+	
+	//findXHighestScores of Hashtable that contains n elements and asked to return X elements
+	//Case 1: X > n , i.e. our table does not contain X elements. It should return what it contains
+	@Test
+	public void test_findXHighestScore5() throws Exception {
+		assertTrue(getXHighestScore(playerRecords, 8).size() == 5);
+	}
+	
+	//findXHighestScores of Hashtable that contains n elements and asked to return X elements
+	//Case 1: X < n . It should only return X elements.
+	@Test
+	public void test_findXHighestScore6() throws Exception {
+		assertTrue(getXHighestScore(playerRecords, 3).size() == 3);
+	}
+	
+	//Helper Methods
 	
 	/**Method used to test the private method "findHighestScore" of the Statistics class.
 	 * 
@@ -142,5 +198,22 @@ public class Test_Statistics {
 		parameters[0] = playerRecords;
 		
 		return (PlayerRecord) m.invoke(stats,  parameters);
+	}
+	
+	private ArrayList<PlayerRecord> getXHighestScore(Hashtable<String, PlayerRecord> table, int x) throws Exception{
+		Statistics stats = new Statistics();
+		
+		Class [] parameterTypes = new Class[2];
+		parameterTypes[0] = java.util.Hashtable.class;
+		parameterTypes[1] = int.class;
+		
+		Method m = stats.getClass().getDeclaredMethod("findXHighestScores", parameterTypes);
+		m.setAccessible(true);
+		
+		Object [] parameters = new Object [2];
+		parameters[0] = table;
+		parameters[1] = x;
+		
+		return (ArrayList<PlayerRecord>) m.invoke(stats,  parameters);
 	}
 }
