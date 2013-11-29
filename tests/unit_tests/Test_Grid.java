@@ -17,7 +17,7 @@ public class Test_Grid {
 	private GridCell [][] gridCells;
 
 	@Before
-	public void initilaization (){
+	public void initialization (){
 		this.grid = new Grid();
 		this.gridCells = this.grid.getGridCells();
 	}

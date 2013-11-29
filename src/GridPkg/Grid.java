@@ -4,13 +4,32 @@ import java.io.IOException;
 
 import GUIPkg.GridSelectorOptionPane;
 
+/**
+ * 
+ * @author Kaichen
+ *
+ */
 public class Grid {
 
+	/**
+	 * Number of Rows of grid (y values)
+	 */
 	private int rowCount;
+	/**
+	 * Number of Rows of grid (x values)
+	 */
 	private int colCount;
+	/**
+	 * Individual cells of the Grid
+	 */
 	private GridCell[][] gridCells;
-	
+	/**
+	 * Default number of rows
+	 */
 	private final int ROW_COUNT_DEFAULT = 50;
+	/**
+	 * Default number of columns
+	 */
 	private final int COL_COUNT_DEFAULT = 75;
 
 	public Grid () {
