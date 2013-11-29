@@ -2,7 +2,6 @@ package GUIPkg;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FileDialog;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -22,43 +21,102 @@ import GridPkg.Grid;
 import GridPkg.GridCell;
 import GridPkg.PreviewGrid;
 
-import java.awt.Rectangle;
 import java.awt.Font;
 
+/** 
+ * Description: Prompts user to select a map;
+ * preview of map is displayed in a grid and corresponding cells of grid are saved
+ * @authors	Anita Szilagyi, Bruno Boivin, Kaichen Wang, Salman Hashmi, Shahrzad Ti
+ * @version	1.0
+ * @since	2013-11-23	
+ */
 
 public class GridSelectorOptionPane {
 	
-	//Path to map file
+	/**
+	 * Path to selected map file
+	 */
 	private String selectedMapPath;
-	
-	private String selectedMapName;
-	
+	/**
+	 * Name of selected map file
+	 */
+	private String selectedMapName;	
+	/**
+	 * Cells of Grid corresponding to map 1 (pre-loaded)
+	 */
 	private GridCell [][] gridCells1;
+	/**
+	 * Cells of Grid corresponding to map 2 (pre-loaded)
+	 */
 	private GridCell [][] gridCells2;
+	/**
+	 * Cells of Grid corresponding to map 3 (pre-loaded)
+	 */
 	private GridCell [][] gridCells3;
+	/**
+	 * Cells of Grid corresponding to custom map (loaded when selected)
+	 */
 	private GridCell [][] gridCellsCustom;
 	
 	//GUI swing elements
+	/**
+	 * pop-up dialog window
+	 */
 	private JDialog dialog;
+	/**
+	 * OK option for user to confirm selection (or close to cancel)
+	 */
 	private JOptionPane optionPane;
 	
+	/**
+	 * panel with radio buttons/button for user to select maps
+	 */
 	private JPanel mainPanel;
+	/**
+	 * panel which wraps selected map previews
+	 */
 	private JPanel previewContainerPanel;
-	
+	/**
+	 * panel which contains individual map 1 preview (pre-loaded)
+	 */
 	private JPanel previewMap1;
+	/**
+	 * panel which contains individual map 2 preview (pre-loaded)
+	 */
 	private JPanel previewMap2;
+	/**
+	 * panel which contains individual map 3 preview (pre-loaded)
+	 */
 	private JPanel previewMap3;
+	/**
+	 * panel which contains individual custom map preview (loaded when selected)
+	 */
 	private JPanel previewCustom;
-	
+	/**
+	 * for user to choose option of map 1
+	 */
 	private JRadioButton map1;
+	/**
+	 * for user to choose option of map 2
+	 */
 	private JRadioButton map2;
+	/**
+	 * for user to choose option of map 3
+	 */
 	private JRadioButton map3;
+	/**
+	 * regroups 3 default options
+	 */
 	private ButtonGroup buttonGroup;
-	
+	/**
+	 * for user to choose option of custom map
+	 */
 	private JButton customMap;
-	
-		
+	/**
+	 * for user to browse disk for file of custom map
+	 */
 	private FileDialog selectFile;
+	
 	//Set map names used throughout class
 	final private String MAP_NAME_1 = "map1";
 	final private String MAP_NAME_2 = "map2";
@@ -67,12 +125,13 @@ public class GridSelectorOptionPane {
 
 	//Constructor
 	public GridSelectorOptionPane () {
-		
 		this.selectedMapName = null;
 		initializeGUIElements ();
-		
 	}
 	
+	/**
+	 * initializes all Swing GUI elements (except selection buttons) and sets their basic properties
+	 */
 	private void initializeGUIElements () {
 		
 		//Level 1 (Top Level): Load Dialog
@@ -80,48 +139,50 @@ public class GridSelectorOptionPane {
 
 		//Level 2: Load OptionPane (within Dialog)
 		this.optionPane = new JOptionPane();
-		optionPane.setFont(new Font("STARWARS", Font.PLAIN, 17));
-		optionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
-		
+		this.optionPane.setFont(new Font("STARWARS", Font.PLAIN, 17));
+		this.optionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
 	    this.optionPane.setMessage("SELECT A MAP");
-//	    this.optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-	    this.optionPane.setOptionType(JOptionPane.DEFAULT_OPTION);
-//	    this.optionPane.setBackground(Color.BLACK);  
+	    this.optionPane.setOptionType(JOptionPane.DEFAULT_OPTION); 
 
 	    //Level 3: Load Panels (within OptionPane)
 	    this.mainPanel = new JPanel();
 	    this.mainPanel.setOpaque(false);
-	    this.optionPane.add(mainPanel);
-	    
+	  
 	    this.previewContainerPanel = new JPanel(new CardLayout());
-	   // previewContainerPanel.setBounds(new Rectangle(0, 0, 375, 0));
 	    this.previewContainerPanel.setBorder(BorderFactory.createLineBorder(Color.gray));
 	    this.previewContainerPanel.setBounds(0, 0, 375, 250);
 	    this.previewContainerPanel.setBackground(Color.gray);
+	    
+	    this.optionPane.add(this.mainPanel);
 	    this.optionPane.add(this.previewContainerPanel);
-	    //this.pack();
+
 	    //Level 4: Load Elements (within Panels)
 	    initializeSelection ();
 		initializePreview ();
 		
-		//Show everything after they have all been loaded
+		//Add final actions to dialog and show everything after they have been loaded
 		this.dialog = optionPane.createDialog(null, "MAPS"); 
-		this.dialog.setDefaultCloseOperation(
-			    JDialog.DISPOSE_ON_CLOSE);
-			dialog.addWindowListener(new WindowAdapter() {
-			    public void windowClosing(WindowEvent we) {
-//			        System.out.println("Thwarted user attempt to close window.");
-			        cancelMapSeletion();
-			    }
+		this.dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.dialog.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+			   cancelMapSeletion();
+			}
 		});
-	    this.dialog.setVisible(true);
+		this.dialog.setVisible(true);
 	}
 	
+	/**
+	 * helper method for signaling that user has cancelled selection and closed dialog
+	 */
 	private void cancelMapSeletion (){
 		this.selectedMapPath = null;
 	}
 	
+	/**
+	 * initializes radio button and file select button for user map selection
+	 */
 	private void initializeSelection (){
+		
 		this.map1 = new JRadioButton(this.MAP_NAME_1);
 		map1.setFont(new Font("STARWARS", Font.PLAIN, 11));
 		this.mainPanel.add(this.map1);
@@ -138,20 +199,21 @@ public class GridSelectorOptionPane {
 		buttonGroup.add(this.map1);
 		buttonGroup.add(this.map2);
 		buttonGroup.add(this.map3);
-//		this.map1.setSelected(true);
 		
 		this.customMap = new JButton("Select File");
-		customMap.setFont(new Font("STARWARS", Font.PLAIN, 11));
+		this.customMap.setFont(new Font("STARWARS", Font.PLAIN, 11));
 		this.selectFile = new FileDialog(this.dialog, "Select a map file");
-	    
-	    setButtonActions (this.customMap, this.MAP_NAME_4);
 	    this.mainPanel.add(this.customMap);
 		
 		setButtonActions (this.map1, this.MAP_NAME_1);
 		setButtonActions (this.map2, this.MAP_NAME_2);
 		setButtonActions (this.map3, this.MAP_NAME_3);
+	    setButtonActions (this.customMap, this.MAP_NAME_4);
 	}
 	
+	/**
+	 * initialized (loads as cards) previews of 3 default maps
+	 */
 	private void initializePreview (){
 	
 	    this.previewMap1 = new JPanel();
@@ -169,26 +231,36 @@ public class GridSelectorOptionPane {
 	    createGridPreview (this.previewMap3, this.MAP_NAME_3, "res/maps/" + this.MAP_NAME_3 + ".txt");
 	}
 	
-	//Displays the Preview grid corresponding to the selected file
-	private void updateCustomPreview (String mapName){
-		
-		this.previewCustom = new JPanel();
-	    this.previewCustom.setLayout(new GridLayout(50,75,1,1));    
-	    this.previewCustom.setOpaque(false);
-	    
-	    createGridPreview (this.previewCustom, mapName, this.selectedMapPath);
-
-		CardLayout cl = (CardLayout) previewContainerPanel.getLayout();
-		cl.show(previewContainerPanel, mapName);
-	}
-	
-	//Displays the Preview grid corresponding to the selected file
+	/**
+	 * Updates the preview of grid corresponding to the selected default map
+	 * @param name of the map
+	 */
 	private void updatePreview (String mapName){
 		 CardLayout cl = (CardLayout) previewContainerPanel.getLayout();
 		 cl.show(previewContainerPanel, mapName);
 	}
 	
+	/**
+	 * Updates the preview of grid corresponding to the selected file of custom map 
+	 * @param name of the map
+	 */
+	private void updateCustomPreview (String mapName){
+		this.previewCustom = new JPanel();
+	    this.previewCustom.setLayout(new GridLayout(50,75,1,1));    
+	    this.previewCustom.setOpaque(false);
+	    
+	    createGridPreview (this.previewCustom, mapName, this.selectedMapPath);
+	    
+		CardLayout cl = (CardLayout) previewContainerPanel.getLayout();
+		cl.show(previewContainerPanel, mapName);
+	}
 	
+	/**
+	 * 
+	 * @param initilizes the preview of 3 default maps
+	 * @param name of map
+	 * @param map file path
+	 */
 	private void createGridPreview (JPanel mapPreview, String mapName, String selectedMapPath) {
 	
 		Grid gridPreview = new Grid();
@@ -207,19 +279,17 @@ public class GridSelectorOptionPane {
 	    else {
 	    	this.gridCellsCustom = cellsPreview;
 	    }
-		
-		//int rowCount = gridPreview.getGridRow();
-		//int colCount = gridPreview.getGridCol();
-		
+
 		PreviewGrid gridPrev=new PreviewGrid(cellsPreview);
 		gridPrev.repaint();
      	this.previewContainerPanel.add (gridPrev, mapName);
-     	//gridPrev.setLayout(null);
-     	//pack();
 	}
 	
-	
-	//Adds actions to perform when RADIO BUTTON is clicked by user
+	/**
+	 * Adds actions to perform when RADIO BUTTON is clicked by user
+	 * @param radio button
+	 * @param name of corresponding map selected
+	 */
 	private void setButtonActions (JRadioButton button, String mapName) {
 		final String MAP_NAME = mapName; 
 		button.addActionListener(new ActionListener() {
@@ -231,7 +301,11 @@ public class GridSelectorOptionPane {
 	    });
 	}
 	
-	//Adds actions to perform when BUTTON is clicked by user (overloaded)
+	/**
+	 * Adds actions to perform when BUTTON is clicked by user (overloaded)
+	 * @param file select button
+	 * @param name of corresponding map selected
+	 */
 	private void setButtonActions (JButton button, String mapName) {
 		final String MAP_NAME = mapName; 
 		button.addActionListener(new ActionListener() {
@@ -245,11 +319,11 @@ public class GridSelectorOptionPane {
 	
 	/**
 	 * Saves the path corresponding to the selected file
-	 * @param mapName is the name of the map
+	 * @param name of the map
 	 */
 	private void setMapPath (String mapName){
+		//if custom
 		if (mapName.equals(this.MAP_NAME_4)){
-			//selectFile.setDirectory("C:\\");
 			this.selectFile.setFile("*.txt");
 		    this.selectFile.setVisible(true);
 		    String directory = this.selectFile.getDirectory();
@@ -266,14 +340,21 @@ public class GridSelectorOptionPane {
 			this.selectedMapPath = "res/maps/" + mapName + ".txt";
 			this.selectedMapName = mapName;
 		}
-//		System.out.println (this.getSelectedMapPath());
     }
 	
 	//getters
+	/**
+	 * gets path of selected map
+	 * @return path of selected map
+	 */
 	public String getSelectedMapPath (){
     	return this.selectedMapPath;
     }
 	
+	/**
+	 * gets cells of Grid corresponding to map selected
+	 * @return cells of selected Grid
+	 */
 	public GridCell [][] getSelectedGridCells (){
     	if (this.selectedMapName.equals(MAP_NAME_1)){
     		return this.gridCells1;
@@ -288,12 +369,7 @@ public class GridSelectorOptionPane {
     		return this.gridCellsCustom;
     	}
     	else{
-    		System.out.println("YO");
     		return null;
     	}
     }
-	
-	public static void main (String [] args){
-		GridSelectorOptionPane test = new GridSelectorOptionPane();
-	}
 }
