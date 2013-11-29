@@ -19,17 +19,24 @@ import StatisticsPkg.Statistics;
 import UserPkg.User;
 import java.awt.Color;
 
+
+/** Panel used to display both individual and pair scores.
+ * 
+ * @author Bruno Boivin <bruno.boivin@mail.mcgill.ca>
+ * @version 1.0
+ */
 public class StatisticsPanel extends JPanel {
 	
 	/**
-	 * Panel used to display both individual and pair scores.
+	 * Constructor
 	 */
 	public StatisticsPanel(final User userA, final User userB) {
 		
+		//set layout to absolute
 		setPreferredSize(new Dimension(650,650));
-		
 		setLayout(null);
 		
+		//create container
 		JBackgroundPanel panel = new JBackgroundPanel();
 		panel.setBounds(0, 0, 650, 650);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -104,14 +111,14 @@ public class StatisticsPanel extends JPanel {
 		lblGamesPlayed.setFont(new Font("STARWARS", Font.PLAIN, 18));
 		lblGamesPlayed.setBounds(253, 230, 148, 27);
 		panel.add(lblGamesPlayed);
-		
-		JLabel label = new JLabel(pairRecord.getGamesWonPlayerA() + " - " + pairRecord.getGamesWonPlayerB());
-		
-		
-		
+			
+		/*
+		 * A PairRecord has 2 player attributes, playerA and playerB.
+		 * The pairScore JLable's text is updated based which user playerA corresponds to.
+		 */
 		JLabel pairScore = 
 				pairRecord.getPlayerA().equals(userA.getUsername()) //condition
-				? label //result if true
+				? new JLabel(pairRecord.getGamesWonPlayerA() + " - " + pairRecord.getGamesWonPlayerB()) //result if true
 				: new JLabel(pairRecord.getGamesWonPlayerB() + " - " + pairRecord.getGamesWonPlayerA()); //result if false
 		pairScore.setHorizontalAlignment(SwingConstants.CENTER);
 		pairScore.setFont(new Font("STARWARS", Font.BOLD, 20));
@@ -119,13 +126,9 @@ public class StatisticsPanel extends JPanel {
 		pairScore.setLocation(286, 133);
 		pairScore.setForeground(new Color(255, 255, 0));
 		pairScore.setBackground(new Color(0, 0, 0));
-		
-		/*
-		pairScore.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		pairScore.setHorizontalAlignment(SwingConstants.CENTER);
-		pairScore.setBounds(116, 9, 76, 33);*/
 		panel.add(pairScore);
 		
+		//add top ten table
 		JScrollPane scrollPane = new JScrollPane(TopTenPanel.createTable());
 		scrollPane.setBounds(131, 343, 388, 184);
 		panel.add(scrollPane);	
@@ -144,8 +147,7 @@ public class StatisticsPanel extends JPanel {
 		btnBack.setBounds(253, 555, 142, 47);
 		panel.add(btnBack);
 		
-		add(panel);
-		
+		//main labels
 		JLabel lblTop = new JLabel("Top 10");
 		lblTop.setFont(new Font("STARWARS", Font.PLAIN, 25));
 		lblTop.setForeground(new Color(255, 255, 0));
@@ -168,6 +170,9 @@ public class StatisticsPanel extends JPanel {
 		lblStatistics.setForeground(new Color(255, 255, 0));
 		lblStatistics.setBounds(0, 17, 650, 72);
 		panel.add(lblStatistics);
+		
+		//add container to Statistics panel
+		add(panel);
 	}
 
 }

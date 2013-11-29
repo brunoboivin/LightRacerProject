@@ -20,15 +20,24 @@ import StatisticsPkg.PlayerRecord;
 import StatisticsPkg.Statistics;
 import java.awt.Color;
 
+/** Panel used to display both individual and pair scores.
+ * 
+ * @author Bruno Boivin <bruno.boivin@mail.mcgill.ca>
+ * @version 1.0
+ */
 public class TopTenPanel extends JPanel {
 
+	/**
+	 * Constructor
+	 */
 	public static JTable createTable() {
-		//generate table
+		//get highest scores from player_records csv file
 		ArrayList<PlayerRecord> records = Statistics.getHighestScores();
 
 		Object columnNames[] = {  "Rank", "Username", "Games Won", "Games Played" };
 		Object rowData[][] = new Object [records.size()][columnNames.length];
-
+		
+		//fill table 
 		for (int j = 0; j < records.size(); j++){
 			PlayerRecord record = records.get(j);
 			rowData[j][0] = j+1;
@@ -37,8 +46,10 @@ public class TopTenPanel extends JPanel {
 			rowData[j][3] = record.getGamesPlayed();
 		}
 
+		//create table
 		JTable table = new JTable(rowData, columnNames);
 		table.setBackground(Color.YELLOW);
+		
 		//center table data
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
