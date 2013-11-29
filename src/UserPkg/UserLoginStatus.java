@@ -3,7 +3,7 @@ package UserPkg;
 /**
  * Enumeration for the status of the user's login attempt.
  * 
- * @authors Anita Szilagyi, Bruno Boivin, Kaichen Wang, Salman Hashmi, Shahrzad Ti
+ * @author Anita Szilagyi <anita.szilagyi@mail.mcgill.ca>
  * @version 1.0
  * @since 2013-11-08
  */
