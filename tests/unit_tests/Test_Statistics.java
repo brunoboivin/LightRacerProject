@@ -11,6 +11,9 @@ import org.junit.Test;
 import StatisticsPkg.PlayerRecord;
 import StatisticsPkg.Statistics;
 
+/**
+ * Unit tests for the Statistics class.
+ */
 public class Test_Statistics {
 	
 	static Hashtable<String, PlayerRecord> playerRecords;
@@ -44,12 +47,7 @@ public class Test_Statistics {
 		playerRecords = null;
 	}
 	
-	
-	/*
-	 * Since findHighestScore is a private method, we are using the reflexion API to test it.
-	 * 
-	 * findHighestScore should return the PlayerRecord of the best player
-	 */
+	//Check whether the findHighestScore method indeed return the PlayerRecord of the best player
 	@Test
 	public void test_findHighestScore() throws Exception{
 		//simulating games
