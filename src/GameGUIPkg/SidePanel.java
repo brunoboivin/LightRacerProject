@@ -1,46 +1,36 @@
 package GameGUIPkg;
 
 import javax.swing.JPanel;
-import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.List;
 import javax.swing.JLabel;
 
 import GamePkg.Game;
 import RacerPkg.ID;
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 import java.awt.Color;
-import com.jgoodies.forms.factories.FormFactory;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.JTable;
-import java.awt.Component;
-import javax.swing.Box;
 import java.awt.Dimension;
-import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
-import javax.swing.JSeparator;
 import javax.swing.JLayeredPane;
 
-import java.awt.GridLayout;
 import net.miginfocom.swing.MigLayout;
 
+
+/** Class used to display the sidepanel for the game.
+ * @author Shahrzad Tighnavardmollasaraei <shahrzad.tighnavardmollasaraei@mail.mcgill.ca>
+ * @version 1.0
+ * @since 2013-11-08
+ */
 public class SidePanel extends JPanel {
 	
 	private JLayeredPane layeredPane;
 	
 	private Game game;
-	//private int cellRow;
+	
 	private String yCell;
 	private String dCell;
 	
@@ -54,13 +44,23 @@ public class SidePanel extends JPanel {
 	
 	private JLabel lblUserA;
 	private JLabel lblUserB;
-	
+	/**
+	 * The username of the racer as Yoda.
+	 */
 	private String YODA;
+	
+	/**
+	 * The username of the racer as DarthVader.
+	 */
 	private String DARTHVADER;
-	
+	/**
+	 * The current round.
+	 */
 	private String round;
+	/**
+	 * The counter used for displaying the round labels.
+	 */
 	private int counter;
-	
 	
 	
 	private static final int CONTROLS_OFFSET = 430;
@@ -78,9 +78,10 @@ public class SidePanel extends JPanel {
 	private static final Font HEADER_FONT = new Font("STARWARS", Font.PLAIN, 20);
 	private static final Font TITLE_FONT = new Font("STARWARS", Font.PLAIN, 30);
 	private static final Color TEXT_COLOR=new Color(255, 255, 0);
-	//private 
 	/**
-	 * Create the panel.
+	 * Create the SidePanel.
+	 * @param game The Game.
+	 * @param height The height of the desired side panel.
 	 */
 	public SidePanel(Game game,int height) 
 	{
@@ -101,6 +102,10 @@ public class SidePanel extends JPanel {
 		
 	
 	}
+	/**
+	 * Based on the round create the sidepanel labels.
+	 * @param number The current round
+	 */
 	public void paintHeaders(int number)
 	{
 		
@@ -172,8 +177,9 @@ public class SidePanel extends JPanel {
 	
 	
 	
-	
-	
+	/**
+	 * Paints the sidepanel with the appropriate components.	
+	 */
 	@Override
 	public void paintComponent(Graphics g) 
 	{
@@ -238,6 +244,12 @@ public class SidePanel extends JPanel {
 			g.drawString("Pause Game: P", SIDE_OFFSET, drawY += MESSAGE_STRIDE);
 
 	}
+	/**
+	 * Based on the id of the winner update the sidepanel component on the appropite celll in the pane.
+	 * @param id ID of the Winner
+	 * @param layeredPane The pane where rounds are shown
+	 * @param round The current round
+	 */
 	private void winnerCell (ID id,JLayeredPane layeredPane,int round)
 	{
 		ImageIcon yoda=new ImageIcon("res/img/greenLightSaber.png");
@@ -290,6 +302,12 @@ public class SidePanel extends JPanel {
 				break;
 		}
 	}
+	/**
+	 * Generate the cell location for placement of a component in the layeredPane on the sidepanel.
+	 * @param column The column of the cell on the pane
+	 * @param row	The row of the cell on the pane
+	 * @return The String indicating the location for the cell
+	 */
 	private String cellString(int column,int row )
 	{
 		return "cell"+column+" "+row;

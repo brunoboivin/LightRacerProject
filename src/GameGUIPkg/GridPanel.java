@@ -8,48 +8,55 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import GamePkg.Game;
 import GridPkg.*;
 
+/** Class used to display the game and its components.
+ * @author Shahrzad Tighnavardmollasaraei <shahrzad.tighnavardmollasaraei@mail.mcgill.ca>
+ * @version 1.0
+ * @since 2013-11-08
+ */
 
 public class GridPanel extends JPanel 
 {
-
+	
 	/**
-	 * @param args
+	 * The number of rows.
 	 */
-
 	private int ROW_COUNT;
+	/**
+	 * The number of columns.
+	 */
 	private int COL_COUNT;
 	/**
 	 * The size of each tile in pixels.
 	 */
 	public static final int CELL_SIZE = 13;
+	/**
+	 * The font used to display messages.
+	 */
 	private static final Font FONT = new Font("STARWARS", Font.BOLD, 25);
 	/**
 	 * The array of cells that make up this board.
 	 */
 	private GridCell[][] cells;
 	
-	private static final Color TEXT_COLOR=new Color(25, 25, 112);
-	
+	/**
+	 * The Game instance.
+	 */
 	private Game game;
+	/**
+	 * The Grid instance.
+	 */
 	private Grid gameGrid;
+	
 	/**
 	 * Creates a new GridPanel instance.
 	 * @param game The TronGame instance.
 	 */
-	//private GameStatus status;
-	
 	public GridPanel(Game game, Grid grid) 
 	{
 		this.game = game;
@@ -60,7 +67,10 @@ public class GridPanel extends JPanel
 		setPreferredSize(new Dimension(COL_COUNT * CELL_SIZE, ROW_COUNT * CELL_SIZE));
 		setBackground(Color.WHITE);
 	}
-	
+	/**
+	 * Returns the height of GridPanel.
+	 * @return Height 
+	 */
 	public int heightSize()
 	{
 		return (ROW_COUNT* CELL_SIZE);
@@ -68,29 +78,24 @@ public class GridPanel extends JPanel
 	/**
 	 * Clears all of the cells on the board and sets their values to null. this has to be done by the Grid Class
 	 */
-	public void clearBoard() {
+	public void clearBoard() 
+	{
 		Grid.resetGrid(this.cells);
 	}
 	private void initGrid(Grid newGrid)
 	{
-		//this.game = tron;
 		this.gameGrid=newGrid;
 		this.cells = newGrid.getGridCells();
 		this.COL_COUNT = newGrid.getGridCol();
 		this.ROW_COUNT = newGrid.getGridRow();
 	}
 	/**
-	 * 
+	 * Changes the map between rounds.
 	 */
 	public void changeGrid()
 	{
-		//this.game = tron;
-	//	Grid grid = new Grid();
-		//Grid newGrid=prom
 		Grid newGrid = Grid.promptMapSelection(gameGrid);
-		this.initGrid(newGrid);
-		
-		
+		this.initGrid(newGrid);	
 	}
 	
 	/**
@@ -127,7 +132,9 @@ public class GridPanel extends JPanel
 	{
 		return cells[x][y];
 	}
-	
+	/**
+	 * Paints game board/panel (cells and the messages).
+	 */
 	@Override
 	public void paintComponent(Graphics g) 
 	{
@@ -148,24 +155,7 @@ public class GridPanel extends JPanel
 				}
 			}
 		}
-		/*
-		 * Draw the grid on the board. This makes it easier to see exactly
-		 * where we in relation to the fruit.
-		 * 
-		 * The panel is one pixel too small to draw the bottom and right
-		 * outlines, so we outline the board with a rectangle separately.
-		 */
-		/*g.setColor(Color.LIGHT_GRAY);
-		g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
-		for(int x = 0; x < COL_COUNT; x++) 
-		{
-			for(int y = 0; y < ROW_COUNT; y++) 
-			{
-				g.drawLine(x * TILE_SIZE, 0, x * TILE_SIZE, getHeight());
-				g.drawLine(0, y * TILE_SIZE, getWidth(), y * TILE_SIZE);
-			
-			}
-		}*/
+		
 		/*
 		 * Show a message on the screen based on the current game state.
 		 */
@@ -178,9 +168,7 @@ public class GridPanel extends JPanel
 			 */
 			int centerX = getWidth() / 2;
 			int centerY = getHeight() / 2;
-			//System.out.println("x :"+centerX+" y: "+centerY);
-			//g.drawRect (315, 200, 345, 250);
-			//g.setColor(Color.GRAY);
+		
 			
 			g.setColor(Color.WHITE);
 			
@@ -213,7 +201,6 @@ public class GridPanel extends JPanel
 					gameMsg=game.roundWinner()+" won this round";
 				roundMsg =roundMsg+game.status.getRoundNumber()+" is over";
 				spaceMsg=spaceMsg+"Start the next Round";
-				//smallMessage = "Press Enter to start the next round";
 				
 			}
 			else if(game.status.isGameOver()) 
@@ -222,7 +209,6 @@ public class GridPanel extends JPanel
 				roundMsg = "Game Over!";
 				spaceMsg=spaceMsg+"Play again";
 				escMsg ="ESC : Go back to the Main Menu ";
-				//smallMessage ="Press SPACE to play Again or ESC to go back to the Main Menu";
 			} 
 			else if(game.status.isPaused()) 
 			{
@@ -244,7 +230,13 @@ public class GridPanel extends JPanel
 			g.drawString(escMsg, centerX - g.getFontMetrics().stringWidth(escMsg) / 2, centerY+100 );
 		}
 	}
-	
+	/**
+	 * Draws the GridCell.
+	 * @param x The horizontal coordinate of the cell
+	 * @param y	The vertical coordinate of the cell
+	 * @param type The type of the GridCell
+	 * @param g Graphics
+	 */
 	
 	private void drawCell(int x, int y, GridCell type, Graphics g) 
 	{
@@ -290,11 +282,18 @@ public class GridPanel extends JPanel
 		
 		}
 	}
-	
+	/**
+	 * 
+	 * @return The number of rows in the GridPanel.
+	 */
 	public int getGridPanelRow(){
 		return this.ROW_COUNT;
 	}
 	
+	/**
+	 * 
+	 * @return The number of columns in the GridPanel.
+	 */
 	public int getGridPanelCol (){
 		return this.COL_COUNT;
 	}
