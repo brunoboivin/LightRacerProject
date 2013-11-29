@@ -7,7 +7,7 @@ import GUIPkg.GridSelectorOptionPane;
 /** 
  * Description: Grid is a mapping of a 2D surface in a cartesian plane; composed of square cells
  * @authors	Anita Szilagyi, Bruno Boivin, Kaichen Wang, Salman Hashmi, Shahrzad Ti
- * @version	1.4
+ * @version	1.0
  * @since	2013-11-23	
  */
 

@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 /** 
  * Description: Takes data from a ".txt" file (specific format) and returns the contained integers as coordinates
  * @authors	Anita Szilagyi, Bruno Boivin, Kaichen Wang, Salman Hashmi, Shahrzad Ti
- * @version	1.4
+ * @version	1.0
  * @since	2013-11-23	
  */
 

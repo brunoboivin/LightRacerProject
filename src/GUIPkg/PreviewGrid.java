@@ -8,60 +8,61 @@ import javax.swing.JPanel;
 
 import GridPkg.GridCell;
 
-
+/** 
+ * Description: Paints a preview of a select Grid (and its cells) to the screen
+ * @authors	Anita Szilagyi, Bruno Boivin, Kaichen Wang, Salman Hashmi, Shahrzad Ti
+ * @version	1.0
+ * @since	2013-11-23	
+ */
 
 public class PreviewGrid extends JPanel {
 
-	private GridCell[][] mapGrid;
-	private int cellSize= 5;
-	private int colNum=75;
-	private int rowNum=50;
 	/**
-	 * Create the panel.
+	 * cells of a Grid
 	 */
-	public PreviewGrid(GridCell[][] map) 
-	{
+	private GridCell[][] mapGrid;
+	/**
+	 * desired pixel size of a cell
+	 */
+	private int cellSize = 5;
+	/**
+	 * number of columns of Grid
+	 */
+	private int colNum = 75;
+	/**
+	 * number of rows of Grid
+	 */
+	private int rowNum = 50;
+
+	public PreviewGrid (GridCell[][] map) {
 		this.mapGrid=map;
 		setLayout(null);
-		
 		setPreferredSize(new Dimension(colNum*cellSize, rowNum*cellSize));
-		setBackground(Color.BLACK);
-		
+		setBackground(Color.BLACK);	
 	}
 	
 	@Override
-	public void paintComponent(Graphics g) 
-	{
-		
-		super.paintComponent(g);
-		
-		
-		//grid
-		for(int x = 0; x < colNum; x++) 
-		{
+	/**
+	 * Draws cells to screen with colors
+	 * corresponding to whether cell is obstacle of empty
+	 */
+	public void paintComponent(Graphics cell) {
+		super.paintComponent(cell);
+		for(int x = 0; x < colNum; x++) {
 			for(int y = 0; y < rowNum; y++) {
-			//	TileType type = getTile(x, y);
 				if(mapGrid[x][y] == GridCell.Obstacle) {
-					//drawTile(x * cellSize, y * cellSize, type, g);
-					g.setColor(Color.YELLOW);
-					g.fillRect(x*cellSize, y*cellSize, cellSize, cellSize);
+					cell.setColor(Color.YELLOW);
+					cell.fillRect(x*cellSize, y*cellSize, cellSize, cellSize);
 				}
 			}
 		}
-		
-		
-		
-		g.setColor(Color.DARK_GRAY);
-		g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
-		for(int x = 0; x < colNum; x++) 
-		{
-			for(int y = 0; y < rowNum; y++) 
-			{
-				g.drawLine(x * cellSize, 0, x * cellSize, getHeight());
-				g.drawLine(0, y * cellSize, getWidth(), y * cellSize);
+		cell.setColor(Color.DARK_GRAY);
+		cell.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
+		for(int x = 0; x < colNum; x++) {
+			for(int y = 0; y < rowNum; y++) {
+				cell.drawLine(x * cellSize, 0, x * cellSize, getHeight());
+				cell.drawLine(0, y * cellSize, getWidth(), y * cellSize);
 			}
 		}	
-		
 	}
-
 }
