@@ -90,9 +90,8 @@ public class MainMenuPanel extends JPanel {
 		btnPlayerStats.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		btnPlayerStats.addMouseListener(new MouseAdapter() {
 			/**
-			 * Description: Invoked when the mouse button has been clicked (pressed and released) on a component.
+			 * Invoked when the mouse button has been clicked (pressed and released) on a component.
 			 * @param	e of MouseEvent which indicates if a mouse action occurred in a component in this case a click to pull player stats.
-			 * @return void
 			 */
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -121,15 +120,12 @@ public class MainMenuPanel extends JPanel {
 		btnChooseMap.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		btnChooseMap.addMouseListener(new MouseAdapter() {
 			/**
-			 * Description: Invoked when the mouse button has been clicked (pressed and released) on a component.
+			 * Invoked when the mouse button has been clicked (pressed and released) on a component.
 			 * @param	arg0 of MouseEvent which indicates if a mouse action occurred in a component in this case a click to prompt for map selection.
-			 * @return void
 			 */
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//GridSelectorOptionPane gridSelector = new GridSelectorOptionPane();
 				MainFrame.grid = Grid.promptMapSelection(MainFrame.grid);
-				//lblSelectedMap.setText("");
 			}
 		});
 		
@@ -148,9 +144,8 @@ public class MainMenuPanel extends JPanel {
 		btnNewButton.setFont(new Font("STARWARS", Font.PLAIN, 25));
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			/**
-			 * Description: Invoked when the mouse button has been clicked (pressed and released) on a component.
+			 * Invoked when the mouse button has been clicked (pressed and released) on a component.
 			 * @param	arg0 of MouseEvent which indicates if a mouse action such as a click occurred in a component.
-			 * @return void
 			 */
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -165,9 +160,8 @@ public class MainMenuPanel extends JPanel {
 		btnBack.setFont(new Font("STARWARS", Font.PLAIN, 15));
 		btnBack.addMouseListener(new MouseAdapter() {
 			/**
-			 * Description: Invoked when the mouse button has been clicked (pressed and released) on a component.
+			 * Invoked when the mouse button has been clicked (pressed and released) on a component.
 			 * @param	e of MouseEvent which indicates if a mouse action occurred in a component in this case a click to swap panels.
-			 * @return void
 			 */
 			@Override
 			public void mouseClicked(MouseEvent e) {
