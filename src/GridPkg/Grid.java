@@ -4,15 +4,34 @@ import java.io.IOException;
 
 import GUIPkg.GridSelectorOptionPane;
 
-//import java.util.Vector;
+/** 
+ * Description: Grid is a mapping of a 2D surface in a cartesian plane; composed of square cells
+ * @authors	Anita Szilagyi, Bruno Boivin, Kaichen Wang, Salman Hashmi, Shahrzad Ti
+ * @version	1.0
+ * @since	2013-11-23	
+ */
 
 public class Grid {
 
+	/**
+	 * Number of Rows of grid (y values)
+	 */
 	private int rowCount;
+	/**
+	 * Number of Rows of grid (x values)
+	 */
 	private int colCount;
+	/**
+	 * Individual cells of the Grid
+	 */
 	private GridCell[][] gridCells;
-	
+	/**
+	 * Default number of rows
+	 */
 	private final int ROW_COUNT_DEFAULT = 50;
+	/**
+	 * Default number of columns
+	 */
 	private final int COL_COUNT_DEFAULT = 75;
 
 	public Grid () {
@@ -24,10 +43,10 @@ public class Grid {
 		initializeGrid ();
 	}  
 	
-	//Initializes a new grid in which each cell of the grid is empty or an obstacle
+	/**
+	 * Initializes a new grid in which each cell (GridCell) is Empty
+	 */
 	private void initializeGrid () {
-		
-		//First set all gridCells as empty
 		for (int i = 0; i < this.colCount; i++) {
 		    for (int j = 0; j < this.rowCount; j++) {
 		    	this.gridCells[i][j] = GridCell.Empty;
@@ -35,14 +54,15 @@ public class Grid {
 		}
 	}	
 	
-	
+	/**
+	 * Calls GUI to prompt user to select a map (Grid)
+	 * then update a Grid accordingly
+	 * @param existing Grid
+	 * @return updated Grid
+	 */
 	public static Grid promptMapSelection (Grid currentGrid) {
-			
-		//Prompt user to select a map
-		GridSelectorOptionPane selectGrid = new GridSelectorOptionPane();
 		
-//		//Add obstacles corresponding to the selected map
-//		addObstacles(selectGrid.getSelectedMapPath());
+		GridSelectorOptionPane selectGrid = new GridSelectorOptionPane();
 		
 		if (selectGrid.getSelectedMapPath() != null){
 			currentGrid.setGridCells(selectGrid.getSelectedGridCells());
@@ -50,19 +70,11 @@ public class Grid {
 		return currentGrid;
 	}	
 	
-	
-	//ONLY FOR TESTING PURPOSES: adds obstacles at select coordinates
-	private void initializeGridTest (){
-		for (int i = 0; i < this.colCount; i++) {
-		    for (int j = 0; j < this.rowCount; j++) {
-		    	this.gridCells[i][j] = GridCell.Empty;
-		    }
-		}
-		this.gridCells[5][5] = GridCell.Obstacle;
-		this.gridCells[10][25] = GridCell.Obstacle;
-	}
-	
-	//prepares an int array containing obstacle coordinates loaded from a map file
+	/**
+	 * Prepares an int array containing obstacle coordinates loaded from a map file
+	 * @param path to map file
+	 * @return int array containing obstacle coordinates
+	 */
 	private int [] loadObstacles (String mapPath) {
 		
 		int obstacleCoords [] = null;
@@ -76,7 +88,10 @@ public class Grid {
 		return obstacleCoords;
 	}
 	
-	//adds obstacles to the grid
+	/**
+	 * adds obstacles to the grid
+	 * @param path to map file
+	 */
 	public void addObstacles (String selectedMapPath) {
 		
 		int [] obstacleCoords = loadObstacles(selectedMapPath);
@@ -96,6 +111,31 @@ public class Grid {
 			yCoord1 = this.rowCount - obstacleCoordsPair[1];
 			yCoord2 = this.rowCount - obstacleCoordsPair[3];
 			
+			if(xCoord1 < 0){
+				xCoord1 = 0;
+			}
+			if(xCoord2 < 0){
+				xCoord2 = 0;
+			}
+			if(yCoord1 < 0){
+				yCoord1 = 0;
+			}
+			if(yCoord2 < 0){
+				yCoord2 = 0;
+			}
+			if(xCoord1 > this.colCount){
+				xCoord1 = this.colCount;
+			}
+			if(xCoord2 > this.colCount){
+				xCoord2 = this.colCount;
+			}
+			if(yCoord1 > this.rowCount){
+				yCoord1 = this.rowCount;
+			}
+			if(yCoord2 > this.rowCount){
+				yCoord2 = this.rowCount;
+			}
+				
 			if (xCoord1 <= xCoord2){
 				xStart = xCoord1;
 				xEnd = xCoord2;
@@ -122,7 +162,11 @@ public class Grid {
 		}	
 	}
 	
-	//Resets an existing grid to its initial state; with each cell either being empty or an obstacle
+	/**
+	 * Resets an existing grid to its initial state; 
+	 * with each cell either being empty or an obstacle
+	 * @param cells of an existing Grid
+	 */
 	public static void resetGrid (GridCell[][] gridCells) {
 		for(int i = 0; i < gridCells.length; i++) {
 			for(int j=0; j< gridCells[i].length; j++) {
@@ -134,19 +178,31 @@ public class Grid {
 	}
 	
 	//getters
+	/**
+	 * @return value of Grid's cells in 2D array
+	 */
 	public GridCell[][] getGridCells (){
 		return this.gridCells;
 	}
 	
+	/**
+	 * @return number of rows in Grid
+	 */
 	public int getGridRow (){
 		return this.rowCount;
 	}
 	
+	/**
+	 * @return number of columns in Grid
+	 */
 	public int getGridCol (){
 		return this.colCount;
 	}
 	
 	//setters
+	/**
+	 * @param sets Grid's cells with parameter
+	 */
 	public void setGridCells (GridCell[][] gridCells){
 		this.gridCells = gridCells;
 	}

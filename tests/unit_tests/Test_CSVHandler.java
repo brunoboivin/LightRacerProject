@@ -14,7 +14,7 @@ import UserPkg.User;
 public class Test_CSVHandler {
 
 	String path = "tests/unit_tests/tmp.csv";
-	File file = new File(path);
+	File file = new File(path); 
 	
 	@Before
 	public void setUp() throws Exception {

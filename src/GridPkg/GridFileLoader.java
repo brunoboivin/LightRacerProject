@@ -4,14 +4,21 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
+/** 
+ * Description: Takes data from a ".txt" file (specific format) and returns the contained integers as coordinates
+ * @authors	Anita Szilagyi, Bruno Boivin, Kaichen Wang, Salman Hashmi, Shahrzad Ti
+ * @version	1.0
+ * @since	2013-11-23	
+ */
+
 public class GridFileLoader {
 	
-//	public static void main (String[] args) throws IOException{
-//		GridFileLoader test = new GridFileLoader();
-//		test.readFile();
-//	}
-	
-	//Takes a map file path. Returns the data in the form of an array of int coordinates.
+	/**
+	 * Takes a map file path. Returns the data in the form of an array of int coordinates.
+	 * @param file of Map (Grid) file
+	 * @return int array with coordinates of obstacles contained in file
+	 * @throws IOException
+	 */
 	public static int [] readFile ( String mapPath ) throws IOException {
 		
 		//e.g. "maps/map2.txt"		
@@ -35,7 +42,11 @@ public class GridFileLoader {
 	
 	}
 	
-	//Converts raw data from a file into an array of int coordinates
+	/**
+	 * Helper method: Converts raw data from a file into an array of int coordinates
+	 * @param data from file as String
+	 * @return data as int array or coordinates
+	 */
 	private static int [] convertDataToCoords ( String dataFromFile ) {
 	
 		String[] coordsFromFile;
