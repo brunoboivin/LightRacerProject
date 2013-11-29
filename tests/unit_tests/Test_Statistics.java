@@ -11,6 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import StatisticsPkg.PairRecord;
 import StatisticsPkg.PlayerRecord;
 import StatisticsPkg.Statistics;
 
@@ -177,6 +178,82 @@ public class Test_Statistics {
 	public void test_findXHighestScore6() throws Exception {
 		assertTrue(getXHighestScore(playerRecords, 3).size() == 3);
 	}
+		
+	//getPlayerStats should return a new PlayerRecord if player does not have a record yet
+	@Test
+	public void test_getPlayerStats1() {
+		PlayerRecord record = Statistics.getPlayerStat("HelloWorld.ThisIsATest.HelloWorld");
+		
+		assertTrue(record.getUsername().equals("HelloWorld.ThisIsATest.HelloWorld"));
+		assertTrue(record.getGamesWon() == 0 && record.getGamesPlayed() == 0);
+	}
+	
+	//getPlayerStats should return the PlayerRecord associated to a specified player name
+	@Test
+	public void test_getPlayerStats2() {
+		PlayerRecord record = Statistics.getPlayerStat("abc");
+		
+		assertTrue(record.getUsername().equals("abc"));
+		assertTrue(record.getGamesWon() != 0 && record.getGamesPlayed() != 0);
+	}
+	
+	//getPairStats should return a new PairRecord if the 2 players don't have one yet
+	@Test
+	public void test_getPairStats1() {
+		PairRecord record = Statistics.getPairRecord("HelloWorld.ThisIsATest.HelloWorld", "HelloWorld.ThisIsATest.HelloWorld2");
+		
+		assertTrue( (record.getPlayerA().equals("HelloWorld.ThisIsATest.HelloWorld")&& record.getPlayerB().equals("HelloWorld.ThisIsATest.HelloWorld2"))
+				 || (record.getPlayerB().equals("HelloWorld.ThisIsATest.HelloWorld")&& record.getPlayerA().equals("HelloWorld.ThisIsATest.HelloWorld2")));
+		
+		assertTrue(record.getGamesWonPlayerA() == 0 && record.getGamesWonPlayerB() == 0);
+	}
+	
+	//getPairStats should return the PairRecord associated to the specified player names
+	@Test
+	public void test_getPairStats2() {
+		PairRecord record = Statistics.getPairRecord("abc", "abcd");
+		
+		assertTrue( (record.getPlayerA().equals("abc") && record.getPlayerB().equals("abcd"))
+				 || (record.getPlayerA().equals("abcd") && record.getPlayerB().equals("abc")));
+		
+		assertTrue(record.getGamesWonPlayerA() != 0 && record.getGamesWonPlayerB() != 0);
+	}
+	
+	//Tests whether individual player stats are updated properly when Statistics.update is called
+	@Test
+	public void test_update() {
+		String player1 = "TEST1TEST",
+			   player2 = "TEST2TEST";
+		
+		PlayerRecord r1 = Statistics.getPlayerStat(player1),
+		             r2 = Statistics.getPlayerStat(player2);
+		
+		Statistics.update(player1, player2);
+		
+		PlayerRecord r11 = Statistics.getPlayerStat(player1),
+					 r22 = Statistics.getPlayerStat(player2);
+		
+		assertTrue(r11.getGamesPlayed() == r1.getGamesPlayed()+1);
+		assertTrue(r22.getGamesPlayed() == r2.getGamesPlayed()+1);
+		assertTrue(r11.getGamesWon() == r1.getGamesWon()+1);
+	}
+	
+	//Tests whether pair stats are updated properly when Statistics.update is called
+	@Test
+	public void test_update2() {
+		String player1 = "TEST1TEST",
+			   player2 = "TEST2TEST";
+			
+		PairRecord record = Statistics.getPairRecord(player1, player2);
+		
+		Statistics.update(player1, player2);
+		
+		PairRecord record2 = Statistics.getPairRecord(player1, player2);
+		
+		assertTrue( (record.getGamesWonPlayerA()+1 == record2.getGamesWonPlayerA())
+				 || (record.getGamesWonPlayerB()+1 == record2.getGamesWonPlayerB()));
+	}
+	
 	
 	//Helper Methods
 	
@@ -200,6 +277,13 @@ public class Test_Statistics {
 		return (PlayerRecord) m.invoke(stats,  parameters);
 	}
 	
+	/**Method used to test the private method "findXHighestScores" of the Statistics class.
+	 * 
+	 * @param table
+	 * @param x
+	 * @return
+	 * @throws Exception
+	 */
 	private ArrayList<PlayerRecord> getXHighestScore(Hashtable<String, PlayerRecord> table, int x) throws Exception{
 		Statistics stats = new Statistics();
 		
