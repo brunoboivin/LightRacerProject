@@ -81,13 +81,11 @@ public class GameStatus {
 	public void setRoundOver(boolean roundOver) 
 	{
 		this.isRoundOver=roundOver;
-		if(roundOver==true)
-		{
-			++roundNumber;
-		}
 		
 		if(roundOver==true)
 		{
+			++roundNumber;
+			
 			if(roundNumber>3 && threeRounds==false)
 			{
 				this.tronGame.side.removeAll();
@@ -101,11 +99,11 @@ public class GameStatus {
 		}
 		
 	}
+	
 	/**
 	 * Gets the flag that indicates whether or not the current round is over.
 	 * @return The round over flag.
 	 */
-	
 	public boolean isRoundOver() 
 	{
 		return this.isRoundOver;
@@ -118,6 +116,8 @@ public class GameStatus {
 	{
 		return roundNumber;
 	}	
+	
+	
 	/**
 	 * Gets the flag that indicates whether or not the game is over.
 	 * If the game is over it updates the statistics.

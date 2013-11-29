@@ -8,9 +8,6 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import UserPkg.User;
-import UserPkg.UserManagement;
-import GUIPkg.GridSelectorOptionPane;
 import GridPkg.Grid;
 
 import javax.swing.BoxLayout;
