@@ -9,7 +9,7 @@ import GameGuiPkg.GridPanel;
 import GridPkg.GridCell;
 
 
-/** Class used to 
+/** Class used to define a racer.
  * 
  * @author Shahrzad Tighnavardmollasaraei <shahrzad.tighnavardmollasaraei@mail.mcgill.ca>
  * @version 1.0
