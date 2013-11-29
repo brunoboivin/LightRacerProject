@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Class used for implementing a game user.
  * 
- * @author Anita Szilagyi <anita.szilagyi@mail.mcgill.ca>
+ * @authors Anita Szilagyi, Bruno Boivin, Kaichen Wang, Salman Hashmi, Shahrzad Ti
  * @version 1.0
  * @since 2013-11-08
  */
