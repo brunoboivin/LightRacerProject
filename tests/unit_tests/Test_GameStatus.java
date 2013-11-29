@@ -16,7 +16,7 @@ import GridPkg.Grid;
 /**
  * Class to unit test GameStatus.java
  * @author Salman Hashmi <salman.hashmi2@mail.mcgill.ca>
- * @version 1.1
+ * @version 1.2
  * @since 2013-11-27
  *
  */
@@ -31,7 +31,11 @@ public class Test_GameStatus {
 	}
 
 	@Test
-	public void testSetRoundOver() throws Exception{
+	/**
+	 * Checks if  SetRoundOver correctly updates Round status
+	 * @return void
+	 */
+	public void setRoundOverTest1() {
 		User user1 = new User("salman", "1234");
 		User user2 = new User("salman", "1234");
 		
@@ -46,6 +50,21 @@ public class Test_GameStatus {
 		
 		stat.setRoundOver(true);
 		stat.setRoundOver(true);// RoundNumber should be 3
+	
+	}
+	
+	@Test
+	/**
+	 * Checks if GameStatus is updating rounds correctly after round 3
+	 * @throws Exception
+	 * @return void
+	 */
+	public void setRoundOverTest2() throws Exception {
+		User user1 = new User("salman", "1234");
+		User user2 = new User("salman", "1234");
+		
+		Game tron = new Game(user1,user2, (new Grid()));
+		GameStatus stat = new GameStatus(tron);
 		
 		Class secret = stat.getClass(); 
 		Field f = secret.getDeclaredField("threeRounds");
@@ -53,15 +72,25 @@ public class Test_GameStatus {
 		
 		boolean threeRounds = (Boolean) f.get(stat); // Return threeRounds
 		assert(threeRounds == false);
-		
-		stat.setRoundOver(true);// RoundNumber should be 4
+	}
+	
+	@Test
+	/**
+	 * Checks if 
+	 * @throws Exception
+	 * @return void
+	 */
+	public void isGameOverTest() throws Exception {
+		// to be completed 
+	/*
+		stat.setRoundOver(true);// RoundNumber should be 
 		assert(threeRounds == true);
 		
-		stat.setRoundOver(true);// RoundNumber should be 5
-		stat.setRoundOver(true);// RoundNumber should be 6
+		stat.setRoundOver(true);// RoundNumber should be 
+		stat.setRoundOver(true);// RoundNumber should be 
 		assert(threeRounds == false);
-
-		//fail("Not yet implemented");
+	*/
+		
 	}
 
 }
