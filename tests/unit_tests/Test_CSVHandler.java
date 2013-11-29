@@ -11,6 +11,10 @@ import CSVPkg.CSVHandler;
 import StatisticsPkg.PlayerRecord;
 import UserPkg.User;
 
+/**
+ * Unit tests for the CSVHandler class.
+ */
+
 public class Test_CSVHandler {
 
 	String path = "tests/unit_tests/tmp.csv";
@@ -26,6 +30,7 @@ public class Test_CSVHandler {
 		file.delete();
 	}
 
+	//Tests whether a serialized ArrayList of objects can be written to a file using the CSVHandler.write method
 	@Test
 	public void test_write_ArrayList() {
 		long empty = file.length();
@@ -40,8 +45,9 @@ public class Test_CSVHandler {
 		assertTrue(empty != file.length());
 	}
 	
+	//Tests whether a serialized Hashtable of objects can be written to a file using the CSVHandler.write method
 	@Test
-	public void test_write_HashMap() {
+	public void test_write_Hashtable() {
 		long empty = file.length();
 		Hashtable<Object, Object> map = new Hashtable<Object, Object>();
 		
@@ -54,6 +60,8 @@ public class Test_CSVHandler {
 		assertTrue(empty != file.length());
 	}
 
+	//Tests whether CSVHandler.read can retrieve an ArrayList of objects store in a csv file
+	//Multiple related assertions are performed; if any of them fails, the whole test fails. 
 	@Test
 	public void test_read_ArrayList() {
 		//write to file
@@ -83,6 +91,8 @@ public class Test_CSVHandler {
 		assertTrue( user.username.equals(userRead.username));
 	}
 	
+	//Tests whether CSVHandler.read can retrieve a Hashtable of objects store in a csv file
+	//Multiple related assertions are performed; if any of them fails, the whole test fails. 
 	@Test
 	public void test_read_HashMap() {
 		//write to file
