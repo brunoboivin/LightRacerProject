@@ -1,10 +1,13 @@
-package GridPkg;
+package unit_tests;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import org.junit.* ;
+
+import GridPkg.Grid;
+import GridPkg.GridCell;
 
 import static org.junit.Assert.* ;
 
