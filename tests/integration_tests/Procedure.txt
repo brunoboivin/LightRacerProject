@@ -1,5 +1,0 @@
-Since we performed most integration tests manually, this file contains the details of those tests.
-- How they were performed
-- What classes were being tested
-- Which features/functions were being tested
-- Etc.
