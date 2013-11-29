@@ -20,6 +20,8 @@ import javax.swing.JRadioButton;
 
 import GridPkg.Grid;
 import GridPkg.GridCell;
+import GridPkg.PreviewGrid;
+
 import java.awt.Rectangle;
 import java.awt.Font;
 

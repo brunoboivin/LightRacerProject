@@ -1,4 +1,4 @@
-package GUIPkg;
+package GridPkg;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,7 +6,6 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import GridPkg.GridCell;
 
 /** 
  * Description: Paints a preview of a select Grid (and its cells) to the screen
