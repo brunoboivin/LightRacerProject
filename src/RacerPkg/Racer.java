@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 import UserPkg.User;
 
-import GameGuiPkg.GridPanel;
+import GameGUIPkg.GridPanel;
 import GridPkg.GridCell;
 
 

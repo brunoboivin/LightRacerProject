@@ -1,15 +1,20 @@
 package GamePkg;
 
 import StatisticsPkg.Statistics;
-
+/** Class used to define the current state of the game.
+ * 
+ * @author Shahrzad Tighnavardmollasaraei <shahrzad.tighnavardmollasaraei@mail.mcgill.ca>
+ * @version 1.0
+ * @since 2013-11-08
+ */
 public class GameStatus {
 
 	/**
 	 * The TronGame instance.
 	 */
-	private TronGame tronGame;
+	private Game tronGame;
 	/**
-	 * The number of rounds played for a game
+	 * The number of rounds played for a game.
 	 */
 	private int roundNumber;
 	
@@ -31,13 +36,19 @@ public class GameStatus {
 	 * Whether or not the game is paused.
 	 */
 	private boolean isPaused ;
+	/**
+	 * Instance indicating whether or not the statistics are updated.
+	 */
 	private boolean statUpdated;
+	/**
+	 * Whether of not 3 rounds are done or not.
+	 */
 	private boolean threeRounds;
 	/**
 	 * GameStatus constructor.
 	 * @param game
 	 */
-	public GameStatus(TronGame game)
+	public GameStatus(Game game)
 	{
 		this.tronGame=game;
 		this.setGameOver(false);
@@ -52,6 +63,10 @@ public class GameStatus {
 	{
 		return this.isNewGame;
 	}
+	/**
+	 * Setting the status if New game or not.
+	 * @param newGame
+	 */
 	
 	public void setNewGame(boolean newGame) 
 	{
@@ -63,7 +78,6 @@ public class GameStatus {
 	 * It also increments the number of rounds played.
 	 * @param roundOver
 	 */
-	
 	public void setRoundOver(boolean roundOver) 
 	{
 		this.isRoundOver=roundOver;
@@ -79,11 +93,9 @@ public class GameStatus {
 				this.tronGame.side.removeAll();
 				this.tronGame.side.paintHeaders(roundNumber);
 				this.threeRounds=true;
-				//roundNumber=1;
 			}
 			if(roundNumber>3 && (roundNumber%3)==0)
 			{
-			//	this.tronGame.side.removeAll();
 				threeRounds=false;
 			}
 		}
@@ -102,11 +114,10 @@ public class GameStatus {
 	 *
 	 * @return the number of rounds played so far.
 	 */
-	public int getRoundNumber() {
+	public int getRoundNumber() 
+	{
 		return roundNumber;
-	}
-	
-	
+	}	
 	/**
 	 * Gets the flag that indicates whether or not the game is over.
 	 * If the game is over it updates the statistics.
@@ -140,12 +151,14 @@ public class GameStatus {
 		return this.isGameOver;
 	}
 	
+	
+	/**
+	 * Setting if the game is over or not
+	 * @param gameOver
+	 */
 	private void setGameOver(boolean gameOver) 
 	{
 		this.isGameOver = gameOver;
-		//if(gameOver==false)
-			//this.statUpdated=false;
-		//System.out.println("stat is updated"+this.statUpdated);
 	}
 
 	/**
@@ -156,20 +169,13 @@ public class GameStatus {
 	{
 		return this.isPaused;
 	}
-
+	/**
+	 * Setting the status as paused or not.
+	 * @param paused
+	 */
 	public void setPaused(boolean paused) 
 	{
 		this.isPaused = paused;
 	}
-	/*
-	public void restartStatus(TronGame tron,boolean confirm)
-	{
-		//this.setNewGame(true);
-		if(confirm==true)
-		{
-			tron.setGameOver(false);
-			this.statUpdated=false;
-		}
-	}
-	*/
+	
 }

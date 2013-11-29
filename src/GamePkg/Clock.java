@@ -1,5 +1,12 @@
 package GamePkg;
 
+/** Clock class used to define the timing of the game.
+ * 
+ * @author Shahrzad Tighnavardmollasaraei <shahrzad.tighnavardmollasaraei@mail.mcgill.ca>
+ * @version 1.0
+ * @since 2013-11-08
+ */
+
 public class Clock {
 	
 	/**

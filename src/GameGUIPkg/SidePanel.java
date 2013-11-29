@@ -1,4 +1,4 @@
-package GameGuiPkg;
+package GameGUIPkg;
 
 import javax.swing.JPanel;
 import java.awt.Canvas;
@@ -8,7 +8,7 @@ import java.awt.Image;
 import java.awt.List;
 import javax.swing.JLabel;
 
-import GamePkg.TronGame;
+import GamePkg.Game;
 import RacerPkg.ID;
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
@@ -39,7 +39,7 @@ public class SidePanel extends JPanel {
 	
 	private JLayeredPane layeredPane;
 	
-	private TronGame game;
+	private Game game;
 	//private int cellRow;
 	private String yCell;
 	private String dCell;
@@ -82,7 +82,7 @@ public class SidePanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public SidePanel(TronGame game,int height) 
+	public SidePanel(Game game,int height) 
 	{
 		
 		this.game = game;

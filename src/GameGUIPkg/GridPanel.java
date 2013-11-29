@@ -1,6 +1,6 @@
 
 
-package GameGuiPkg;
+package GameGUIPkg;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,7 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import GamePkg.TronGame;
+import GamePkg.Game;
 import GridPkg.*;
 
 
@@ -42,7 +42,7 @@ public class GridPanel extends JPanel
 	
 	private static final Color TEXT_COLOR=new Color(25, 25, 112);
 	
-	private TronGame game;
+	private Game game;
 	private Grid gameGrid;
 	/**
 	 * Creates a new GridPanel instance.
@@ -50,7 +50,7 @@ public class GridPanel extends JPanel
 	 */
 	//private GameStatus status;
 	
-	public GridPanel(TronGame game, Grid grid) 
+	public GridPanel(Game game, Grid grid) 
 	{
 		this.game = game;
 		this.gameGrid = grid;
