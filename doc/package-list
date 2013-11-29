@@ -1,1 +1,9 @@
+CSVPkg
+GUIPkg
 GameGUIPkg
+GamePkg
+GridPkg
+RacerPkg
+StatisticsPkg
+UserPkg
+unit_tests
