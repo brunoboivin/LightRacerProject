@@ -23,6 +23,12 @@ import UserPkg.UserManagement;
 import UserPkg.UserRegistrationStatus;
 import java.awt.Color;
 
+/**
+ * Frame used to registers users into the game system.
+ * 
+ * @author Anita Szilagyi <anita.szilagyi@mail.mcgill.ca>
+ * @version 1.0
+ */
 public class RegistrationFrame extends JFrame {
 
 	public UserRegistrationStatus registerResult;
@@ -62,36 +68,59 @@ public class RegistrationFrame extends JFrame {
 		btnCreate.setBackground(new Color(0, 0, 0));
 		btnCreate.setBounds(171, 166, 95, 29);
 		btnCreate.addMouseListener(new MouseAdapter() {
+			/**
+			 * Invoked when the mouse button has been clicked (pressed and
+			 * released) on a component.
+			 * 
+			 * @param e
+			 *            of MouseEvent which indicates if a mouse action
+			 *            occurred in a component in this case a click to
+			 *            register a user.
+			 */
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (StringUtils.isBlank(usernameField.getText())) {
+					// Check if the fields were submitted empty
 					JOptionPane.showMessageDialog(null, "Please provide a username.", "Warning",
 							JOptionPane.WARNING_MESSAGE);
 				} else {
+					// Check for username to have only letters and numbers
 					if (!StringUtils.isAlphanumeric(usernameField.getText())) {
-						JOptionPane.showMessageDialog(null, "Username must only contain letters and numbers.", "Warning",
-								JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Username must only contain letters and numbers.",
+										"Warning", JOptionPane.WARNING_MESSAGE);
 					} else {
+						// Check for an empty password field submitted
 						if (StringUtils.isBlank(passwordField.getText())) {
 							JOptionPane.showMessageDialog(null, "Please provide a password.", "Warning",
 									JOptionPane.WARNING_MESSAGE);
 						} else {
-							registerResult = UserManagement.registerUser(usernameField.getText(), (passwordField.getText()));
+							// Register the user with the provided username and password
+							registerResult = UserManagement.registerUser(usernameField.getText(),
+									(passwordField.getText()));
+							// Based on the result of the registration status, take different actions
 							switch (registerResult) {
-							case Success: JOptionPane.showMessageDialog(null, "Success!");
-							        dispose();
-									break;
-							case BadPassword: JOptionPane.showMessageDialog(null, "Password must be at least 8 characters, "
-											+ "have at least \none upper case and one lower case letter, "
-											+ "a digit and \na special character (i.e. ~!@#$%^&*()_+=-.,<>?{}[];)",
-											"Error", JOptionPane.ERROR_MESSAGE);
-									break;
-							case UsernameTaken: JOptionPane.showMessageDialog(null, "Username already in use!", "Error",
+							// User registered correctly
+							case Success:
+								JOptionPane.showMessageDialog(null, "Success!");
+								dispose();
+								break;
+							// User's choice of password does not meet the requirements
+							case BadPassword:
+								JOptionPane.showMessageDialog(null, "Password must be at least 8 characters, "
+														+ "have at least \none upper case and one lower case letter, "
+														+ "a digit and \na special character (i.e. ~!@#$%^&*()_+=-.,<>?{}[];)",
+												"Error", JOptionPane.ERROR_MESSAGE);
+								break;
+							// User's choice of username is already taken
+							case UsernameTaken:
+								JOptionPane.showMessageDialog(null, "Username already in use!", "Error",
 										JOptionPane.ERROR_MESSAGE);
-									break;
-							case FileError: JOptionPane.showMessageDialog(null, "Attempt failed, try again!", "Error",
+								break;
+							// Registration failed due to internal reasons
+							case FileError:
+								JOptionPane.showMessageDialog(null, "Attempt failed, try again!", "Error",
 										JOptionPane.ERROR_MESSAGE);
-									break;
+								break;
 							}
 						}
 					}
@@ -143,6 +172,15 @@ public class RegistrationFrame extends JFrame {
 		btnExit.setForeground(new Color(255, 255, 0));
 		btnExit.setBackground(new Color(0, 0, 0));
 		btnExit.addMouseListener(new MouseAdapter() {
+			/**
+			 * Invoked when the mouse button has been clicked
+			 * (pressed and released) on a component.
+			 * 
+			 * @param e
+			 *            of MouseEvent which indicates if a mouse action
+			 *            occurred in a component in this case a click to exit
+			 *            the registration frame.
+			 */
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
