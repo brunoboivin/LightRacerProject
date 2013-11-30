@@ -58,9 +58,12 @@ LIST OF THIRD-PARTY LIBRARIES
 		- Installation instructions: Installed automatically when used for the first time in WindowBuilder Pro
 
 INSTRUCTIONS FOR COMPILING AND RUNNING THE CODE
-	Step 1: Run build.xml (as an Ant build if inside Eclipse)
+	Step 1: 
+		a.  Run build.xml (as an Ant build if inside Eclipse)
 			**Make sure that the environment variable JAVA_HOME is pointing to the JDK installed on your pc.
 				To do that, click on Run -> External Tools -> External Tools Configurations
-									 Select the JRE tab and click on edit to change set the path to your JDK folder.
+				Select the JRE tab and click on edit to change set the path to your JDK folder.
+		b.  To run all the unit tests, right click on AllTests.java located in test.unit_tests package and run as JUnit Test.
+			
 	Step 2: Launch the main method of MainFrame.java, which is located inside the GUIPkg.
 			Or alternatively, simply launch the executable Tron.jar file.
