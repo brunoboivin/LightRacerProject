@@ -12,6 +12,8 @@ import UserPkg.User;
 import GamePkg.Game;
 import GamePkg.GameStatus;
 import GridPkg.Grid;
+import GameGUIPkg.GridPanel;
+
 
 /**
  * Class to unit test GameStatus.java
@@ -21,6 +23,11 @@ import GridPkg.Grid;
  *
  */
 public class Test_GameStatus {
+	User user1 = new User("salman", "1234");
+	User user2 = new User("salman", "1234");
+	Grid grid = new Grid();
+	Game tron = new Game(user1,user2, grid);
+	GameStatus stat = new GameStatus(tron);
 
 	@Before
 	public void setUp() throws Exception {
@@ -36,12 +43,7 @@ public class Test_GameStatus {
 	 * @return void
 	 */
 	public void setRoundOverTest1() {
-		User user1 = new User("salman", "1234");
-		User user2 = new User("salman", "1234");
-		
-		Game tron = new Game(user1,user2, (new Grid()));
-		GameStatus stat = new GameStatus(tron);
-		
+	
 		stat.setRoundOver(false);
 		assert(stat.isRoundOver() == false);
 		
@@ -60,11 +62,6 @@ public class Test_GameStatus {
 	 * @return void
 	 */
 	public void setRoundOverTest2() throws Exception {
-		User user1 = new User("salman", "1234");
-		User user2 = new User("salman", "1234");
-		
-		Game tron = new Game(user1,user2, (new Grid()));
-		GameStatus stat = new GameStatus(tron);
 		
 		Class secret = stat.getClass(); 
 		Field f = secret.getDeclaredField("threeRounds");
@@ -76,21 +73,13 @@ public class Test_GameStatus {
 	
 	@Test
 	/**
-	 * Checks if 
+	 * Checks if Game is not over at start up
 	 * @throws Exception
 	 * @return void
 	 */
 	public void isGameOverTest() throws Exception {
-		// to be completed 
-	/*
-		stat.setRoundOver(true);// RoundNumber should be 
-		assert(threeRounds == true);
-		
-		stat.setRoundOver(true);// RoundNumber should be 
-		stat.setRoundOver(true);// RoundNumber should be 
-		assert(threeRounds == false);
-	*/
-		
+		// Game should not be over at start up
+		assert(stat.isGameOver() == false);
 	}
 
 }
