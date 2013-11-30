@@ -149,17 +149,4 @@ public class Test_Racer {
 		assert(d.getLast() == Direction.Up);
 	}
 	
-	@Test
-	public void testUpdateRacer() throws Exception {
-		/*
-		User use = new User("salman", "1234");
-		Racer race = new Racer(use, ID.DARTHVADER);
-		Class secret = race.getClass();
-		Field f = secret.getDeclaredField("racerPoints");
-		f.setAccessible(true);
-		LinkedList<Point> l = ((LinkedList<Point>) (f.get(race)));
-		*/
-		fail("Not yet implemented");
-	}
-	
 }
