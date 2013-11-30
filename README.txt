@@ -66,4 +66,4 @@ INSTRUCTIONS FOR COMPILING AND RUNNING THE CODE
 		b.  To run all the unit tests, right click on AllTests.java located in test.unit_tests package and run as JUnit Test.
 			
 	Step 2: Launch the main method of MainFrame.java, which is located inside the GUIPkg.
-			Or alternatively, simply launch the executable Tron.jar file.
+			Or alternatively, simply launch the executable LightBattles.jar file.
