@@ -13,6 +13,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import GameGUIPkg.GridPanel;
+import GamePkg.Game;
+import GridPkg.Grid;
 import GridPkg.GridCell;
 import RacerPkg.Direction;
 import RacerPkg.ID;
@@ -149,4 +152,19 @@ public class Test_Racer {
 		assert(d.getLast() == Direction.Up);
 	}
 	
+	@Test
+	public void testUpdateRacer() throws Exception {
+		User user1 = new User("salman", "1234");
+		User user2 = new User("salman2", "1234");
+		Grid grid = new Grid();
+		Game tron = new Game(user1,user2, grid);
+		GridPanel panel = new GridPanel(tron, grid);
+		
+		Racer race = new Racer(user1, ID.DARTHVADER);
+		race.setUpRacer(new Point (0,0), Direction.Up);
+
+		GridCell cell = race.updateRacer(panel);
+		// Cell should be empty after one move
+		assert(cell == GridCell.Empty);
+	}
 }
